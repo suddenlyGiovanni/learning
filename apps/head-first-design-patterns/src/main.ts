@@ -1,4 +1,4 @@
-import strategy from './strategy/main'
+import strategy, { Version } from './strategy/main'
 
 // strategy pattern
-strategy()
+strategy(Version.final)
