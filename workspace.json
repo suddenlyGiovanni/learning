@@ -1,8 +1,70 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "head-first-design-patterns": {
+      "root": "apps/head-first-design-patterns",
+      "sourceRoot": "apps/head-first-design-patterns/src",
+      "projectType": "application",
+      "prefix": "head-first-design-patterns",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/head-first-design-patterns",
+            "main": "apps/head-first-design-patterns/src/main.ts",
+            "tsConfig": "apps/head-first-design-patterns/tsconfig.app.json",
+            "assets": [
+              "apps/head-first-design-patterns/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/head-first-design-patterns/src/environments/environment.ts",
+                  "with": "apps/head-first-design-patterns/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "head-first-design-patterns:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/head-first-design-patterns/tsconfig.app.json",
+              "apps/head-first-design-patterns/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/head-first-design-patterns/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/head-first-design-patterns/jest.config.js",
+            "tsConfig": "apps/head-first-design-patterns/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
+    "defaultCollection": "@nrwl/node"
   },
   "schematics": {
     "@nrwl/workspace": {
@@ -62,5 +124,6 @@
         "linter": "eslint"
       }
     }
-  }
+  },
+  "defaultProject": "head-first-design-patterns"
 }
