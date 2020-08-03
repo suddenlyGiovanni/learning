@@ -1,4 +1,6 @@
+/* eslint-disable no-console */
 type UnaryFn<A, B> = (a: A) => B
+type NArityFn<Args extends unknown[], B> = (...args: [...Args]) => B
 type times10 = (x: number) => number
 export const times10: times10 = (x) => x * 10
 
@@ -10,14 +12,16 @@ export const times10: times10 = (x) => x * 10
  * the cache from the previous example.
  */
 
-export const memoize = <A, B>(cb: UnaryFn<A, B>): ((x: A) => B) => {
+export const memoize = <A extends unknown[], B>(
+  f: NArityFn<A, B>
+): NArityFn<A, B> => {
   const cache = new Map<A, B>()
-  return (x) => {
-    if (cache.has(x)) {
-      return cache.get(x) as B
+  return (...args) => {
+    if (cache.has(args)) {
+      return cache.get(args) as B
     }
-    const value = cb(x)
-    cache.set(x, value)
+    const value = f(...args)
+    cache.set(args, value)
     return value
   }
 }
@@ -25,15 +29,18 @@ export const memoize = <A, B>(cb: UnaryFn<A, B>): ((x: A) => B) => {
 // Returned function from memoizedAdd
 const memoizedTimes10 = memoize(times10)
 const memoizedTimes100 = memoize((x: number): number => x * 100)
+const memoizedTimes = memoize((x: number, y: number): number => x * y)
 console.log('~~~~~~~~~~~~~~TASK 4~~~~~~~~~~~~~~')
 try {
   // Calculated
   console.log('Task 4 calculated value:', memoizedTimes10(9))
   console.log('Task 4 calculated value:', memoizedTimes100(9))
+  console.log('Task 4 calculated value:', memoizedTimes(9, 1000))
 
   // Cached
   console.log('Task 4 cached value:', memoizedTimes10(9))
   console.log('Task 4 cached value:', memoizedTimes100(9))
+  console.log('Task 4 cached value:', memoizedTimes(9, 1000))
 } catch (err) {
   console.error('Task 4:', err)
 }

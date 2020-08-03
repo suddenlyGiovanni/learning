@@ -31,7 +31,10 @@
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
     "no-console": ["warn", { "allow": ["warn", "error"] }],
     "one-var": ["error", "never"],
-    "id-length": ["error", { "exceptions": ["i", "j", "z", "x", "xs"] }],
+    "id-length": [
+      "error",
+      { "exceptions": ["f", "i", "j", "z", "x", "xs", "y", "ys"] }
+    ],
     "no-magic-numbers": [
       "warn",
       {
