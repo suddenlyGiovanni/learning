@@ -28,9 +28,10 @@
   },
   "plugins": ["@typescript-eslint", "jest", "import"],
   "rules": {
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
     "no-console": ["warn", { "allow": ["warn", "error"] }],
     "one-var": ["error", "never"],
-    "id-length": ["error", { "exceptions": ["x", "xs"] }],
+    "id-length": ["error", { "exceptions": ["i", "j", "z", "x", "xs"] }],
     "no-magic-numbers": [
       "warn",
       {
