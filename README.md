@@ -1,90 +1,89 @@
-# Learning
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
-This project was generated using [Nx](https://nx.dev).
+# suddenlyGiovanni's learning monorepo
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+One Paragraph of project description goes here
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
+## Getting Started
 
-## Adding capabilities to your workspace
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+### Prerequisites
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+What things you need to install the software and how to install them
 
-Below are our core plugins:
+```
+Give examples
+```
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+### Installing
 
-There are also many [community plugins](https://nx.dev/nx-community) you could add.
+A step by step series of examples that tell you how to get a development env running
 
-## Generate an application
+Say what the step will be
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+```
+Give the example
+```
 
-> You can use any of the plugins above to generate applications as well.
+And repeat
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+```
+until finished
+```
 
-## Generate a library
+End with an example of getting some data out of the system or using it for a little demo
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+## Running the tests
 
-> You can also use any of the plugins above to generate libraries as well.
+Explain how to run the automated tests for this system
 
-Libraries are sharable across libraries and applications. They can be imported from `@learning/mylib`.
+### Break down into end to end tests
 
-## Development server
+Explain what these tests test and why
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+```
+Give an example
+```
 
-## Code scaffolding
+### And coding style tests
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+Explain what these tests test and why
 
-## Build
+```
+Give an example
+```
 
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Deployment
 
-## Running unit tests
+Add additional notes about how to deploy this on a live system
 
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+## Built With
 
-Run `nx affected:test` to execute the unit tests affected by a change.
+* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
+* [Maven](https://maven.apache.org/) - Dependency Management
+* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
-## Running end-to-end tests
+## Contributing
 
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+## Versioning
 
-## Understand your workspace
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
+## Authors
 
-## Further help
+* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
 
-Visit the [Nx Documentation](https://nx.dev) to learn more.
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
-## ☁ Nx Cloud
+## License
 
-### Computation Memoization in the Cloud
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
+## Acknowledgments
 
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+* Hat tip to anyone whose code was used
+* Inspiration
+* etc
