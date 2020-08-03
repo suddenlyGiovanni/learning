@@ -28,6 +28,17 @@
   },
   "plugins": ["@typescript-eslint", "jest", "import"],
   "rules": {
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "one-var": ["error", "never"],
+    "id-length": ["error", { "exceptions": ["x", "xs"] }],
+    "no-magic-numbers": [
+      "warn",
+      {
+        "ignoreArrayIndexes": true,
+        "enforceConst": true,
+        "detectObjects": true
+      }
+    ],
     "import/extensions": ["warn", "never"],
     "import/order": [
       "warn",
