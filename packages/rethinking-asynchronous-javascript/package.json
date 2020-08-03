@@ -1,0 +1,29 @@
+{
+  "name": "rethinking-asynchronous-javascript",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Giovanni Ravalico <ravalico.giovanni@gmail.com>",
+  "homepage": "https://github.com/suddenlyGiovanni/learning#readme",
+  "license": "MIT",
+  "main": "lib/rethinking-asynchronous-javascript.js",
+  "directories": {
+    "src": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.yarnpkg.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suddenlyGiovanni/learning.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/suddenlyGiovanni/learning/issues"
+  }
+}
