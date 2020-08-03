@@ -1,0 +1,14 @@
+{
+  "ts": {
+    "path": "...typescript"
+  },
+  "node": "~/.config/nvm/14.0.0/bin/node",
+  "recycle": true,
+  "env": {
+    "params": {
+      "env": "NODE_PATH=./src",
+      "runner": "--input-type=module"
+    }
+  },
+  "installPackageCommand": "yarn add {packageName}"
+}
