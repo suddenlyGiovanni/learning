@@ -28,20 +28,10 @@
   },
   "plugins": ["@typescript-eslint", "jest", "import"],
   "rules": {
-    "no-ternary": "off",
-    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
-    "no-console": ["warn", { "allow": ["warn", "error"] }],
-    "one-var": ["error", "never"],
     "id-length": [
       "error",
-      { "exceptions": ["x", "xs", "y", "ys", "f", "i", "j", "n", "z"] }
-    ],
-    "no-magic-numbers": [
-      "warn",
       {
-        "ignoreArrayIndexes": true,
-        "enforceConst": true,
-        "detectObjects": true
+        "exceptions": ["x", "xs", "y", "ys", "f", "i", "j", "n", "z"]
       }
     ],
     "import/extensions": ["warn", "never"],
@@ -63,6 +53,30 @@
         "newlines-between": "always-and-inside-groups"
       }
     ],
+    "line-comment-position": "off",
+    "no-console": [
+      "warn",
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
+    "no-inline-comments": "warn",
+    "no-magic-numbers": [
+      "warn",
+      {
+        "detectObjects": true,
+        "enforceConst": true,
+        "ignoreArrayIndexes": true
+      }
+    ],
+    "no-plusplus": [
+      "error",
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "no-ternary": "off",
+    "one-var": ["error", "never"],
     "sort-imports": [
       "warn",
       {
