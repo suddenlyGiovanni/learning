@@ -28,12 +28,13 @@
   },
   "plugins": ["@typescript-eslint", "jest", "import"],
   "rules": {
+    "no-ternary": "off",
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
     "no-console": ["warn", { "allow": ["warn", "error"] }],
     "one-var": ["error", "never"],
     "id-length": [
       "error",
-      { "exceptions": ["f", "i", "j", "z", "x", "xs", "y", "ys"] }
+      { "exceptions": ["x", "xs", "y", "ys", "f", "i", "j", "n", "z"] }
     ],
     "no-magic-numbers": [
       "warn",
