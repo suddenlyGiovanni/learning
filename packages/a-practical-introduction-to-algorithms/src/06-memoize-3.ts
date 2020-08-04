@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-type UnaryFn<A, B> = (a: A) => B
-type NArityFn<Args extends unknown[], B> = (...args: [...Args]) => B
+export type UnaryFn<A, B> = (a: A) => B
+export type NArityFn<Args extends unknown[], B> = (...args: [...Args]) => B
 type times10 = (x: number) => number
 export const times10: times10 = (x) => x * 10
 
