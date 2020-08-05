@@ -1,0 +1,21 @@
+{
+  "name": "algo-cast",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Giovanni Ravalico <ravalico.giovanni@gmail.com>",
+  "homepage": "https://github.com/suddenlyGiovanni/learning#readme",
+  "license": "ISC",
+  "main": "lib/algo-cast.js",
+  "directories": {  },
+  "files": [  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suddenlyGiovanni/learning.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/suddenlyGiovanni/learning/issues"
+  }
+}
