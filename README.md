@@ -3,7 +3,15 @@
 
 # suddenlyGiovanni's learning monorepo
 
-One Paragraph of project description goes here
+
+Repo | Description
+---------|----------
+ [a-practical-introduction-to-algorithms](./packages/a-practical-introduction-to-algorithms/) | temp
+ [algo-cast](./packages/algo-cast/) | temp
+ [build-your-own-programming-language](./packages/build-your-own-programming-language/) | temp
+ [complete_intro_to_react_v5](./packages/complete_intro_to_react_v5/) | temp
+ [head-first-design-patterns](./packages/head-first-design-patterns/) | temp
+ [rethinking-asynchronous-javascript](./packages/rethinking-asynchronous-javascript/) | temp
 
 ## Getting Started
 
