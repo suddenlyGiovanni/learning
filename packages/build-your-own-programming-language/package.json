@@ -1,0 +1,41 @@
+{
+  "author": "Giovanni Ravalico <ravalico.giovanni@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/suddenlyGiovanni/learning/issues"
+  },
+  "dependencies": {
+    "chalk": "3.0.0",
+    "inquirer": "7.1.0",
+    "lodash.flow": "3.5.0"
+  },
+  "description": "> TODO: description",
+  "devDependencies": {
+    "@types/inquirer": "6.5.0",
+    "@types/jest": "25.1.4",
+    "@types/lodash.flow": "3.5.6",
+    "nodemon": "2.0.2",
+    "ts-jest": "25.2.1",
+    "ts-node": "8.7.0"
+  },
+  "directories": {},
+  "files": [],
+  "homepage": "https://github.com/suddenlyGiovanni/learning#readme",
+  "license": "ISC",
+  "main": "src/index.ts",
+  "name": "build-your-own-programming-language",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suddenlyGiovanni/learning.git"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "build:live": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/repl/repl.ts",
+    "clean": "rm -rf lib",
+    "cz": "git-cz",
+    "purge-node_modules": "rm -rf node_modules",
+    "start": "npm run build:live",
+    "test": "jest",
+    "test-types": "dtslint types"
+  },
+  "version": "0.0.0"
+}
