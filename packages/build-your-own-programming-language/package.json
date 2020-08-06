@@ -10,7 +10,7 @@
   },
   "description": "> TODO: description",
   "devDependencies": {
-    "@types/inquirer": "6.5.0",
+    "@types/inquirer": "7.3.0",
     "@types/jest": "25.1.4",
     "@types/lodash.flow": "3.5.6",
     "nodemon": "2.0.2",
