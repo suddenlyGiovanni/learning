@@ -28,72 +28,104 @@
   },
   "plugins": ["@typescript-eslint", "jest", "import"],
   "rules": {
-    "id-length": [
-      "error",
-      {
-        "exceptions": ["x", "xs", "y", "ys", "f", "i", "j", "n", "z"]
-      }
-    ],
-    "import/extensions": ["warn", "never"],
-    "import/order": [
-      "warn",
-      {
-        "alphabetize": {
-          "caseInsensitive": true,
-          "order": "asc"
-        },
-        "groups": [
-          "builtin",
-          "external",
-          "parent",
-          "sibling",
-          "index",
-          "internal"
-        ],
-        "newlines-between": "always-and-inside-groups"
-      }
-    ],
-    "line-comment-position": "off",
-    "no-console": [
-      "warn",
-      {
-        "allow": ["warn", "error"]
-      }
-    ],
-    "no-inline-comments": "warn",
-    "no-magic-numbers": [
-      "warn",
-      {
-        "detectObjects": true,
-        "enforceConst": true,
-        "ignoreArrayIndexes": true
-      }
-    ],
-    "no-plusplus": [
-      "error",
-      {
-        "allowForLoopAfterthoughts": true
-      }
-    ],
-    "no-ternary": "off",
-    "one-var": ["error", "never"],
-    "sort-imports": [
-      "warn",
-      {
-        "ignoreCase": false,
-        "ignoreDeclarationSort": true,
-        "ignoreMemberSort": false,
-        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
-      }
-    ],
-    "sort-keys": [
-      "warn",
-      "asc",
-      {
-        "caseSensitive": true,
-        "minKeys": 2,
-        "natural": true
-      }
-    ]
-  }
+  "capitalized-comments": [
+    "warn",
+    "always",
+    {
+      "ignoreInlineComments": true,
+      "ignoreConsecutiveComments": true
+    }
+  ],
+  "id-length": [
+    "error",
+    {
+      "exceptions": [
+        "x",
+        "xs",
+        "y",
+        "ys",
+        "f",
+        "i",
+        "j",
+        "n",
+        "z"
+      ]
+    }
+  ],
+  "import/extensions": [
+    "warn",
+    "never"
+  ],
+  "import/order": [
+    "warn",
+    {
+      "alphabetize": {
+        "caseInsensitive": true,
+        "order": "asc"
+      },
+      "groups": [
+        "builtin",
+        "external",
+        "parent",
+        "sibling",
+        "index",
+        "internal"
+      ],
+      "newlines-between": "always-and-inside-groups"
+    }
+  ],
+  "line-comment-position": "off",
+  "no-console": [
+    "warn",
+    {
+      "allow": [
+        "warn",
+        "error"
+      ]
+    }
+  ],
+  "no-inline-comments": "warn",
+  "no-magic-numbers": [
+    "warn",
+    {
+      "detectObjects": true,
+      "enforceConst": true,
+      "ignoreArrayIndexes": true
+    }
+  ],
+  "no-plusplus": [
+    "error",
+    {
+      "allowForLoopAfterthoughts": true
+    }
+  ],
+  "no-ternary": "off",
+  "one-var": [
+    "error",
+    "never"
+  ],
+  "sort-imports": [
+    "warn",
+    {
+      "ignoreCase": false,
+      "ignoreDeclarationSort": true,
+      "ignoreMemberSort": false,
+      "memberSyntaxSortOrder": [
+        "none",
+        "all",
+        "multiple",
+        "single"
+      ]
+    }
+  ],
+  "sort-keys": [
+    "warn",
+    "asc",
+    {
+      "caseSensitive": true,
+      "minKeys": 2,
+      "natural": true
+    }
+  ]
+}
 }
