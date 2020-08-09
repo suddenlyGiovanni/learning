@@ -80,21 +80,21 @@ export class Node<T> implements ILinkedListNode<T> {
   public toString(): string {
     return JSON.stringify({ value: this._value, next: this._next })
   }
+
 }
 
 /** Class representing a Linked List */
 export class LinkedList<T> implements ILinkedList<T> {
-  private _head: null | ILinkedListNode<T> = null
+  private _head: null | ILinkedListNode<T>
 
-  private _tail: null | ILinkedListNode<T> = null
+  private _tail: null | ILinkedListNode<T>
 
-  private _length = 0
+  private _length: number
 
-  public constructor(value: T) {
-    const node = new Node(value, null)
-    this._head = node
-    this._tail = node
-    this._length++
+  public constructor() {
+    this._head = null
+    this._tail = null
+    this._length = 0
   }
 
   public get head(): null | ILinkedListNode<T> {
@@ -114,11 +114,27 @@ export class LinkedList<T> implements ILinkedList<T> {
    */
   public insert(value: T): this {
     const node = new Node(value)
+    if (this._head === null && this._tail === null) {
+      // We are to insert the first node in the list.
+      this._head = node
+      this._tail = this._head
+      this.incrementLength()
+      return this
+    }
+
     const prevTail = this._tail
     prevTail!.next = node
     this._tail = node
-    this._length++
+    this.incrementLength()
     return this
+  }
+
+  private incrementLength(): void {
+    this._length++
+  }
+
+  private decrementLength(): void {
+    this._length--
   }
 
   /*
@@ -136,11 +152,11 @@ export class LinkedList<T> implements ILinkedList<T> {
       if (this.isTail(currentNode)) {
         previousNode!.next = null
         this._tail = previousNode
-        this._length--
+        this.decrementLength()
         return currentNode.value
       }
       previousNode!.next = currentNode.next
-      this._length--
+      this.decrementLength()
       return currentNode.value
     }
     return null
@@ -162,7 +178,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     currentNode.next = null
     const tail = this._tail
     this._tail = currentNode
-    this._length--
+    this.decrementLength()
     return tail!.value
   }
 
@@ -199,7 +215,8 @@ export class LinkedList<T> implements ILinkedList<T> {
 // ------------------ examples-----------------
 
 // construct LinkedList
-const testLinkedList = new LinkedList<number>(10)
+const testLinkedList = new LinkedList<number>()
+testLinkedList.insert(10)
 
 // isHead()
 const { head } = testLinkedList
