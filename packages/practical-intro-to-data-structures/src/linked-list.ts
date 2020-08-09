@@ -80,7 +80,6 @@ export class Node<T> implements ILinkedListNode<T> {
   public toString(): string {
     return JSON.stringify({ value: this._value, next: this._next })
   }
-
 }
 
 /** Class representing a Linked List */
@@ -210,6 +209,16 @@ export class LinkedList<T> implements ILinkedList<T> {
   public isTail(node: ILinkedListNode<T>): boolean {
     return this._tail === node
   }
+
+  /** Implementing the iterable protocol!! */
+
+  *[Symbol.iterator]() {
+    let currentNode = this._head
+    while (currentNode) {
+      yield currentNode?.value
+      currentNode = currentNode?.next
+    }
+  }
 }
 
 // ------------------ examples-----------------
@@ -255,7 +264,12 @@ const node14 = testLinkedList.tail // =>  Node { _value: 14, _next: null }
 testLinkedList.remove(node14!) // => 14
 console.log(testLinkedList.tail) // => Node { _value: 13, _next: null }
 
+
 // {[10] -> [11] -> [13]}
 console.log(testLinkedList) // => 14
 testLinkedList.remove(node11!) // => 11
 console.log(JSON.stringify(testLinkedList, null, 2)) // => 14 {[10] -> [13]}
+
+for (const el of testLinkedList) {
+  console.log(el)
+}
