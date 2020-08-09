@@ -1,4 +1,6 @@
-/* eslint-disable no-undefined, no-underscore-dangle, @typescript-eslint/ban-ts-comment */
+/* eslint-disable no-inline-comments */
+/* eslint-disable no-undefined, no-underscore-dangle, @typescript-eslint/ban-ts-comment, no-plusplus */
+
 export interface StackInterface<T> {
   /**
    * Adds a member to the collection
@@ -24,46 +26,76 @@ export interface StackInterface<T> {
 
 /** Class representing a Stack. */
 export class Stack<T> implements StackInterface<T> {
-  private readonly _stack: T[]
+  private readonly _stack: Record<number, T>
 
-  private get size(): number {
-    return this._stack.length
-  }
+  private _length: number
 
   public constructor() {
-    this._stack = []
+    this._stack = {}
+    this._length = 0
   }
 
-  public push(x: T): void {
-    this._stack.push(x)
+  private incrementLength(): void {
+    this._length++
   }
 
+  private decrementLength(): void {
+    this._length--
+  }
+
+  /**
+   * Adds a member to the collection
+   */
+  public push(value: T): void {
+    this._stack[this._length] = value
+    this.incrementLength()
+  }
+
+  /**
+   * Removes and returns the most recently added member to the collection
+   */
   public pop(): undefined | T {
-    if (this.size > 0) {
-      return this._stack.pop() as T
+    if (this._length > 0) {
+      const lastIdx = this._length - 1
+      const last = this._stack[lastIdx]
+      delete this._stack[lastIdx]
+      this.decrementLength()
+      return last
     }
     return undefined
   }
 
+  /**
+   * Returns the most Head of the stack without removing it
+   */
   public peek(): undefined | T {
-    if (this.size > 0) {
-      return this._stack[this.size - 1]
+    if (this._length > 0) {
+      const lastIdx = this._length - 1
+      return this._stack[lastIdx]
     }
     return undefined
+  }
+
+  public toString(): string {
+    return JSON.stringify({ length: this._length, stack: this._stack }, null, 2)
   }
 }
 
 // Examples
 
-const testStack = new Stack<number>()
+const testStack = new Stack<string>()
+testStack.peek() // undefined
 
-testStack.push(1)
-testStack.push(2)
-testStack.push(3)
-testStack.peek() // => 3
-testStack.pop() // => 3
-testStack.peek() // => 2
-testStack.pop() // => 2s
-testStack.pop() // => 1
-testStack.peek() // => Error('stack underflow')
-testStack.pop() // => Error('stack underflow')
+testStack.push('first')
+testStack.peek() // 'first'
+testStack.toString() // '{ length: 1, stack: { 0: "first" } }'
+
+testStack.push('second')
+testStack.peek() // 'second
+testStack.toString() // '{ length: 3, stack: { 0: "first", 1: "second", 2: "third" } }'
+
+testStack.push('third')
+testStack.toString() // '{ "length": 3, "stack": { "0": "first", "1": "second", "2": "third" } }'
+testStack.peek() // 'third
+testStack.pop() // 'third
+testStack.toString() // '{ "length": 2, "stack": { "0": "first", "1": "second" } }'
