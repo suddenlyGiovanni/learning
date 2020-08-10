@@ -1,5 +1,5 @@
-/* eslint-disable no-magic-numbers */
-/* eslint-disable no-underscore-dangle, class-methods-use-this, multiline-comment-style */
+/* eslint-disable no-warning-comments */
+/* eslint-disable max-statements, @typescript-eslint/no-non-null-assertion, no-magic-numbers, no-underscore-dangle, class-methods-use-this, multiline-comment-style */
 
 export interface HashTableClass<T> {
   /**
@@ -19,10 +19,11 @@ export interface HashTableClass<T> {
   remove(key: string): T
 
   /**
-   * Returns the value associated with a key
+   * Given an existing `key`, it returns the associated `value`
+   * otherwise returns `undefined`
    * @template T
    * @param {string} key - the key to search for
-   * @returns {T} value - the value associated with the key
+   * @returns {T | undefined} value - the value associated with the key or undefined
    */
   retrieve(key: string): T
 }
@@ -33,7 +34,20 @@ type Storage<T> = Array<null | Tuple2<string, T> | Array<Tuple2<string, T>>>
 
 /** Class representing a Hash Table */
 export class HashTableClass<T> implements HashTableClass<T> {
-  // { _storage: [[key, value], [key, value]]}
+  private readonly UPPER_BOUNDARY = 50
+
+  /**
+   * @example
+   *  const _storage = [
+   *     [key, value],
+   *     null,
+   *     [
+   *       [key, value],
+   *       [key, value]
+   *     ]
+   *   ]
+   *
+   */
   private _storage: Storage<T>
 
   public constructor() {
@@ -45,35 +59,76 @@ export class HashTableClass<T> implements HashTableClass<T> {
    */
   public insert(key: string, value: T): void {
     // Check if the saturation of the storage
-    this.checkStorageSaturation()
+    this.checkLoadFactor()
 
     const tuple = this.makeTuple2(key, value)
     this._insert({ size: this.size, storage: this._storage, tuple })
   }
 
   /**
-   * Deletes a key-value pair and return the deleted value
+   * Given an existing `key`, it deletes a key-value pair and return the deleted value
+   * else returns `undefined`
    */
-  public remove(key: string): T {}
-
-  /*
-   * Returns the value associated with a key
-   */
-  public retrieve(key: string): T {
+  public remove(key: string): undefined | T {
     const index = this._hash(key, this.size)
     const row = this._storage[index]
-    // Row can be a Tuple2<string, T> | Array<Tuple2<string, T>>
-    if (Array.isArray(row![0])) {
-      // Row is Array<Tuple2<string, T>>
-      const tuple = ((row as unknown) as Tuple2<string, T>[]).find(
-        ([_key]) => key === _key
-      )
-      const [_, value] = tuple as Tuple2<string, T>
-      return value //?
+    if (row) {
+      // Row can be a Tuple2<string, T> | Array<Tuple2<string, T>>
+      if (this.isArrayOfTuples(row)) {
+        // Row is Array<Tuple2<string, T>>
+        // how many collisions were stored in this sub array?
+        const { length } = row
+
+        const tupleIdx = row.findIndex(([_key]) => key === _key)
+        /*
+         * If the sub array is larger than 2 elements we can conserve the arry and just remove the
+         * one element that we need
+         */
+        if (length > 2) {
+          const [tuple] = row.splice(tupleIdx, 1)
+          const [, value] = tuple
+          return value
+        }
+        // We need to pluck the tuple from the array and then fold it to a single dimension
+        const [tuple] = row.splice(tupleIdx, 1)
+        const [, value] = tuple
+        const rowReset = row.flat(1) as Tuple2<string, T>
+        this._storage[index] = rowReset
+        return value
+      }
+      // Row is Tuple2<string, T>
+      const [, value] = row
+      // Now we need to remove the tuple
+      this._storage[index] = null
+      return value
     }
-    // Row is Tuple2<string, T>
-    const [_, value] = (row as unknown) as Tuple2<string, T>
-    return value //?
+    return undefined
+
+    // TODO: check if the load factor fall under the predefined LOWER_BOUNDARY threshold!
+    // TODO: if so shrink the size of the HashTable!
+  }
+
+  /*
+   * Given an existing `key`, it returns the associated `value`
+   * otherwise returns `undefined`
+   */
+  public retrieve(key: string): undefined | T {
+    const index = this._hash(key, this.size)
+
+    const row = this._storage[index]
+    if (row) {
+      // Row can be a Tuple2<string, T> | Array<Tuple2<string, T>>
+      if (this.isArrayOfTuples(row)) {
+        // Row is Array<Tuple2<string, T>>
+        const tuple = row.find(([_key]) => key === _key)
+        const [, value] = tuple!
+        return value
+      }
+      // Row is Tuple2<string, T>
+      const [, value] = row
+      return value
+    }
+    return undefined
   }
 
   /** For debugging purpose */
@@ -110,7 +165,7 @@ export class HashTableClass<T> implements HashTableClass<T> {
   }): void {
     // Pass the key thought the hashing fn to get an indexs
     const [key] = insertTuple
-    const index = this._hash(key, size) //?
+    const index = this._hash(key, size)
 
     // Check if the index is already been used.
     if (storage[index]) {
@@ -137,12 +192,32 @@ export class HashTableClass<T> implements HashTableClass<T> {
     }
   }
 
-  private checkStorageSaturation(): void {
-    const saturationPercentage = this.storageSaturationPercentage() //?
-    if (saturationPercentage >= 50) {
-      // If we get to 50% then we need to resize the array and re-hash all the entries
+  private checkLoadFactor(): void {
+    if (this.loadFactor() >= this.UPPER_BOUNDARY) {
+      // If we get to the UPPER_BOUNDARY then we need to resize the array and re-hash all the entries
       this.resizeStorage()
     }
+  }
+
+  private isArrayOfTuples(
+    row: Tuple2<string, T> | Tuple2<string, T>[]
+  ): row is Tuple2<string, T>[] {
+    return Array.isArray(row[0])
+  }
+
+  /**
+   * Calculates the load factor of the hash table
+   * @returns {number} saturation in percentage
+   */
+  private loadFactor(): number {
+    // TODO: optimize, this is a liner operation where we need to perform it in constant time!
+    // TODO: introduce new private properties (entriesNumber, bucketsNumber) to track the load factor
+    const rowsTotalNumber = this._storage.reduce(
+      (acc, cur) => (cur === null ? acc : acc + 1),
+      0
+    )
+
+    return Math.floor((rowsTotalNumber / this.size) * 100)
   }
 
   private makeTuple2(key: string, value: T): Tuple2<string, T> {
@@ -158,7 +233,11 @@ export class HashTableClass<T> implements HashTableClass<T> {
         if (Array.isArray(row[0])) {
           // Row is Array<Tuple2<string, T>>
           ;(row as Tuple2<string, T>[]).forEach((tuple) => {
-            this._insert({ size: doubleSize, storage: _newStorage, tuple })
+            this._insert({
+              size: doubleSize,
+              storage: _newStorage,
+              tuple,
+            })
           })
         } else {
           // Row is Tuple2<string, T>
@@ -174,44 +253,28 @@ export class HashTableClass<T> implements HashTableClass<T> {
     // Replace the old storage with the new one
     this._storage = _newStorage
   }
-
-  /**
-   * Calculates the saturation percentage of the storage
-   * @returns {number} saturation in percentage
-   */
-  private storageSaturationPercentage(): number {
-    const hashRowsNumberTotal = this._storage.reduce((acc, cur) => {
-      return cur === null ? acc : acc + 1
-    }, 0)
-
-    return Math.floor((hashRowsNumberTotal / this.size) * 100)
-  }
 }
 
-const testHashTable = new HashTableClass<number>()
 
-testHashTable.insert('one', 1)
-
-testHashTable.insert('two', 2)
-
-testHashTable.insert('three', 3)
-
-testHashTable.insert('three', 3)
-
-testHashTable.insert('four', 4)
-
-testHashTable.insert('five', 5)
-
-testHashTable.insert('six', 6)
-
-testHashTable.insert('seven', 7)
-
-testHashTable.insert('eight', 8)
-
-testHashTable.retrieve('six') //?
-
-testHashTable.retrieve('two') //2
-
-testHashTable.retrieve('five') //?
-
-testHashTable.toString() //?
+// Examples:
+// const testHashTable = new HashTableClass<number>()
+// testHashTable.insert('one', 1)
+// testHashTable.insert('two', 2)
+// testHashTable.insert('three', 3)
+// testHashTable.insert('three', 3)
+// testHashTable.insert('four', 4)
+// testHashTable.insert('five', 5)
+// testHashTable.insert('six', 6)
+// testHashTable.insert('seven', 7)
+// testHashTable.insert('eight', 8)
+// testHashTable.insert('nine', 9)
+// testHashTable.retrieve('six')
+// testHashTable.retrieve('two')
+// testHashTable.retrieve('five')
+// testHashTable.toString()
+// testHashTable.remove('six')
+// testHashTable.toString()
+// testHashTable.remove('two')
+// testHashTable.toString()
+// testHashTable.remove('nine')
+// testHashTable.toString()
