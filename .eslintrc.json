@@ -28,104 +28,128 @@
   },
   "plugins": ["@typescript-eslint", "jest", "import"],
   "rules": {
-  "capitalized-comments": [
-    "warn",
-    "always",
-    {
-      "ignoreInlineComments": true,
-      "ignoreConsecutiveComments": true
-    }
-  ],
-  "id-length": [
-    "error",
-    {
-      "exceptions": [
-        "x",
-        "xs",
-        "y",
-        "ys",
-        "f",
-        "i",
-        "j",
-        "n",
-        "z"
-      ]
-    }
-  ],
-  "import/extensions": [
-    "warn",
-    "never"
-  ],
-  "import/order": [
-    "warn",
-    {
-      "alphabetize": {
-        "caseInsensitive": true,
-        "order": "asc"
-      },
-      "groups": [
-        "builtin",
-        "external",
-        "parent",
-        "sibling",
-        "index",
-        "internal"
-      ],
-      "newlines-between": "always-and-inside-groups"
-    }
-  ],
-  "line-comment-position": "off",
-  "no-console": [
-    "warn",
-    {
-      "allow": [
-        "warn",
-        "error"
-      ]
-    }
-  ],
-  "no-inline-comments": "warn",
-  "no-magic-numbers": [
-    "warn",
-    {
-      "detectObjects": true,
-      "enforceConst": true,
-      "ignoreArrayIndexes": true
-    }
-  ],
-  "no-plusplus": [
-    "error",
-    {
-      "allowForLoopAfterthoughts": true
-    }
-  ],
-  "no-ternary": "off",
-  "one-var": [
-    "error",
-    "never"
-  ],
-  "sort-imports": [
-    "warn",
-    {
-      "ignoreCase": false,
-      "ignoreDeclarationSort": true,
-      "ignoreMemberSort": false,
-      "memberSyntaxSortOrder": [
-        "none",
-        "all",
-        "multiple",
-        "single"
-      ]
-    }
-  ],
-  "sort-keys": [
-    "warn",
-    "asc",
-    {
-      "caseSensitive": true,
-      "minKeys": 2,
-      "natural": true
-    }
-  ]
-}
+    "@typescript-eslint/member-ordering": [
+      "error",
+      {
+        "default": {
+          "memberTypes": [
+            "signature",
+            "public-static-field",
+            "protected-static-field",
+            "private-static-field",
+            "public-instance-field",
+            "protected-instance-field",
+            "private-instance-field",
+            "public-abstract-field",
+            "protected-abstract-field",
+            "private-abstract-field",
+            "public-field",
+            "protected-field",
+            "private-field",
+            "static-field",
+            "instance-field",
+            "abstract-field",
+            "field",
+            "public-constructor",
+            "protected-constructor",
+            "private-constructor",
+            "constructor",
+            "public-static-method",
+            "protected-static-method",
+            "private-static-method",
+            "public-instance-method",
+            "protected-instance-method",
+            "private-instance-method",
+            "public-abstract-method",
+            "protected-abstract-method",
+            "private-abstract-method",
+            "public-method",
+            "protected-method",
+            "private-method",
+            "static-method",
+            "instance-method",
+            "abstract-method",
+            "method"
+          ],
+          "order": "alphabetically"
+        }
+      }
+    ],
+    "capitalized-comments": [
+      "warn",
+      "always",
+      {
+        "ignoreConsecutiveComments": true,
+        "ignoreInlineComments": true
+      }
+    ],
+    "id-length": [
+      "error",
+      {
+        "exceptions": ["x", "xs", "y", "ys", "f", "i", "j", "n", "z"]
+      }
+    ],
+    "import/extensions": ["warn", "never"],
+    "import/order": [
+      "warn",
+      {
+        "alphabetize": {
+          "caseInsensitive": true,
+          "order": "asc"
+        },
+        "groups": [
+          "builtin",
+          "external",
+          "parent",
+          "sibling",
+          "index",
+          "internal"
+        ],
+        "newlines-between": "always-and-inside-groups"
+      }
+    ],
+    "line-comment-position": "off",
+    "no-console": [
+      "warn",
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
+    "no-inline-comments": "warn",
+    "no-magic-numbers": [
+      "warn",
+      {
+        "detectObjects": true,
+        "enforceConst": true,
+        "ignoreArrayIndexes": true
+      }
+    ],
+    "no-plusplus": [
+      "error",
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "no-ternary": "off",
+    "no-undefined": "off",
+    "one-var": ["error", "never"],
+    "sort-imports": [
+      "warn",
+      {
+        "ignoreCase": false,
+        "ignoreDeclarationSort": true,
+        "ignoreMemberSort": false,
+        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+      }
+    ],
+    "sort-keys": [
+      "warn",
+      "asc",
+      {
+        "caseSensitive": true,
+        "minKeys": 2,
+        "natural": true
+      }
+    ]
+  }
 }
