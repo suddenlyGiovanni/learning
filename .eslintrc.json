@@ -86,7 +86,7 @@
     "id-length": [
       "error",
       {
-        "exceptions": ["x", "xs", "y", "ys", "f", "i", "j", "n", "z"]
+        "exceptions": ["x", "xs", "y", "ys", "f", "i", "j", "n", "z", "_"]
       }
     ],
     "import/extensions": ["warn", "never"],
@@ -132,6 +132,13 @@
     ],
     "no-ternary": "off",
     "no-undefined": "off",
+    "no-unused-vars": [
+      "error",
+      {
+        "ignoreRestSiblings": true,
+        "args": "after-used"
+      }
+    ],
     "one-var": ["error", "never"],
     "sort-imports": [
       "warn",

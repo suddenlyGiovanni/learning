@@ -1,24 +1,28 @@
+/* eslint-disable no-magic-numbers */
 /* eslint-disable no-underscore-dangle, class-methods-use-this, multiline-comment-style */
 
 export interface HashTableClass<T> {
   /**
    * Inserts a new key-value pair
+   * @template T
    * @param {string} key - the key associated with the value
-   * @param {*} value - the value to insert
+   * @param {T} value - the value to insert
    */
   insert(key: string, value: T): void
 
   /**
    * Deletes a key-value pair
+   * @template T
    * @param {string} key - the key associated with the value
-   * @return {*} value - the deleted value
+   * @return {T} value - the deleted value
    */
   remove(key: string): T
 
   /**
    * Returns the value associated with a key
+   * @template T
    * @param {string} key - the key to search for
-   * @return {*} - the value associated with the key
+   * @returns {T} value - the value associated with the key
    */
   retrieve(key: string): T
 }
@@ -45,7 +49,6 @@ export class HashTableClass<T> implements HashTableClass<T> {
 
     const tuple = this.makeTuple2(key, value)
     this._insert({ size: this.size, storage: this._storage, tuple })
-
   }
 
   /**
@@ -53,10 +56,25 @@ export class HashTableClass<T> implements HashTableClass<T> {
    */
   public remove(key: string): T {}
 
-  /**
+  /*
    * Returns the value associated with a key
    */
-  public retrieve(key: string): T {}
+  public retrieve(key: string): T {
+    const index = this._hash(key, this.size)
+    const row = this._storage[index]
+    // Row can be a Tuple2<string, T> | Array<Tuple2<string, T>>
+    if (Array.isArray(row![0])) {
+      // Row is Array<Tuple2<string, T>>
+      const tuple = ((row as unknown) as Tuple2<string, T>[]).find(
+        ([_key]) => key === _key
+      )
+      const [_, value] = tuple as Tuple2<string, T>
+      return value //?
+    }
+    // Row is Tuple2<string, T>
+    const [_, value] = (row as unknown) as Tuple2<string, T>
+    return value //?
+  }
 
   /** For debugging purpose */
   public toString(): string {
@@ -189,5 +207,11 @@ testHashTable.insert('six', 6)
 testHashTable.insert('seven', 7)
 
 testHashTable.insert('eight', 8)
+
+testHashTable.retrieve('six') //?
+
+testHashTable.retrieve('two') //2
+
+testHashTable.retrieve('five') //?
 
 testHashTable.toString() //?
