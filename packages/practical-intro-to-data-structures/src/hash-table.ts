@@ -1,5 +1,4 @@
-/* eslint-disable no-warning-comments */
-/* eslint-disable max-statements, @typescript-eslint/no-non-null-assertion, no-magic-numbers, no-underscore-dangle, class-methods-use-this, multiline-comment-style */
+/* eslint-disable max-statements, @typescript-eslint/no-non-null-assertion, no-magic-numbers, no-underscore-dangle, class-methods-use-this, multiline-comment-style, no-plusplus, no-warning-comments */
 
 export interface HashTableClass<T> {
   /**
@@ -36,6 +35,8 @@ type Storage<T> = Array<null | Tuple2<string, T> | Array<Tuple2<string, T>>>
 export class HashTableClass<T> implements HashTableClass<T> {
   private readonly UPPER_BOUNDARY = 50
 
+  private _inputSize: number
+
   /**
    * @example
    *  const _storage = [
@@ -50,8 +51,12 @@ export class HashTableClass<T> implements HashTableClass<T> {
    */
   private _storage: Storage<T>
 
+  private _tableSize: number
+
   public constructor() {
-    this._storage = Array(10) as null[]
+    this._tableSize = 10
+    this._storage = Array(this._tableSize).fill(null) as null[]
+    this._inputSize = 0
   }
 
   /**
@@ -62,7 +67,12 @@ export class HashTableClass<T> implements HashTableClass<T> {
     this.checkLoadFactor()
 
     const tuple = this.makeTuple2(key, value)
-    this._insert({ size: this.size, storage: this._storage, tuple })
+    this._insert({
+      size: this._tableSize,
+      storage: this._storage,
+      tuple,
+    })
+    this._inputSize++
   }
 
   /**
@@ -70,7 +80,7 @@ export class HashTableClass<T> implements HashTableClass<T> {
    * else returns `undefined`
    */
   public remove(key: string): undefined | T {
-    const index = this._hash(key, this.size)
+    const index = this._hash(key, this._tableSize)
     const row = this._storage[index]
     if (row) {
       // Row can be a Tuple2<string, T> | Array<Tuple2<string, T>>
@@ -86,6 +96,7 @@ export class HashTableClass<T> implements HashTableClass<T> {
          */
         if (length > 2) {
           const [tuple] = row.splice(tupleIdx, 1)
+          this._inputSize--
           const [, value] = tuple
           return value
         }
@@ -94,12 +105,14 @@ export class HashTableClass<T> implements HashTableClass<T> {
         const [, value] = tuple
         const rowReset = row.flat(1) as Tuple2<string, T>
         this._storage[index] = rowReset
+        this._inputSize--
         return value
       }
       // Row is Tuple2<string, T>
       const [, value] = row
       // Now we need to remove the tuple
       this._storage[index] = null
+      this._inputSize--
       return value
     }
     return undefined
@@ -113,7 +126,7 @@ export class HashTableClass<T> implements HashTableClass<T> {
    * otherwise returns `undefined`
    */
   public retrieve(key: string): undefined | T {
-    const index = this._hash(key, this.size)
+    const index = this._hash(key, this._tableSize)
 
     const row = this._storage[index]
     if (row) {
@@ -136,10 +149,6 @@ export class HashTableClass<T> implements HashTableClass<T> {
     return JSON.stringify(this, null, 2)
   }
 
-  private get size(): number {
-    return this._storage.length
-  }
-
   /**
    * Hashes string value into an integer that can be mapped to an array index
    * @param {string} str - the string to be hashed
@@ -155,7 +164,7 @@ export class HashTableClass<T> implements HashTableClass<T> {
   }
 
   private _insert({
-    tuple: insertTuple,
+    tuple,
     storage,
     size,
   }: {
@@ -164,31 +173,28 @@ export class HashTableClass<T> implements HashTableClass<T> {
     tuple: Tuple2<string, T>
   }): void {
     // Pass the key thought the hashing fn to get an indexs
-    const [key] = insertTuple
+    const [key] = tuple
     const index = this._hash(key, size)
-
+    const row = storage[index]
     // Check if the index is already been used.
-    if (storage[index]) {
+    // eslint-disable-next-line no-negated-condition
+    if (row) {
       // We have an index collision
       // now, we could have stumbled upon:
       // 1 - a simple tuple: [key, value]. this is (one dimensional)
       // 2 - an array of tuples: [[key, value], [key, value], ....]
-      if (Array.isArray(storage[index]![0])) {
+      if (this.isArrayOfTuples(row)) {
         // We are in the second case
         // push the tuple to the end of the array. Done
-        storage[index] = [
-          ...(storage[index] as Tuple2<string, T>[]),
-          insertTuple,
-        ]
+        storage[index] = [...row, tuple]
       } else {
         // We are in the first case
         // copy the value at that position
-        const collidedTuple = storage[index] as Tuple2<string, T>
         // Create a new empty array, add the copied value, add the new tuple
-        storage[index] = [collidedTuple, insertTuple]
+        storage[index] = [row, tuple]
       }
     } else {
-      storage[index] = insertTuple
+      storage[index] = tuple
     }
   }
 
@@ -210,14 +216,7 @@ export class HashTableClass<T> implements HashTableClass<T> {
    * @returns {number} saturation in percentage
    */
   private loadFactor(): number {
-    // TODO: optimize, this is a liner operation where we need to perform it in constant time!
-    // TODO: introduce new private properties (entriesNumber, bucketsNumber) to track the load factor
-    const rowsTotalNumber = this._storage.reduce(
-      (acc, cur) => (cur === null ? acc : acc + 1),
-      0
-    )
-
-    return Math.floor((rowsTotalNumber / this.size) * 100)
+    return Math.floor((this._inputSize / this._tableSize) * 100)
   }
 
   private makeTuple2(key: string, value: T): Tuple2<string, T> {
@@ -225,14 +224,15 @@ export class HashTableClass<T> implements HashTableClass<T> {
   }
 
   private resizeStorage(): void {
-    const doubleSize = this.size * 2
+    const doubleSize = this._tableSize * 2
     const _newStorage = Array(doubleSize).fill(null) as Storage<T>
+
     this._storage.forEach((row) => {
       if (row !== null) {
         // Row can be a Tuple2<string, T> | Array<Tuple2<string, T>>
-        if (Array.isArray(row[0])) {
+        if (this.isArrayOfTuples(row)) {
           // Row is Array<Tuple2<string, T>>
-          ;(row as Tuple2<string, T>[]).forEach((tuple) => {
+          row.forEach((tuple) => {
             this._insert({
               size: doubleSize,
               storage: _newStorage,
@@ -244,7 +244,7 @@ export class HashTableClass<T> implements HashTableClass<T> {
           this._insert({
             size: doubleSize,
             storage: _newStorage,
-            tuple: row as Tuple2<string, T>,
+            tuple: row,
           })
         }
       }
@@ -252,9 +252,9 @@ export class HashTableClass<T> implements HashTableClass<T> {
 
     // Replace the old storage with the new one
     this._storage = _newStorage
+    this._tableSize = doubleSize
   }
 }
-
 
 // Examples:
 // const testHashTable = new HashTableClass<number>()
@@ -268,13 +268,13 @@ export class HashTableClass<T> implements HashTableClass<T> {
 // testHashTable.insert('seven', 7)
 // testHashTable.insert('eight', 8)
 // testHashTable.insert('nine', 9)
-// testHashTable.retrieve('six')
-// testHashTable.retrieve('two')
-// testHashTable.retrieve('five')
-// testHashTable.toString()
-// testHashTable.remove('six')
-// testHashTable.toString()
-// testHashTable.remove('two')
-// testHashTable.toString()
-// testHashTable.remove('nine')
-// testHashTable.toString()
+// testHashTable.retrieve('six') //?
+// testHashTable.retrieve('two') //?
+// testHashTable.retrieve('five')  //?
+// testHashTable.toString()  //?
+// testHashTable.remove('six') //?
+// testHashTable.toString()  //?
+// testHashTable.remove('two') //?
+// testHashTable.toString()  //?
+// testHashTable.remove('nine')  //?
+// testHashTable.toString()  //?
