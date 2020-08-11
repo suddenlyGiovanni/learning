@@ -1,3 +1,4 @@
+/* eslint-disable max-statements */
 /* eslint-disable spaced-comment */
 /* eslint-disable max-classes-per-file */
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
@@ -58,16 +59,16 @@ export class KStackClass<T> implements KStack<T> {
 
   private readonly k: PositiveIntWithout0
 
-  private readonly storage: T[]
+  private readonly storage: (undefined | T)[]
 
   public constructor(numberOfStacks: number) {
     this.assertPositiveIntWithout0(numberOfStacks)
     // K represent the distance in index between each head of the stack
     this.k = numberOfStacks
     // Initialize the storage as an empty array
-    this.storage = Array(this.k) as T[] //?
-    this.hashTableKHeads = this.makeHashTableK(this.k) //?
-    this.hashTableKTails = this.makeHashTableK(this.k) //?
+    this.storage = Array(this.k) as (undefined | T)[]
+    this.hashTableKHeads = this.makeHashTableK(this.k)
+    this.hashTableKTails = this.makeHashTableK(this.k)
   }
 
   public peek(stackNumber: number): T | undefined {
@@ -81,7 +82,22 @@ export class KStackClass<T> implements KStack<T> {
   public pop(stackNumber: number): T | undefined {
     this.assertPositiveIntWithout0(stackNumber)
     this.assertValidKStack(stackNumber)
-    throw new Error('Method not implemented.')
+
+    const kHeadIndex = this.getHeadIndexK(stackNumber)
+    const kTailIndex = this.getTailIndexK(stackNumber)
+    const kTail = this.storage[kTailIndex]
+
+    // clear kTail
+    this.storage[kTailIndex] = undefined
+
+    // set the new KTail index
+    const newKTailIndex = (kTailIndex - this.k) as PositiveInt
+    if (newKTailIndex <= kHeadIndex) {
+      this.setTailIndexK(stackNumber, kHeadIndex)
+    } else {
+      this.setTailIndexK(stackNumber, newKTailIndex)
+    }
+    return kTail
   }
 
   /*
@@ -122,7 +138,6 @@ export class KStackClass<T> implements KStack<T> {
       // We need to push the head
       this.storage[kHeadIndex] = x
     } else {
-      // then we need to add to the tail for each
       const newKTailIndex = (kTailIndex + this.k) as PositiveInt
       this.storage[newKTailIndex] = x
       this.setTailIndexK(stackNumber, newKTailIndex)
@@ -195,18 +210,18 @@ export class KStackClass<T> implements KStack<T> {
 }
 
 // Tests:
-
-const testKStack = new KStackClass<string>(3) // KStackClass { k: 3, storage: [] }
-
-testKStack.push('s1&v="one"', 1)
-testKStack.push('s3&v="two"', 3)
-testKStack.push('s3&v="three"', 3)
-testKStack.push('s2&v="four"', 2)
-testKStack.push('s3&v="five"', 3)
-
-testKStack.peek(3) //?
-testKStack.peek(1) //?
-testKStack.peek(2) //?
-
-// eslint-disable-next-line no-unused-expressions
-testKStack // ?
+// const testKStack = new KStackClass<string>(3) // KStackClass { k: 3, storage: [] }
+// testKStack.push('s1&v="one"', 1)
+// testKStack.push('s3&v="two"', 3)
+// testKStack.push('s3&v="three"', 3)
+// testKStack.push('s2&v="four"', 2)
+// testKStack.push('s3&v="five"', 3)
+// testKStack.peek(3) //?
+// testKStack.pop(3) //?
+// testKStack.pop(3) //?
+// testKStack.pop(3) //?
+// testKStack.pop(3) //?
+// testKStack.peek(3) //?
+// testKStack.peek(1) //?
+// testKStack.peek(2) //?
+// console.log(testKStack) // ?
