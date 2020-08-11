@@ -74,7 +74,8 @@ export class KStackClass<T> implements KStack<T> {
     this.assertPositiveIntWithout0(stackNumber)
     this.assertValidKStack(stackNumber)
 
-    throw new Error('Method not implemented.')
+    const kTailIndex = this.getTailIndexK(stackNumber)
+    return this.storage[kTailIndex]
   }
 
   public pop(stackNumber: number): T | undefined {
@@ -188,10 +189,7 @@ export class KStackClass<T> implements KStack<T> {
     return hashTableK
   }
 
-  private setTailIndexK(
-    k: PositiveIntWithout0,
-    newKTailIndex: PositiveInt
-  ) {
+  private setTailIndexK(k: PositiveIntWithout0, newKTailIndex: PositiveInt) {
     this.hashTableKTails.set(k, newKTailIndex)
   }
 }
@@ -205,5 +203,10 @@ testKStack.push('s3&v="two"', 3)
 testKStack.push('s3&v="three"', 3)
 testKStack.push('s2&v="four"', 2)
 testKStack.push('s3&v="five"', 3)
+
+testKStack.peek(3) //?
+testKStack.peek(1) //?
+testKStack.peek(2) //?
+
 // eslint-disable-next-line no-unused-expressions
 testKStack // ?
