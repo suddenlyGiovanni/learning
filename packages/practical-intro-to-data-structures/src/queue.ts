@@ -1,6 +1,4 @@
-/* eslint-disable spaced-comment */
-/* eslint-disable max-statements */
-/* eslint-disable no-underscore-dangle, no-undefined, no-inline-comments, @typescript-eslint/ban-ts-comment, no-plusplus */
+/* eslint-disable no-underscore-dangle, no-undefined, no-inline-comments, @typescript-eslint/ban-ts-comment, no-plusplus, max-statements */
 
 /**
  * A Queue is a collection of entities that are maintained in a sequence and can be modified by the
@@ -17,20 +15,20 @@
  * Delete | O(1)  | O(1)
  *
  */
-export interface QueueInterface<T> {
-  /**
-   * Adds a member to the collection
-   * @throws `queue overflow` if the queue has grown over the bounded size
-   * @param {T} x
-   */
-  enqueue(x: T): void
-
+export interface Queue<T> {
   /**
    * Removes and returns the most recently added member to the collection
    * @throws `stack underflow` if the stack is empty
    * @returns {T}
    */
   dequeue(): T | undefined
+
+  /**
+   * Adds a member to the collection
+   * @throws `queue overflow` if the queue has grown over the bounded size
+   * @param {T} x
+   */
+  enqueue(x: T): void
 
   /**
    * Returns the most Head of the stack without removing it
@@ -40,49 +38,20 @@ export interface QueueInterface<T> {
   peek(): T | undefined
 }
 
-export class Queue<T> implements QueueInterface<T> {
-  private readonly _queue: Record<number, T>
+export class QueueClass<T> implements Queue<T> {
+
+  // Zero base index
+  private _headIndex: null | number
 
   // 1,2,3,4
   private _length: number
 
-  // Zero base index
-  private _headIndex: null | number
+  private readonly _queue: Record<number, T>
 
   public constructor() {
     this._queue = {}
     this._headIndex = null
     this._length = 0
-  }
-
-  private incrementLength(): void {
-    this._length++
-  }
-
-  private decrementLength(): void {
-    this._length--
-  }
-
-  private deleteElementFromQueue(index: number): void {
-    delete this._queue[index]
-  }
-
-  public enqueue(value: T): void {
-    if (this._headIndex === null) {
-      /*
-       * Head has not been set yet.
-       * manually set the head to the start!
-       */
-      this._headIndex = 0
-      const tail = this._headIndex
-      this._queue[tail] = value
-      this.incrementLength()
-    } else {
-      // We just have to add to the tail
-      const tail = this._length
-      this._queue[tail] = value
-      this.incrementLength()
-    }
   }
 
   public dequeue(): T | undefined {
@@ -105,6 +74,24 @@ export class Queue<T> implements QueueInterface<T> {
     return head
   }
 
+  public enqueue(value: T): void {
+    if (this._headIndex === null) {
+      /*
+       * Head has not been set yet.
+       * manually set the head to the start!
+       */
+      this._headIndex = 0
+      const tail = this._headIndex
+      this._queue[tail] = value
+      this.incrementLength()
+    } else {
+      // We just have to add to the tail
+      const tail = this._length
+      this._queue[tail] = value
+      this.incrementLength()
+    }
+  }
+
   public peek(): T | undefined {
     if (this._headIndex === null) {
       return undefined
@@ -115,12 +102,25 @@ export class Queue<T> implements QueueInterface<T> {
   public toString(): string {
     return JSON.stringify(this)
   }
+
+  private incrementLength(): void {
+    this._length++
+  }
+
+  private decrementLength(): void {
+    this._length--
+  }
+
+  private deleteElementFromQueue(index: number): void {
+    delete this._queue[index]
+  }
 }
 
-// Example
-
-const testQueue = new Queue<string>()
-testQueue.toString() // ?
+/*
+ * Example
+ * const testQueue = new Queue<string>()
+ * testQueue.toString() // ?
+ */
 /*
  * {
  *   "head": null,
@@ -128,9 +128,10 @@ testQueue.toString() // ?
  *   "length": 0
  * }
  */
-
-testQueue.enqueue('zero')
-testQueue.toString() // ?
+/*
+ * testQueue.enqueue('zero')
+ * testQueue.toString() // ?
+ */
 /*
  * {
  *   "head": 0
@@ -139,8 +140,10 @@ testQueue.toString() // ?
  * }
  */
 
-testQueue.enqueue('one')
-testQueue.toString() // ?
+/*
+ * testQueue.enqueue('one')
+ * testQueue.toString() // ?
+ */
 /*
  * {
  *   "head": 0
@@ -148,9 +151,10 @@ testQueue.toString() // ?
  *   "length": 2
  * }
  */
-
-testQueue.enqueue('two')
-testQueue.toString() // ?
+/*
+ * testQueue.enqueue('two')
+ * testQueue.toString() // ?
+ */
 /*
  * {
  *   "head": 0
@@ -158,10 +162,11 @@ testQueue.toString() // ?
  *   "length": 3
  * }
  */
-
-testQueue.peek() // 'zero'
-testQueue.dequeue() // 'zero'
-testQueue.toString() // ?
+/*
+ * testQueue.peek() // 'zero'
+ * testQueue.dequeue() // 'zero'
+ * testQueue.toString() // ?
+ */
 /*
  * {
  *   "head": 1
@@ -169,10 +174,11 @@ testQueue.toString() // ?
  *   "length": 2
  * }
  */
-
-testQueue.peek() // 'one'
-testQueue.dequeue() // 'one'
-testQueue.toString() // ?
+/*
+ * testQueue.peek() // 'one'
+ * testQueue.dequeue() // 'one'
+ * testQueue.toString() // ?
+ */
 /*
  * {
  *   "head": 2
@@ -180,10 +186,11 @@ testQueue.toString() // ?
  *   "length": 1
  * }
  */
-
-testQueue.peek() // 'two'
-testQueue.dequeue() // 'two'
-testQueue.toString() // ?
+/*
+ * testQueue.peek() // 'two'
+ * testQueue.dequeue() // 'two'
+ * testQueue.toString() // ?
+ */
 /*
  * {
  *   "head": null
@@ -191,9 +198,10 @@ testQueue.toString() // ?
  *   "length": 0
  * }
  */
-
-testQueue.enqueue('three')
-testQueue.toString() // ?
+/*
+ * testQueue.enqueue('three')
+ * testQueue.toString() // ?
+ */
 /*
  * {
  *   "head": 0
@@ -201,9 +209,10 @@ testQueue.toString() // ?
  *   "length": 1
  * }
  */
-
-testQueue.enqueue('four')
-testQueue.toString() // ?
+/*
+ * testQueue.enqueue('four')
+ * testQueue.toString() // ?
+ */
 /*
  * {
  *   "head": 0
