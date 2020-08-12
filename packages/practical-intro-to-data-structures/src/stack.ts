@@ -2,6 +2,12 @@
 
 export interface Stack<T> {
   /**
+   * Returns if the stack is empty or not
+   * @return {boolean} - whether or not the stack is empty
+   */
+  isEmpty(): boolean
+
+  /**
    * Returns the most Head of the stack without removing it
    * @throws `stack underflow` if the stack is empty
    * @returns {T}
@@ -32,6 +38,14 @@ export class StackClass<T> implements Stack<T> {
   public constructor() {
     this._stack = {}
     this._length = 0
+  }
+
+  /**
+   * Returns if the stack is empty or not
+   * @return {boolean} - whether or not the stack is empty
+   */
+  public isEmpty(): boolean {
+    return this._length === 0
   }
 
   /**
@@ -79,6 +93,15 @@ export class StackClass<T> implements Stack<T> {
     this._length++
   }
 }
+
+
+
+type feedStack = <T>(stack: Stack<T>) => (elements: T[]) => Stack<T>
+export const feedStack: feedStack = (stack) => (elements) =>
+  elements.reduce((_stack, element) => {
+    _stack.push(element)
+    return _stack
+  }, stack)
 
 /*
  * Examples
