@@ -1,98 +1,65 @@
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-# suddenlyGiovanni's learning monorepo
+# _suddenlyGiovanni_'s learning monorepo
 
+## Description
 
-Repo | Description
----------|----------
- [a-practical-introduction-to-algorithms](./packages/a-practical-introduction-to-algorithms/) | temp
- [algo-cast](./packages/algo-cast/) | temp
- [build-your-own-programming-language](./packages/build-your-own-programming-language/) | temp
- [complete_intro_to_react_v5](./packages/complete_intro_to_react_v5/) | temp
- [head-first-design-patterns](./packages/head-first-design-patterns/) | temp
- [rethinking-asynchronous-javascript](./packages/rethinking-asynchronous-javascript/) | temp
+👋 Hi, This is my personal **learning** 🗄 monorepo.
+It contains multiple sub repositories regarding different subjects that, at one point, I have decided to explore.
 
-## Getting Started
+Immediately below, you can find the list of all the available sub repo and a link to their respective Readme.
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+**PS:** I'm still in the process of porting over all my GitHub public learning repositories under this same umbrella.
 
-### Prerequisites
+## Sub repositories
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+| Repo                                     | Subject           | Source                                                                                                                   | Author            |
+| ---------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------- |
+| [a-practical-introduction-to-algorithms] | Algorithms        | [Front End Master](https://frontendmasters.com/courses/practical-algorithms/)                                            | [Bianca Gandolfo] |
+| [practical-intro-to-data-structures]     | Data structures   | [Front End Master](https://frontendmasters.com/courses/data-structures-interviews/)                                      | [Bianca Gandolfo] |
+| [algo-cast]                              | Algorithms        | [Udemy](https://www.udemy.com/course/coding-interview-bootcamp-algorithms-and-data-structure/)                           | [Stephen Grider]  |
+| [build-your-own-programming-language]    | Compilers and DSL | [Front End Master](https://frontendmasters.com/courses/programming-language/)                                            | [Steve Kinney]    |
+| [complete_intro_to_react_v5]             | React             | [Front End Master](https://frontendmasters.com/courses/complete-react-v5/)                                               | [Brian Holt]      |
+| [head-first-design-patterns]             | Design Patterns   | [Head First Design Patterns: A Brain-Friendly Guide](https://www.oreilly.com/library/view/head-first-design/0596007124/) |                   |
+| [rethinking-asynchronous-javascript]     | Asynchronicity    | [Front End Master](https://frontendmasters.com/courses/rethinking-async-js/)                                             | [Kyle Simpson]    |
 
 ## Built With
 
-- [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-- [Maven](https://maven.apache.org/) - Dependency Management
-- [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+- [TypeScript] - Typed JavaScript at Any Scale.
+- [Yarn v1] - Package Manager
+- [Lerna] - A tool for managing JavaScript projects with multiple packages.
+- [Jest] - JavaScript testing framework
+- [Wallaby] - A tests runner
+- [Quokka] - A rapid in editor prototyping playground
 
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
-## Authors
-
-- **Billie Thompson** - _Initial work_ - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md] file for details
 
-## Acknowledgments
-
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
+[//]: # "These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax"
+[typescript]: https://www.typescriptlang.org
+[yarn v1]: https://classic.yarnpkg.com/lang/en/
+[lerna]: https://lerna.js.org
+[license.md]: ./LICENSE.md
+[jest]: https://jestjs.io
+[wallaby]: https://wallabyjs.com
+[quokka]: https://quokkajs.com/docs/index.html
+[//]: # 'Repos'
+[a-practical-introduction-to-algorithms]: ./packages/a-practical-introduction-to-algorithms/
+[practical-intro-to-data-structures]: ./packages/practical-intro-to-data-structures/
+[algo-cast]: ./packages/algo-cast/
+[build-your-own-programming-language]: ./packages/build-your-own-programming-language/
+[complete_intro_to_react_v5]: ./packages/complete_intro_to_react_v5/
+[head-first-design-patterns]: ./packages/head-first-design-patterns/
+[rethinking-asynchronous-javascript]: ./packages/rethinking-asynchronous-javascript/
+[//]: # 'Authors'
+[bianca gandolfo]: https://github.com/bgando
+[steve kinney]: https://github.com/stevekinney
+[brian holt]: https://github.com/btholt
+[kyle simpson]: https://github.com/getify
+[stephen grider]: https://github.com/StephenGrider
