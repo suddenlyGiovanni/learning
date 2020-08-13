@@ -1,6 +1,6 @@
-/* eslint-disable max-statements, @typescript-eslint/no-non-null-assertion, no-magic-numbers, no-underscore-dangle, class-methods-use-this, multiline-comment-style, no-plusplus, no-warning-comments */
+/* eslint-disable class-methods-use-this, max-statements, no-underscore-dangle */
 
-export interface HashTableClass<T> {
+export interface HashTable<T> {
   /**
    * Inserts a new key-value pair
    * @template T
@@ -15,7 +15,7 @@ export interface HashTableClass<T> {
    * @param {string} key - the key associated with the value
    * @return {T} value - the deleted value
    */
-  remove(key: string): T
+  remove(key: string): undefined | T
 
   /**
    * Given an existing `key`, it returns the associated `value`
@@ -24,7 +24,7 @@ export interface HashTableClass<T> {
    * @param {string} key - the key to search for
    * @returns {T | undefined} value - the value associated with the key or undefined
    */
-  retrieve(key: string): T
+  retrieve(key: string): undefined | T
 }
 
 export type Tuple2<Key, Value> = [Key, Value]
@@ -32,7 +32,7 @@ export type Tuple2<Key, Value> = [Key, Value]
 type Storage<T> = Array<null | Tuple2<string, T> | Array<Tuple2<string, T>>>
 
 /** Class representing a Hash Table */
-export class HashTableClass<T> implements HashTableClass<T> {
+export class HashTableClass<T> implements HashTable<T> {
   private readonly UPPER_BOUNDARY = 50
 
   private _inputSize: number
@@ -72,7 +72,7 @@ export class HashTableClass<T> implements HashTableClass<T> {
       storage: this._storage,
       tuple,
     })
-    this._inputSize++
+    this._inputSize += 1
   }
 
   /**
@@ -85,8 +85,10 @@ export class HashTableClass<T> implements HashTableClass<T> {
     if (row) {
       // Row can be a Tuple2<string, T> | Array<Tuple2<string, T>>
       if (this.isArrayOfTuples(row)) {
-        // Row is Array<Tuple2<string, T>>
-        // how many collisions were stored in this sub array?
+        /*
+         * Row is Array<Tuple2<string, T>>
+         * how many collisions were stored in this sub array?
+         */
         const { length } = row
 
         const tupleIdx = row.findIndex(([_key]) => key === _key)
@@ -96,7 +98,7 @@ export class HashTableClass<T> implements HashTableClass<T> {
          */
         if (length > 2) {
           const [tuple] = row.splice(tupleIdx, 1)
-          this._inputSize--
+          this._inputSize -= 1
           const [, value] = tuple
           return value
         }
@@ -105,20 +107,22 @@ export class HashTableClass<T> implements HashTableClass<T> {
         const [, value] = tuple
         const rowReset = row.flat(1) as Tuple2<string, T>
         this._storage[index] = rowReset
-        this._inputSize--
+        this._inputSize -= 1
         return value
       }
       // Row is Tuple2<string, T>
       const [, value] = row
       // Now we need to remove the tuple
       this._storage[index] = null
-      this._inputSize--
+      this._inputSize -= 1
       return value
     }
     return undefined
 
-    // TODO: check if the load factor fall under the predefined LOWER_BOUNDARY threshold!
-    // TODO: if so shrink the size of the HashTable!
+    /*
+     * TODO: check if the load factor fall under the predefined LOWER_BOUNDARY threshold!
+     * TODO: if so shrink the size of the HashTable!
+     */
   }
 
   /*
@@ -179,18 +183,24 @@ export class HashTableClass<T> implements HashTableClass<T> {
     // Check if the index is already been used.
     // eslint-disable-next-line no-negated-condition
     if (row) {
-      // We have an index collision
-      // now, we could have stumbled upon:
-      // 1 - a simple tuple: [key, value]. this is (one dimensional)
-      // 2 - an array of tuples: [[key, value], [key, value], ....]
+      /*
+       * We have an index collision
+       * now, we could have stumbled upon:
+       * 1 - a simple tuple: [key, value]. this is (one dimensional)
+       * 2 - an array of tuples: [[key, value], [key, value], ....]
+       */
       if (this.isArrayOfTuples(row)) {
-        // We are in the second case
-        // push the tuple to the end of the array. Done
+        /*
+         * We are in the second case
+         * push the tuple to the end of the array. Done
+         */
         storage[index] = [...row, tuple]
       } else {
-        // We are in the first case
-        // copy the value at that position
-        // Create a new empty array, add the copied value, add the new tuple
+        /*
+         * We are in the first case
+         * copy the value at that position
+         * Create a new empty array, add the copied value, add the new tuple
+         */
         storage[index] = [row, tuple]
       }
     } else {
@@ -256,25 +266,27 @@ export class HashTableClass<T> implements HashTableClass<T> {
   }
 }
 
-// Examples:
-// const testHashTable = new HashTableClass<number>()
-// testHashTable.insert('one', 1)
-// testHashTable.insert('two', 2)
-// testHashTable.insert('three', 3)
-// testHashTable.insert('three', 3)
-// testHashTable.insert('four', 4)
-// testHashTable.insert('five', 5)
-// testHashTable.insert('six', 6)
-// testHashTable.insert('seven', 7)
-// testHashTable.insert('eight', 8)
-// testHashTable.insert('nine', 9)
-// testHashTable.retrieve('six') //?
-// testHashTable.retrieve('two') //?
-// testHashTable.retrieve('five')  //?
-// testHashTable.toString()  //?
-// testHashTable.remove('six') //?
-// testHashTable.toString()  //?
-// testHashTable.remove('two') //?
-// testHashTable.toString()  //?
-// testHashTable.remove('nine')  //?
-// testHashTable.toString()  //?
+/*
+ * Examples:
+ * const testHashTable = new HashTableClass<number>()
+ * testHashTable.insert('one', 1)
+ * testHashTable.insert('two', 2)
+ * testHashTable.insert('three', 3)
+ * testHashTable.insert('three', 3)
+ * testHashTable.insert('four', 4)
+ * testHashTable.insert('five', 5)
+ * testHashTable.insert('six', 6)
+ * testHashTable.insert('seven', 7)
+ * testHashTable.insert('eight', 8)
+ * testHashTable.insert('nine', 9)
+ * testHashTable.retrieve('six') //?
+ * testHashTable.retrieve('two') //?
+ * testHashTable.retrieve('five')  //?
+ * testHashTable.toString()  //?
+ * testHashTable.remove('six') //?
+ * testHashTable.toString()  //?
+ * testHashTable.remove('two') //?
+ * testHashTable.toString()  //?
+ * testHashTable.remove('nine')  //?
+ * testHashTable.toString()  //?
+ */
