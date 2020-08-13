@@ -7,6 +7,8 @@ export interface LinkedListNode<T> {
 }
 
 export interface LinkedList<T> {
+  head: null | LinkedListNode<T>
+
   /*
    * Searches the linked list and returns true if it contains the value passed
    * @param {T} value - the value to search for
@@ -219,6 +221,13 @@ export class LinkedListClass<T> implements LinkedList<T> {
   private incrementLength(): void {
     this._length++
   }
+}
+
+export const populateLinkedList = <T>(values: T[]): LinkedList<T> => {
+  return values.reduce(
+    (list, value) => list.insert(value),
+    new LinkedListClass<T>()
+  )
 }
 
 // ------------------ examples-----------------
