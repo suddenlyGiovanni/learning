@@ -1,31 +1,12 @@
 /* eslint-disable spaced-comment, no-inline-comments, no-plusplus, max-classes-per-file, class-methods-use-this, no-underscore-dangle, max-statements, no-console */
 
-export interface ILinkedListNode<T> {
+export interface LinkedListNode<T> {
+  next: null | LinkedListNode<T>
   value: T
-  next: null | ILinkedListNode<T>
   toString(): string
 }
 
-export interface ILinkedList<T> {
-  /*
-   * Inserts a new value to the end of the linked list
-   * @param {T} value - the value to insert
-   */
-  insert(value: T): void
-
-  /*
-   * Deletes a node
-   * @param {ILinkedListNode<T>} node - the node to remove
-   * @return {null | T} value - the deleted node's value
-   */
-  remove(node: ILinkedListNode<T>): null | T
-
-  /*
-   * Removes the value at the end of the linked list
-   * @return {T} - the removed value
-   */
-  removeTail(): null | T
-
+export interface LinkedList<T> {
   /*
    * Searches the linked list and returns true if it contains the value passed
    * @param {T} value - the value to search for
@@ -34,26 +15,45 @@ export interface ILinkedList<T> {
   contains(value: T): boolean
 
   /*
+   * Inserts a new value to the end of the linked list
+   * @param {T} value - the value to insert
+   */
+  insert(value: T): void
+
+  /*
    * Checks if a node is the head of the linked list
    * @param {ILinkedListNode<T>} node - the node to check
    * @return {boolean} - true if node is the head, otherwise false
    */
-  isHead(node: ILinkedListNode<T>): boolean
+  isHead(node: LinkedListNode<T>): boolean
 
   /*
    * Checks if a node is the tail of the linked list
    * @param {ILinkedListNode<T>} node - the node to check
    * @return {boolean} - true if node is the tail, otherwise false
    */
-  isTail(node: ILinkedListNode<T>): boolean
+  isTail(node: LinkedListNode<T>): boolean
+
+  /*
+   * Deletes a node
+   * @param {ILinkedListNode<T>} node - the node to remove
+   * @return {null | T} value - the deleted node's value
+   */
+  remove(node: LinkedListNode<T>): null | T
+
+  /*
+   * Removes the value at the end of the linked list
+   * @return {T} - the removed value
+   */
+  removeTail(): null | T
 }
 
-export class Node<T> implements ILinkedListNode<T> {
+export class LinkedListNodeClass<T> implements LinkedListNode<T> {
+  private _next: null | LinkedListNode<T>
+
   private _value: T
 
-  private _next: null | ILinkedListNode<T>
-
-  public constructor(value: T, next?: null | ILinkedListNode<T>) {
+  public constructor(value: T, next?: null | LinkedListNode<T>) {
     this._value = value
     if (next) {
       this._next = next
@@ -69,26 +69,26 @@ export class Node<T> implements ILinkedListNode<T> {
     this._value = value
   }
 
-  public set next(node: null | ILinkedListNode<T>) {
+  public set next(node: null | LinkedListNode<T>) {
     this._next = node
   }
 
-  public get next(): null | ILinkedListNode<T> {
+  public get next(): null | LinkedListNode<T> {
     return this._next
   }
 
   public toString(): string {
-    return JSON.stringify({ value: this._value, next: this._next })
+    return JSON.stringify(this)
   }
 }
 
 /** Class representing a Linked List */
-export class LinkedList<T> implements ILinkedList<T> {
-  private _head: null | ILinkedListNode<T>
-
-  private _tail: null | ILinkedListNode<T>
+export class LinkedListClass<T> implements LinkedList<T> {
+  private _head: null | LinkedListNode<T>
 
   private _length: number
+
+  private _tail: null | LinkedListNode<T>
 
   public constructor() {
     this._head = null
@@ -96,11 +96,21 @@ export class LinkedList<T> implements ILinkedList<T> {
     this._length = 0
   }
 
-  public get head(): null | ILinkedListNode<T> {
+  /** Implementing the iterable protocol!! */
+
+  *[Symbol.iterator]() {
+    let currentNode = this._head
+    while (currentNode) {
+      yield currentNode?.value
+      currentNode = currentNode?.next
+    }
+  }
+
+  public get head(): null | LinkedListNode<T> {
     return this._head
   }
 
-  public get tail(): null | ILinkedListNode<T> {
+  public get tail(): null | LinkedListNode<T> {
     return this._tail
   }
 
@@ -108,11 +118,26 @@ export class LinkedList<T> implements ILinkedList<T> {
     return this._length
   }
 
-  /*
+  /**
+   * Searches the linked list and returns true if it contains the value passed
+   */
+  public contains(value: T): boolean {
+    // Head and tail look up are in constant time, better check up
+    if (this._tail?.value === value) {
+      return true
+    }
+    let currentNode = this._head
+    while (currentNode?.value !== value && currentNode?.next !== null) {
+      currentNode = currentNode!.next
+    }
+    return currentNode?.value === value
+  }
+
+  /**
    * Inserts a new value to the end of the linked list
    */
   public insert(value: T): this {
-    const node = new Node(value)
+    const node = new LinkedListNodeClass(value)
     if (this._head === null && this._tail === null) {
       // We are to insert the first node in the list.
       this._head = node
@@ -128,19 +153,25 @@ export class LinkedList<T> implements ILinkedList<T> {
     return this
   }
 
-  private incrementLength(): void {
-    this._length++
+  /**
+   * Checks if a node is the head of the linked list
+   */
+  public isHead(node: LinkedListNode<T>): boolean {
+    return this._head === node
   }
 
-  private decrementLength(): void {
-    this._length--
+  /**
+   * Checks if a node is the tail of the linked list
+   */
+  public isTail(node: LinkedListNode<T>): boolean {
+    return this._tail === node
   }
 
   /*
    * Deletes a node and returns the deleted node value
    */
-  public remove(node: ILinkedListNode<T>): null | T {
-    let previousNode: null | ILinkedListNode<T> = null
+  public remove(node: LinkedListNode<T>): null | T {
+    let previousNode: null | LinkedListNode<T> = null
     let currentNode = this._head
     while (currentNode && currentNode !== node && currentNode.next !== null) {
       previousNode = currentNode
@@ -169,7 +200,7 @@ export class LinkedList<T> implements ILinkedList<T> {
       return null
     }
 
-    let currentNode: null | ILinkedListNode<T> = this._head
+    let currentNode: null | LinkedListNode<T> = this._head
     while (currentNode?.next !== this._tail && currentNode?.next !== null) {
       currentNode = currentNode.next
     }
@@ -181,95 +212,65 @@ export class LinkedList<T> implements ILinkedList<T> {
     return tail!.value
   }
 
-  /*
-   * Searches the linked list and returns true if it contains the value passed
-   */
-  public contains(value: T): boolean {
-    // head and tail look up are in constant time, better check up
-    if (this._tail?.value === value) {
-      return true
-    }
-    let currentNode = this._head
-    while (currentNode?.value !== value && currentNode?.next !== null) {
-      currentNode = currentNode!.next
-    }
-    return currentNode?.value === value
+  private decrementLength(): void {
+    this._length--
   }
 
-  /*
-   * Checks if a node is the head of the linked list
-   */
-  public isHead(node: ILinkedListNode<T>): boolean {
-    return this._head === node
-  }
-
-  /*
-   * Checks if a node is the tail of the linked list
-   */
-  public isTail(node: ILinkedListNode<T>): boolean {
-    return this._tail === node
-  }
-
-  /** Implementing the iterable protocol!! */
-
-  *[Symbol.iterator]() {
-    let currentNode = this._head
-    while (currentNode) {
-      yield currentNode?.value
-      currentNode = currentNode?.next
-    }
+  private incrementLength(): void {
+    this._length++
   }
 }
 
 // ------------------ examples-----------------
-
-// construct LinkedList
-const testLinkedList = new LinkedList<number>()
-testLinkedList.insert(10)
-
-// isHead()
-const { head } = testLinkedList
-console.log(testLinkedList.isHead(head!)) // =>  true
-
-console.log(testLinkedList.head) // => Node { value: 10, next: null }
-console.log(testLinkedList.tail) // => Node { value: 10, next: null }
-console.log(testLinkedList.length) // => 1
-
-// insert(value)
-testLinkedList.insert(11)
-console.log(testLinkedList.head) // => Node { value: 10, next: { value: 11, next: null } }
-const node11 = testLinkedList.tail
-console.log(node11) // => Node { value:11, next :null }
-console.log(testLinkedList.length) // => 2
-
-testLinkedList.insert(12)
-console.log(testLinkedList.length) // => 3
-
-// removeTail()
-console.log(testLinkedList.removeTail()) // => 12
-console.log(testLinkedList.tail) // => Node { value: 11, next: null }
-console.log(testLinkedList.length) // => 2
-
-// contains(value)
-console.log(testLinkedList.contains(10)) // => true
-console.log(testLinkedList.contains(87)) // => false
-console.log(testLinkedList.contains(11)) // => true
-
-// remove(value)
-testLinkedList.insert(13) // {[10] -> [11] -> [13]}
-console.log(testLinkedList.tail) // =>  Node { _value: 13, _next: null }
-
-testLinkedList.insert(14) // {[10] -> [11] -> [13] -> [14]}
-const node14 = testLinkedList.tail // =>  Node { _value: 14, _next: null }
-testLinkedList.remove(node14!) // => 14
-console.log(testLinkedList.tail) // => Node { _value: 13, _next: null }
-
-
-// {[10] -> [11] -> [13]}
-console.log(testLinkedList) // => 14
-testLinkedList.remove(node11!) // => 11
-console.log(JSON.stringify(testLinkedList, null, 2)) // => 14 {[10] -> [13]}
-
-for (const el of testLinkedList) {
-  console.log(el)
-}
+/*
+ * // construct LinkedList
+ *const testLinkedList = new LinkedListClass<number>()
+ *testLinkedList.insert(10)
+ *
+ * // isHead()
+ *const { head } = testLinkedList
+ *console.log(testLinkedList.isHead(head!)) // =>  true
+ *
+ *console.log(testLinkedList.head) // => Node { value: 10, next: null }
+ *console.log(testLinkedList.tail) // => Node { value: 10, next: null }
+ *console.log(testLinkedList.length) // => 1
+ *
+ * // insert(value)
+ *testLinkedList.insert(11)
+ *console.log(testLinkedList.head) // => Node { value: 10, next: { value: 11, next: null } }
+ *const node11 = testLinkedList.tail
+ *console.log(node11) // => Node { value:11, next :null }
+ *console.log(testLinkedList.length) // => 2
+ *
+ *testLinkedList.insert(12)
+ *console.log(testLinkedList.length) // => 3
+ *
+ * // removeTail()
+ *console.log(testLinkedList.removeTail()) // => 12
+ *console.log(testLinkedList.tail) // => Node { value: 11, next: null }
+ *console.log(testLinkedList.length) // => 2
+ *
+ * // contains(value)
+ *console.log(testLinkedList.contains(10)) // => true
+ *console.log(testLinkedList.contains(87)) // => false
+ *console.log(testLinkedList.contains(11)) // => true
+ *
+ * // remove(value)
+ *testLinkedList.insert(13) // {[10] -> [11] -> [13]}
+ *console.log(testLinkedList.tail) // =>  Node { _value: 13, _next: null }
+ *
+ *testLinkedList.insert(14) // {[10] -> [11] -> [13] -> [14]}
+ *const node14 = testLinkedList.tail // =>  Node { _value: 14, _next: null }
+ *testLinkedList.remove(node14!) // => 14
+ *console.log(testLinkedList.tail) // => Node { _value: 13, _next: null }
+ *
+ *
+ * // {[10] -> [11] -> [13]}
+ *console.log(testLinkedList) // => 14
+ *testLinkedList.remove(node11!) // => 11
+ *console.log(JSON.stringify(testLinkedList, null, 2)) // => 14 {[10] -> [13]}
+ *
+ *for (const el of testLinkedList) {
+ *  console.log(el)
+ *}
+ */
