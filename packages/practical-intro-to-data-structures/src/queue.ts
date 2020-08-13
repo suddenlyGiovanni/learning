@@ -1,4 +1,4 @@
-/* eslint-disable no-underscore-dangle, no-undefined, no-inline-comments, @typescript-eslint/ban-ts-comment, no-plusplus, max-statements */
+/* eslint-disable no-underscore-dangle, no-undefined, no-inline-comments, @typescript-eslint/ban-ts-comment, no-plusplus, max-statements, max-lines-per-function */
 
 /**
  * A Queue is a collection of entities that are maintained in a sequence and can be modified by the
@@ -15,7 +15,7 @@
  * Delete | O(1)  | O(1)
  *
  */
-export interface Queue<T> {
+export interface IQueue<T> {
   /**
    * Removes and returns the most recently added member to the collection
    * @throws `stack underflow` if the stack is empty
@@ -38,8 +38,7 @@ export interface Queue<T> {
   peek(): T | undefined
 }
 
-export class QueueClass<T> implements Queue<T> {
-
+export class Queue<T> implements IQueue<T> {
   // Zero base index
   private _headIndex: null | number
 
@@ -103,10 +102,6 @@ export class QueueClass<T> implements Queue<T> {
     return JSON.stringify(this)
   }
 
-  private incrementLength(): void {
-    this._length++
-  }
-
   private decrementLength(): void {
     this._length--
   }
@@ -114,109 +109,113 @@ export class QueueClass<T> implements Queue<T> {
   private deleteElementFromQueue(index: number): void {
     delete this._queue[index]
   }
+
+  private incrementLength(): void {
+    this._length++
+  }
 }
 
-/*
- * Example
- * const testQueue = new Queue<string>()
- * testQueue.toString() // ?
- */
-/*
- * {
- *   "head": null,
- *   "queue": {},
- *   "length": 0
- * }
- */
-/*
- * testQueue.enqueue('zero')
- * testQueue.toString() // ?
- */
-/*
- * {
- *   "head": 0
- *   "queue": {"0": "zero"},
- *   "length": 1
- * }
- */
+// Example
+const main = (): void => {
+  const testQueue = new Queue<string>()
+  testQueue.toString() // ?
 
-/*
- * testQueue.enqueue('one')
- * testQueue.toString() // ?
- */
-/*
- * {
- *   "head": 0
- *   "queue": {"0": "zero", "1": "one"},
- *   "length": 2
- * }
- */
-/*
- * testQueue.enqueue('two')
- * testQueue.toString() // ?
- */
-/*
- * {
- *   "head": 0
- *   "queue": {"0": "zero", "1": "one", "2": "two"},
- *   "length": 3
- * }
- */
-/*
- * testQueue.peek() // 'zero'
- * testQueue.dequeue() // 'zero'
- * testQueue.toString() // ?
- */
-/*
- * {
- *   "head": 1
- *   "queue": {"1": "one", "2": "two"},
- *   "length": 2
- * }
- */
-/*
- * testQueue.peek() // 'one'
- * testQueue.dequeue() // 'one'
- * testQueue.toString() // ?
- */
-/*
- * {
- *   "head": 2
- *   "queue": {"2": "two"},
- *   "length": 1
- * }
- */
-/*
- * testQueue.peek() // 'two'
- * testQueue.dequeue() // 'two'
- * testQueue.toString() // ?
- */
-/*
- * {
- *   "head": null
- *   "queue": {},
- *   "length": 0
- * }
- */
-/*
- * testQueue.enqueue('three')
- * testQueue.toString() // ?
- */
-/*
- * {
- *   "head": 0
- *   "queue": {"0": "three"},
- *   "length": 1
- * }
- */
-/*
- * testQueue.enqueue('four')
- * testQueue.toString() // ?
- */
-/*
- * {
- *   "head": 0
- *   "queue": {"0": "three", "1": "four"},
- *   "length": 2
- * }
- */
+  /*
+   * {
+   *   "head": null,
+   *   "queue": {},
+   *   "length": 0
+   * }
+   */
+
+  testQueue.enqueue('zero')
+  testQueue.toString() // ?
+
+  /*
+   * {
+   *   "head": 0
+   *   "queue": {"0": "zero"},
+   *   "length": 1
+   * }
+   */
+
+  testQueue.enqueue('one')
+  testQueue.toString() // ?
+
+  /*
+   * {
+   *   "head": 0
+   *   "queue": {"0": "zero", "1": "one"},
+   *   "length": 2
+   * }
+   */
+
+  testQueue.enqueue('two')
+  testQueue.toString() // ?
+
+  /*
+   * {
+   *   "head": 0
+   *   "queue": {"0": "zero", "1": "one", "2": "two"},
+   *   "length": 3
+   * }
+   */
+
+  testQueue.peek() // 'zero'
+  testQueue.dequeue() // 'zero'
+  testQueue.toString() // ?
+
+  /*
+   * {
+   *   "head": 1
+   *   "queue": {"1": "one", "2": "two"},
+   *   "length": 2
+   * }
+   */
+
+  testQueue.peek() // 'one'
+  testQueue.dequeue() // 'one'
+  testQueue.toString() // ?
+
+  /*
+   * {
+   *   "head": 2
+   *   "queue": {"2": "two"},
+   *   "length": 1
+   * }
+   */
+
+  testQueue.peek() // 'two'
+  testQueue.dequeue() // 'two'
+  testQueue.toString() // ?
+
+  /*
+   * {
+   *   "head": null
+   *   "queue": {},
+   *   "length": 0
+   * }
+   */
+
+  testQueue.enqueue('three')
+  testQueue.toString() // ?
+
+  /*
+   * {
+   *   "head": 0
+   *   "queue": {"0": "three"},
+   *   "length": 1
+   * }
+   */
+
+  testQueue.enqueue('four')
+  testQueue.toString() // ?
+
+  /*
+   * {
+   *   "head": 0
+   *   "queue": {"0": "three", "1": "four"},
+   *   "length": 2
+   * }
+   */
+}

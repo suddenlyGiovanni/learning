@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this, max-statements, no-underscore-dangle */
 
-export interface HashTable<T> {
+export interface IHashTable<T> {
   /**
    * Inserts a new key-value pair
    * @template T
@@ -32,7 +32,7 @@ export type Tuple2<Key, Value> = [Key, Value]
 type Storage<T> = Array<null | Tuple2<string, T> | Array<Tuple2<string, T>>>
 
 /** Class representing a Hash Table */
-export class HashTableClass<T> implements HashTable<T> {
+export class HashTable<T> implements IHashTable<T> {
   private readonly UPPER_BOUNDARY = 50
 
   private _inputSize: number
