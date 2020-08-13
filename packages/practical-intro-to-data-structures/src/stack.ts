@@ -1,6 +1,6 @@
-/* eslint-disable no-undefined, no-underscore-dangle, @typescript-eslint/ban-ts-comment, no-plusplus */
+/* eslint-disable no-undefined, no-underscore-dangle, @typescript-eslint/ban-ts-comment, no-plusplus, max-statements */
 
-export interface Stack<T> {
+export interface IStack<T> {
   /**
    * Returns if the stack is empty or not
    * @return {boolean} - whether or not the stack is empty
@@ -30,7 +30,7 @@ export interface Stack<T> {
 }
 
 /** Class representing a Stack. */
-export class StackClass<T> implements Stack<T> {
+export class Stack<T> implements IStack<T> {
   private _length: number
 
   private readonly _stack: Record<number, T>
@@ -94,28 +94,26 @@ export class StackClass<T> implements Stack<T> {
   }
 }
 
-
-
-type feedStack = <T>(stack: Stack<T>) => (elements: T[]) => Stack<T>
+type feedStack = <T>(stack: IStack<T>) => (elements: T[]) => IStack<T>
 export const feedStack: feedStack = (stack) => (elements) =>
   elements.reduce((_stack, element) => {
     _stack.push(element)
     return _stack
   }, stack)
 
-/*
- * Examples
- * const testStack = new StackClass<string>()
- * testStack.peek() // undefined
- * testStack.push('first')
- * testStack.peek() // 'first'
- * testStack.toString() // '{ length: 1, stack: { 0: "first" } }'
- * testStack.push('second')
- * testStack.peek() // 'second
- * testStack.toString() // '{ length: 3, stack: { 0: "first", 1: "second", 2: "third" } }'
- * testStack.push('third')
- * testStack.toString() // '{ "length": 3, "stack": { "0": "first", "1": "second", "2": "third" } }'
- * testStack.peek() // 'third
- * testStack.pop() // 'third
- * testStack.toString() // '{ "length": 2, "stack": { "0": "first", "1": "second" } }'
- */
+// Examples
+const main = (): void => {
+  const testStack = new Stack<string>()
+  testStack.peek() // undefined
+  testStack.push('first')
+  testStack.peek() // 'first'
+  testStack.toString() // '{ length: 1, stack: { 0: "first" } }'
+  testStack.push('second')
+  testStack.peek() // 'second
+  testStack.toString() // '{ length: 3, stack: { 0: "first", 1: "second", 2: "third" } }'
+  testStack.push('third')
+  testStack.toString() // '{ "length": 3, "stack": { "0": "first", "1": "second", "2": "third" } }'
+  testStack.peek() // 'third
+  testStack.pop() // 'third
+  testStack.toString() // '{ "length": 2, "stack": { "0": "first", "1": "second" } }'
+}

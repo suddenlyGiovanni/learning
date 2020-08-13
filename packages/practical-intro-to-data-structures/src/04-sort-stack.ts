@@ -1,6 +1,6 @@
 /* eslint-disable no-plusplus, max-statements */
 
-import { Stack, StackClass, feedStack } from './stack'
+import { IStack, Stack, feedStack } from './stack'
 /**
  * Implement the function `sortStack`
  *
@@ -17,11 +17,11 @@ import { Stack, StackClass, feedStack } from './stack'
 /**
  * Sorts a stack with smallest values on top
  * @template T - any
- * @param {Stack} inputStack - the stack to sort
- * @return {Stack} - sorted stack
+ * @param {IStack} inputStack - the stack to sort
+ * @return {IStack} - sorted stack
  */
-export const sortStack = <T>(inputStack: Stack<T>): Stack<T> => {
-  const tmpStack = new StackClass<T>()
+export const sortStack = <T>(inputStack: IStack<T>): IStack<T> => {
+  const tmpStack = new Stack<T>()
 
   while (!inputStack.isEmpty()) {
     const temp = inputStack.pop()!
@@ -39,7 +39,7 @@ export const sortStack = <T>(inputStack: Stack<T>): Stack<T> => {
 }
 
 
-const unsortedStack = feedStack(new StackClass<number>())([
+const unsortedStack = feedStack(new Stack<number>())([
   34,
   3,
   31,

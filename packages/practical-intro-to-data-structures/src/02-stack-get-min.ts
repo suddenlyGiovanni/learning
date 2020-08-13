@@ -1,5 +1,5 @@
-/* eslint-disable max-statements, no-unused-expressions, no-underscore-dangle */
-import { Stack as IStack, StackClass } from './stack'
+/* eslint-disable max-statements, no-unused-expressions, no-underscore-dangle, spaced-comment, dot-notation */
+import { IStack, Stack } from './stack'
 
 /**
  * # Exercise:
@@ -28,7 +28,7 @@ interface Max<T> {
  * @constructor
  * @template T
  */
-export default class Stack<T> implements IStack<T>, Min<T>, Max<T> {
+export default class MinMaxStack<T> implements IStack<T>, Min<T>, Max<T> {
   private readonly _maxStack: IStack<{ value: T }>
 
   private readonly _minStack: IStack<{ value: T }>
@@ -37,8 +37,8 @@ export default class Stack<T> implements IStack<T>, Min<T>, Max<T> {
 
   public constructor() {
     this._storage = []
-    this._minStack = new StackClass<{ value: T }>()
-    this._maxStack = new StackClass<{ value: T }>()
+    this._minStack = new Stack<{ value: T }>()
+    this._maxStack = new Stack<{ value: T }>()
   }
 
   /*
@@ -131,52 +131,53 @@ export default class Stack<T> implements IStack<T>, Min<T>, Max<T> {
   }
 }
 
-/*
- * Examples:
- * const testMinStack = new Stack<number>()
- * --------------
- * testMinStack.push(10)
- * --------------
- * testMinStack.min() //?
- * testMinStack.max() //?
- * --------------
- * testMinStack.push(9)
- * testMinStack.min() //?
- * testMinStack.max() //?
- * --------------
- * testMinStack.push(11)
- * testMinStack.min() //?
- * testMinStack.max() //?
- * --------------
- * testMinStack['_storage'] //?
- * testMinStack['_minStack'] //?
- * testMinStack['_maxStack'] //?
- * --------------
- * testMinStack.pop() //?
- * testMinStack.min() //?
- * testMinStack.max() //?
- * --------------
- * testMinStack.pop() //?
- * testMinStack.min() //?
- * testMinStack.max() //?
- * --------------
- * testMinStack['_storage'] //?
- * testMinStack['_minStack'] //?
- * testMinStack['_maxStack'] //?
- * --------------
- * testMinStack.push(8)
- * testMinStack.min() //?
- * testMinStack.max() //?
- * --------------
- * testMinStack['_storage'] //?
- * testMinStack['_minStack'] //?
- * testMinStack['_maxStack'] //?
- * --------------
- * testMinStack.pop() //?
- * testMinStack.pop() //?
- * testMinStack.pop() //?
- * --------------
- * testMinStack['_storage'] //?
- * testMinStack['_minStack'] //?
- * testMinStack['_maxStack'] //?
- */
+// Examples:
+// eslint-disable-next-line @typescript-eslint/no-unused-vars,  no-unused-vars
+const main = (): void => {
+  const testMinStack = new MinMaxStack<number>()
+
+  testMinStack.push(10)
+
+  testMinStack.min() //?
+  testMinStack.max() //?
+
+  testMinStack.push(9)
+  testMinStack.min() //?
+  testMinStack.max() //?
+
+  testMinStack.push(11)
+  testMinStack.min() //?
+  testMinStack.max() //?
+
+  testMinStack['_storage'] //?
+  testMinStack['_minStack'] //?
+  testMinStack['_maxStack'] //?
+
+  testMinStack.pop() //?
+  testMinStack.min() //?
+  testMinStack.max() //?
+
+  testMinStack.pop() //?
+  testMinStack.min() //?
+  testMinStack.max() //?
+
+  testMinStack['_storage'] //?
+  testMinStack['_minStack'] //?
+  testMinStack['_maxStack'] //?
+
+  testMinStack.push(8)
+  testMinStack.min() //?
+  testMinStack.max() //?
+
+  testMinStack['_storage'] //?
+  testMinStack['_minStack'] //?
+  testMinStack['_maxStack'] //?
+
+  testMinStack.pop() //?
+  testMinStack.pop() //?
+  testMinStack.pop() //?
+
+  testMinStack['_storage'] //?
+  testMinStack['_minStack'] //?
+  testMinStack['_maxStack'] //?
+}

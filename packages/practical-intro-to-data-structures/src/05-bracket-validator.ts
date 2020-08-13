@@ -6,7 +6,7 @@
  * invalid examples: '(' or '[(])'
  */
 
-import { StackClass } from './stack'
+import { Stack } from './stack'
 
 /**
  * Checks for balanced brackets in a string of code.
@@ -14,7 +14,7 @@ import { StackClass } from './stack'
  * @return {boolean} - true if valid, otherwise false
  */
 export const isBalanced = (code: string): boolean => {
-  const leftStack = new StackClass<string>()
+  const leftStack = new Stack<string>()
   let i = 0
 
   while (i < code.length) {

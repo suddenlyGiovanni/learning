@@ -1,4 +1,4 @@
-/* eslint-disable spaced-comment, no-inline-comments, no-plusplus, max-classes-per-file, class-methods-use-this, no-underscore-dangle, max-statements, no-console */
+/* eslint-disable spaced-comment, no-inline-comments, no-plusplus, max-classes-per-file, class-methods-use-this, no-underscore-dangle, max-statements, no-console, max-lines-per-function */
 
 export interface INode<T> {
   next: null | INode<T>
@@ -224,62 +224,58 @@ export class LinkedList<T> implements ILinkedList<T> {
 }
 
 export const populateLinkedList = <T>(values: T[]): ILinkedList<T> => {
-  return values.reduce(
-    (list, value) => list.insert(value),
-    new LinkedList<T>()
-  )
+  return values.reduce((list, value) => list.insert(value), new LinkedList<T>())
 }
 
 // ------------------ examples-----------------
-/*
- * // construct LinkedList
- *const testLinkedList = new LinkedListClass<number>()
- *testLinkedList.insert(10)
- *
- * // isHead()
- *const { head } = testLinkedList
- *console.log(testLinkedList.isHead(head!)) // =>  true
- *
- *console.log(testLinkedList.head) // => Node { value: 10, next: null }
- *console.log(testLinkedList.tail) // => Node { value: 10, next: null }
- *console.log(testLinkedList.length) // => 1
- *
- * // insert(value)
- *testLinkedList.insert(11)
- *console.log(testLinkedList.head) // => Node { value: 10, next: { value: 11, next: null } }
- *const node11 = testLinkedList.tail
- *console.log(node11) // => Node { value:11, next :null }
- *console.log(testLinkedList.length) // => 2
- *
- *testLinkedList.insert(12)
- *console.log(testLinkedList.length) // => 3
- *
- * // removeTail()
- *console.log(testLinkedList.removeTail()) // => 12
- *console.log(testLinkedList.tail) // => Node { value: 11, next: null }
- *console.log(testLinkedList.length) // => 2
- *
- * // contains(value)
- *console.log(testLinkedList.contains(10)) // => true
- *console.log(testLinkedList.contains(87)) // => false
- *console.log(testLinkedList.contains(11)) // => true
- *
- * // remove(value)
- *testLinkedList.insert(13) // {[10] -> [11] -> [13]}
- *console.log(testLinkedList.tail) // =>  Node { _value: 13, _next: null }
- *
- *testLinkedList.insert(14) // {[10] -> [11] -> [13] -> [14]}
- *const node14 = testLinkedList.tail // =>  Node { _value: 14, _next: null }
- *testLinkedList.remove(node14!) // => 14
- *console.log(testLinkedList.tail) // => Node { _value: 13, _next: null }
- *
- *
- * // {[10] -> [11] -> [13]}
- *console.log(testLinkedList) // => 14
- *testLinkedList.remove(node11!) // => 11
- *console.log(JSON.stringify(testLinkedList, null, 2)) // => 14 {[10] -> [13]}
- *
- *for (const el of testLinkedList) {
- *  console.log(el)
- *}
- */
+const main = (): void => {
+  // construct LinkedList
+  const testLinkedList = new LinkedList<number>()
+  testLinkedList.insert(10)
+
+  // isHead()
+  const { head } = testLinkedList
+  console.log(testLinkedList.isHead(head!)) // =>  true
+
+  console.log(testLinkedList.head) // => Node { value: 10, next: null }
+  console.log(testLinkedList.tail) // => Node { value: 10, next: null }
+  console.log(testLinkedList.length) // => 1
+
+  // insert(value)
+  testLinkedList.insert(11)
+  console.log(testLinkedList.head) // => Node { value: 10, next: { value: 11, next: null } }
+  const node11 = testLinkedList.tail
+  console.log(node11) // => Node { value:11, next :null }
+  console.log(testLinkedList.length) // => 2
+
+  testLinkedList.insert(12)
+  console.log(testLinkedList.length) // => 3
+
+  // removeTail()
+  console.log(testLinkedList.removeTail()) // => 12
+  console.log(testLinkedList.tail) // => Node { value: 11, next: null }
+  console.log(testLinkedList.length) // => 2
+
+  // contains(value)
+  console.log(testLinkedList.contains(10)) // => true
+  console.log(testLinkedList.contains(87)) // => false
+  console.log(testLinkedList.contains(11)) // => true
+
+  // remove(value)
+  testLinkedList.insert(13) // {[10] -> [11] -> [13]}
+  console.log(testLinkedList.tail) // =>  Node { _value: 13, _next: null }
+
+  testLinkedList.insert(14) // {[10] -> [11] -> [13] -> [14]}
+  const node14 = testLinkedList.tail // =>  Node { _value: 14, _next: null }
+  testLinkedList.remove(node14!) // => 14
+  console.log(testLinkedList.tail) // => Node { _value: 13, _next: null }
+
+  // {[10] -> [11] -> [13]}
+  console.log(testLinkedList) // => 14
+  testLinkedList.remove(node11!) // => 11
+  console.log(JSON.stringify(testLinkedList, null, 2)) // => 14 {[10] -> [13]}
+
+  for (const el of testLinkedList) {
+    console.log(el)
+  }
+}

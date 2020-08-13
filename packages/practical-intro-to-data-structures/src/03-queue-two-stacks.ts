@@ -6,10 +6,10 @@
  * https://www.geeksforgeeks.org/wp-content/uploads/Stack-Queue.png
  */
 
-import type { Queue } from './queue'
-import { Stack, StackClass } from './stack'
+import type { IQueue } from './queue'
+import { IStack, Stack } from './stack'
 
-export class QueueClass<T> implements Queue<T> {
+export class QueueClass<T> implements IQueue<T> {
   private activeStack: 'stackA' | 'stackB'
 
   private inactiveStack: 'stackA' | 'stackB'
@@ -17,14 +17,14 @@ export class QueueClass<T> implements Queue<T> {
   private length: number
 
   private readonly storage: {
-    stackA: Stack<T>
-    stackB: Stack<T>
+    stackA: IStack<T>
+    stackB: IStack<T>
   }
 
   public constructor() {
     this.storage = {
-      stackA: new StackClass<T>(),
-      stackB: new StackClass<T>(),
+      stackA: new Stack<T>(),
+      stackB: new Stack<T>(),
     }
     this.activeStack = 'stackA'
     this.inactiveStack = 'stackB'
@@ -101,19 +101,20 @@ export class QueueClass<T> implements Queue<T> {
   }
 }
 
-/*
- * Examples
- * const testQueue = new QueueClass<string>()
- * testQueue.enqueue('first')
- * testQueue.enqueue('second')
- * testQueue.enqueue('third')
- * testQueue.enqueue('forth')
- * testQueue.enqueue('fifth')
- * testQueue.enqueue('sixth')
- * testQueue.peek() //?
- * testQueue.dequeue() //?
- * testQueue.dequeue() //?
- * testQueue.dequeue() //?
- * testQueue.enqueue('seventh')
- * console.log(testQueue.toString()) //?
- */
+// Examples
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+const main = (): void => {
+  const testQueue = new QueueClass<string>()
+  testQueue.enqueue('first')
+  testQueue.enqueue('second')
+  testQueue.enqueue('third')
+  testQueue.enqueue('forth')
+  testQueue.enqueue('fifth')
+  testQueue.enqueue('sixth')
+  testQueue.peek() //?
+  testQueue.dequeue() //?
+  testQueue.dequeue() //?
+  testQueue.dequeue() //?
+  testQueue.enqueue('seventh')
+  console.log(testQueue.toString()) //?
+}
