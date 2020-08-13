@@ -9,18 +9,24 @@
  * If the input linked list has 1 node, then this node should be deleted and new head should be returned.
  */
 
-import { INode, Node } from './linked-list'
+import { INode, Node, populateLinkedList } from './linked-list'
 
 const isEven = (x: number): boolean => x % 2 === 0
-
+const calculateLength = <T>(head: INode<T>): number => {
+  let length = 1
+  let node = head
+  while (node.next !== null) {
+    node = node.next
+    length += 1
+  }
+  return length
+}
 /**
  * Deletes a node from the middle of the linked list
  * @param {Node} head - the head node of a linked list
  * @return {Node} - the deleted node
  */
-export const deleteMiddleNode = <T>(
-  head: INode<T>
-): null | INode<T> => {
+export const deleteMiddleNode = <T>(head: INode<T>): null | INode<T> => {
   if (!head) {
     return null
   }
@@ -28,49 +34,28 @@ export const deleteMiddleNode = <T>(
     return new Node<T>(head.value)
   }
 
-  const calculateLength = (): number => {
-    let length = 1
-    let node = head
-    while (node.next !== null) {
-      node = node.next
-      length += 1
-    }
-    return length
-  }
-
-  const length = calculateLength()
+  const length = calculateLength(head)
   const middleNode = isEven(length) ? length / 2 + 1 : (length + 1) / 2
 
-
-  let currentNode = head
+  let node = head
   // eslint-disable-next-line init-declarations
-  let previousNode: INode<T>;
+  let previous: INode<T>
   let i = 1
-  while (i < middleNode && currentNode.next !== null) {
-    previousNode = currentNode
-    currentNode = currentNode.next
+  while (i < middleNode && node.next !== null) {
+    previous = node
+    node = node.next
     i += 1
   }
-  previousNode!.next = currentNode.next
-  currentNode.next = null
-  return currentNode
+  previous!.next = node.next
+  node.next = null
+  return node
 }
-
 
 // Test
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const main = (): void => {
-  const a1 = new Node(1)
-  const a2 = new Node(2)
-  const a3 = new Node(3)
-  const a4 = new Node(4)
-  const a5 = new Node(5)
-  a1.next = a2
-  a2.next = a3
-  a3.next = a4
-  a4.next = a5
-
-  console.log(deleteMiddleNode(a1))
-  console.log(a1)
+  const { head } = populateLinkedList([1, 2, 3, 4, 5])
+  console.log(deleteMiddleNode(head!))
+  console.log(head)
 }
 // main()
