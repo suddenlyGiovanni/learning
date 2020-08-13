@@ -132,8 +132,7 @@ export default class MinMaxStack<T> implements IStack<T>, Min<T>, Max<T> {
 }
 
 // Examples:
-// eslint-disable-next-line @typescript-eslint/no-unused-vars,  no-unused-vars
-const main = (): void => {
+export const main = (): void => {
   const testMinStack = new MinMaxStack<number>()
 
   testMinStack.push(10)
@@ -181,3 +180,4 @@ const main = (): void => {
   testMinStack['_minStack'] //?
   testMinStack['_maxStack'] //?
 }
+// main()

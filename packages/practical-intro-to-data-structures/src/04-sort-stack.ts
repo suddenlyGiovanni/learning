@@ -38,15 +38,11 @@ export const sortStack = <T>(inputStack: IStack<T>): IStack<T> => {
   return inputStack
 }
 
+// Tests:
+export const main = (): void => {
+  const unsortedStack = feedStack(new Stack<number>())([34, 3, 31, 98, 92, 23])
 
-const unsortedStack = feedStack(new Stack<number>())([
-  34,
-  3,
-  31,
-  98,
-  92,
-  23,
-])
-
-const sortedSack = sortStack(unsortedStack)
-console.log(JSON.stringify(sortedSack))
+  const sortedSack = sortStack(unsortedStack)
+  console.log(JSON.stringify(sortedSack))
+}
+// main()

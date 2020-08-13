@@ -19,9 +19,7 @@ import { INode, populateLinkedList } from './linked-list'
  * @param {INode<T>} head - the head of the linked list
  * @return {LinkedListNodeT>} - the head of the linked list without any duplicates
  */
-export const removeDuplicates = <T>(
-  head: INode<T>
-): INode<T> => {
+export const removeDuplicates = <T>(head: INode<T>): INode<T> => {
   if (!head.next) {
     return head
   }
@@ -51,8 +49,7 @@ export const removeDuplicates = <T>(
 }
 
 // Tests:
-// eslint-disable-next-line func-style, @typescript-eslint/no-unused-vars, no-unused-vars
-function main(): void {
+export const main = (): void => {
   const linkedListWithDuplicates = populateLinkedList([
     12,
     11,

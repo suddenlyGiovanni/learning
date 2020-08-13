@@ -102,8 +102,7 @@ export class QueueClass<T> implements IQueue<T> {
 }
 
 // Examples
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-const main = (): void => {
+export const main = (): void => {
   const testQueue = new QueueClass<string>()
   testQueue.enqueue('first')
   testQueue.enqueue('second')
@@ -118,3 +117,4 @@ const main = (): void => {
   testQueue.enqueue('seventh')
   console.log(testQueue.toString()) //?
 }
+// main()

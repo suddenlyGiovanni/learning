@@ -52,8 +52,7 @@ export const deleteMiddleNode = <T>(head: INode<T>): null | INode<T> => {
 }
 
 // Test
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const main = (): void => {
+export const main = (): void => {
   const { head } = populateLinkedList([1, 2, 3, 4, 5])
   console.log(deleteMiddleNode(head!))
   console.log(head)
