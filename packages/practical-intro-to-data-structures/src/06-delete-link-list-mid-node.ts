@@ -9,33 +9,33 @@
  * If the input linked list has 1 node, then this node should be deleted and new head should be returned.
  */
 
-import { LinkedListNode, LinkedListNodeClass } from './linked-list'
+import { INode, Node } from './linked-list'
 
 const isEven = (x: number): boolean => x % 2 === 0
 
 /**
  * Deletes a node from the middle of the linked list
- * @param {LinkedListNodeClass} head - the head node of a linked list
- * @return {LinkedListNodeClass} - the deleted node
+ * @param {Node} head - the head node of a linked list
+ * @return {Node} - the deleted node
  */
 export const deleteMiddleNode = <T>(
-  head: LinkedListNode<T>
-): null | LinkedListNode<T> => {
+  head: INode<T>
+): null | INode<T> => {
   if (!head) {
     return null
   }
   if (head && head.next === null) {
-    return new LinkedListNodeClass<T>(head.value)
+    return new Node<T>(head.value)
   }
 
   const calculateLength = (): number => {
-    let l = 1
-    let currentNode = head
-    while (currentNode.next !== null) {
-      currentNode = currentNode.next
-      l += 1
+    let length = 1
+    let node = head
+    while (node.next !== null) {
+      node = node.next
+      length += 1
     }
-    return l
+    return length
   }
 
   const length = calculateLength()
@@ -44,7 +44,7 @@ export const deleteMiddleNode = <T>(
 
   let currentNode = head
   // eslint-disable-next-line init-declarations
-  let previousNode: LinkedListNode<T>;
+  let previousNode: INode<T>;
   let i = 1
   while (i < middleNode && currentNode.next !== null) {
     previousNode = currentNode
@@ -60,11 +60,11 @@ export const deleteMiddleNode = <T>(
 // Test
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const main = (): void => {
-  const a1 = new LinkedListNodeClass(1)
-  const a2 = new LinkedListNodeClass(2)
-  const a3 = new LinkedListNodeClass(3)
-  const a4 = new LinkedListNodeClass(4)
-  const a5 = new LinkedListNodeClass(5)
+  const a1 = new Node(1)
+  const a2 = new Node(2)
+  const a3 = new Node(3)
+  const a4 = new Node(4)
+  const a5 = new Node(5)
   a1.next = a2
   a2.next = a3
   a3.next = a4

@@ -1,13 +1,13 @@
 /* eslint-disable spaced-comment, no-inline-comments, no-plusplus, max-classes-per-file, class-methods-use-this, no-underscore-dangle, max-statements, no-console */
 
-export interface LinkedListNode<T> {
-  next: null | LinkedListNode<T>
+export interface INode<T> {
+  next: null | INode<T>
   value: T
   toString(): string
 }
 
-export interface LinkedList<T> {
-  head: null | LinkedListNode<T>
+export interface ILinkedList<T> {
+  head: null | INode<T>
 
   /*
    * Searches the linked list and returns true if it contains the value passed
@@ -27,21 +27,21 @@ export interface LinkedList<T> {
    * @param {ILinkedListNode<T>} node - the node to check
    * @return {boolean} - true if node is the head, otherwise false
    */
-  isHead(node: LinkedListNode<T>): boolean
+  isHead(node: INode<T>): boolean
 
   /*
    * Checks if a node is the tail of the linked list
    * @param {ILinkedListNode<T>} node - the node to check
    * @return {boolean} - true if node is the tail, otherwise false
    */
-  isTail(node: LinkedListNode<T>): boolean
+  isTail(node: INode<T>): boolean
 
   /*
    * Deletes a node
    * @param {ILinkedListNode<T>} node - the node to remove
    * @return {null | T} value - the deleted node's value
    */
-  remove(node: LinkedListNode<T>): null | T
+  remove(node: INode<T>): null | T
 
   /*
    * Removes the value at the end of the linked list
@@ -50,12 +50,12 @@ export interface LinkedList<T> {
   removeTail(): null | T
 }
 
-export class LinkedListNodeClass<T> implements LinkedListNode<T> {
-  private _next: null | LinkedListNode<T>
+export class Node<T> implements INode<T> {
+  private _next: null | INode<T>
 
   private _value: T
 
-  public constructor(value: T, next?: null | LinkedListNode<T>) {
+  public constructor(value: T, next?: null | INode<T>) {
     this._value = value
     if (next) {
       this._next = next
@@ -71,11 +71,11 @@ export class LinkedListNodeClass<T> implements LinkedListNode<T> {
     this._value = value
   }
 
-  public set next(node: null | LinkedListNode<T>) {
+  public set next(node: null | INode<T>) {
     this._next = node
   }
 
-  public get next(): null | LinkedListNode<T> {
+  public get next(): null | INode<T> {
     return this._next
   }
 
@@ -85,12 +85,12 @@ export class LinkedListNodeClass<T> implements LinkedListNode<T> {
 }
 
 /** Class representing a Linked List */
-export class LinkedListClass<T> implements LinkedList<T> {
-  private _head: null | LinkedListNode<T>
+export class LinkedList<T> implements ILinkedList<T> {
+  private _head: null | INode<T>
 
   private _length: number
 
-  private _tail: null | LinkedListNode<T>
+  private _tail: null | INode<T>
 
   public constructor() {
     this._head = null
@@ -101,18 +101,18 @@ export class LinkedListClass<T> implements LinkedList<T> {
   /** Implementing the iterable protocol!! */
 
   *[Symbol.iterator]() {
-    let currentNode = this._head
-    while (currentNode) {
-      yield currentNode?.value
-      currentNode = currentNode?.next
+    let node = this._head
+    while (node) {
+      yield node?.value
+      node = node?.next
     }
   }
 
-  public get head(): null | LinkedListNode<T> {
+  public get head(): null | INode<T> {
     return this._head
   }
 
-  public get tail(): null | LinkedListNode<T> {
+  public get tail(): null | INode<T> {
     return this._tail
   }
 
@@ -128,18 +128,18 @@ export class LinkedListClass<T> implements LinkedList<T> {
     if (this._tail?.value === value) {
       return true
     }
-    let currentNode = this._head
-    while (currentNode?.value !== value && currentNode?.next !== null) {
-      currentNode = currentNode!.next
+    let node = this._head
+    while (node?.value !== value && node?.next !== null) {
+      node = node!.next
     }
-    return currentNode?.value === value
+    return node?.value === value
   }
 
   /**
    * Inserts a new value to the end of the linked list
    */
   public insert(value: T): this {
-    const node = new LinkedListNodeClass(value)
+    const node = new Node(value)
     if (this._head === null && this._tail === null) {
       // We are to insert the first node in the list.
       this._head = node
@@ -158,22 +158,22 @@ export class LinkedListClass<T> implements LinkedList<T> {
   /**
    * Checks if a node is the head of the linked list
    */
-  public isHead(node: LinkedListNode<T>): boolean {
+  public isHead(node: INode<T>): boolean {
     return this._head === node
   }
 
   /**
    * Checks if a node is the tail of the linked list
    */
-  public isTail(node: LinkedListNode<T>): boolean {
+  public isTail(node: INode<T>): boolean {
     return this._tail === node
   }
 
   /*
    * Deletes a node and returns the deleted node value
    */
-  public remove(node: LinkedListNode<T>): null | T {
-    let previousNode: null | LinkedListNode<T> = null
+  public remove(node: INode<T>): null | T {
+    let previousNode: null | INode<T> = null
     let currentNode = this._head
     while (currentNode && currentNode !== node && currentNode.next !== null) {
       previousNode = currentNode
@@ -202,14 +202,14 @@ export class LinkedListClass<T> implements LinkedList<T> {
       return null
     }
 
-    let currentNode: null | LinkedListNode<T> = this._head
-    while (currentNode?.next !== this._tail && currentNode?.next !== null) {
-      currentNode = currentNode.next
+    let node: null | INode<T> = this._head
+    while (node?.next !== this._tail && node?.next !== null) {
+      node = node.next
     }
 
-    currentNode.next = null
+    node.next = null
     const tail = this._tail
-    this._tail = currentNode
+    this._tail = node
     this.decrementLength()
     return tail!.value
   }
@@ -223,10 +223,10 @@ export class LinkedListClass<T> implements LinkedList<T> {
   }
 }
 
-export const populateLinkedList = <T>(values: T[]): LinkedList<T> => {
+export const populateLinkedList = <T>(values: T[]): ILinkedList<T> => {
   return values.reduce(
     (list, value) => list.insert(value),
-    new LinkedListClass<T>()
+    new LinkedList<T>()
   )
 }
 

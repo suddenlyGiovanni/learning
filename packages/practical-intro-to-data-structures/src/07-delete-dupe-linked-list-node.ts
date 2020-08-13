@@ -11,17 +11,17 @@
  * - Consider the case where there is only duplicates. What difference does that make?
  */
 
-import { LinkedListNode, populateLinkedList } from './linked-list'
+import { INode, populateLinkedList } from './linked-list'
 
 /**
  * Deletes a duplicated node from a linked list
  * @template T
- * @param {LinkedListNode<T>} head - the head of the linked list
+ * @param {INode<T>} head - the head of the linked list
  * @return {LinkedListNodeT>} - the head of the linked list without any duplicates
  */
 export const removeDuplicates = <T>(
-  head: LinkedListNode<T>
-): LinkedListNode<T> => {
+  head: INode<T>
+): INode<T> => {
   if (!head.next) {
     return head
   }
