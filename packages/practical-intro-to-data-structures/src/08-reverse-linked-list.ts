@@ -31,8 +31,9 @@ export const reverse = <T>(head: INode<T>): INode<T> => {
 }
 
 // Test
-const main = (): void => {
+export const main = (): void => {
   const { head } = populateLinkedList([1, 2, 3, 4, 5])
   const reversed = reverse(head!)
   console.log(reversed.toString())
 }
+// main()

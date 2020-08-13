@@ -53,15 +53,21 @@ export const isBalanced = (code: string): boolean => {
   return leftStack.isEmpty()
 }
 
-/*
- *  Test cases:
- * Input: exp = '[()]{}{[()()]()}'
- * Output: Balanced
- */
-// isBalanced('[(])') //?
+// Tests
+export const main = (): void => {
+  const balancedExpression = '[()]{}{[()()]()}'
+  const unbalancedExpression = '[(])'
+  /*
+   *  Test cases:
+   * Input: exp = '[()]{}{[()()]()}'
+   * Output: Balanced
+   */
+  console.log(isBalanced(balancedExpression))
 
-/*
- * Input: exp = '[(])'
- * Output: Not Balanced
- */
-// isBalanced('[()]{}{[()()]()}') //?
+  /*
+   * Input: exp = '[(])'
+   * Output: Not Balanced
+   */
+  console.log(isBalanced(unbalancedExpression))
+}
+// main()

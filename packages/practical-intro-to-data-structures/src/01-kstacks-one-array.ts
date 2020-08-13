@@ -207,8 +207,7 @@ export class KStack<T> implements IKStack<T> {
 }
 
 // Tests:
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-const main = (): void => {
+export const main = (): void => {
   const testKStack = new KStack<string>(3) // KStackClass { k: 3, storage: [] }
   testKStack.push('s1&v="one"', 1)
   testKStack.push('s3&v="two"', 3)
@@ -225,3 +224,4 @@ const main = (): void => {
   testKStack.peek(2) //?
   console.log(testKStack) // ?
 }
+// main()

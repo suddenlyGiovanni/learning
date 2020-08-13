@@ -228,7 +228,8 @@ export const populateLinkedList = <T>(values: T[]): ILinkedList<T> => {
 }
 
 // ------------------ examples-----------------
-const main = (): void => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+export const main = (): void => {
   // construct LinkedList
   const testLinkedList = new LinkedList<number>()
   testLinkedList.insert(10)
