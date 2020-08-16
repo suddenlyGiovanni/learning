@@ -1,9 +1,10 @@
+import assert from 'assert'
 /*
  * Given a linked list and a number k, write a function that
  * returns the value at the k’th node from end of the linked list.
  */
 
-import { INode, populateLinkedList } from './linked-list'
+import { INode, makeLinkedList } from './linked-list'
 
 /**
  * Returns the k-to-the-last node in a singly-linked list
@@ -13,10 +14,10 @@ import { INode, populateLinkedList } from './linked-list'
  */
 export const kthToLastNode = <T>(k: number, head: INode<T>): INode<T> => {
   let node = head
-  let kNode: null| INode<T> = node
+  let kNode: null | INode<T> = node
   for (let i = 1; i <= k; i++) {
-    if(node.next === null) {
-      throw new Error('`k` is out of bound');
+    if (node.next === null) {
+      throw new Error('`k` is out of bound')
     }
     kNode = kNode.next
   }
@@ -29,7 +30,7 @@ export const kthToLastNode = <T>(k: number, head: INode<T>): INode<T> => {
 }
 
 export const main = (): void => {
-  const linkedList = populateLinkedList<number>([
+  const linkedList = makeLinkedList<number>([
     15,
     10,
     13,
@@ -47,7 +48,10 @@ export const main = (): void => {
     11,
   ])
   const head = linkedList.head!
-  console.log(kthToLastNode(5, head)) // Expected output {value:3 next: ...}
+ // Expected output {value:3 next: ...}
+  assert.deepStrictEqual(
+    kthToLastNode(5, head),
+    makeLinkedList([3, 4, 8, 14, 11]).head
+  )
 }
-
 // main()

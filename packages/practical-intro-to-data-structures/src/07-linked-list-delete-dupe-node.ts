@@ -1,4 +1,7 @@
+import assert from 'assert'
 /* eslint-disable max-statements */
+import { INode, makeLinkedList } from './linked-list'
+
 /**
  * Write a removeDuplicates() function which takes a `list` and deletes any duplicate nodes
  * from the list. The list is not sorted.
@@ -10,8 +13,6 @@
  * - For this case, it can have multiple duplicates.
  * - Consider the case where there is only duplicates. What difference does that make?
  */
-
-import { INode, populateLinkedList } from './linked-list'
 
 /**
  * Deletes a duplicated node from a linked list
@@ -50,18 +51,11 @@ export const removeDuplicates = <T>(head: INode<T>): INode<T> => {
 
 // Tests:
 export const main = (): void => {
-  const linkedListWithDuplicates = populateLinkedList([
-    12,
-    11,
-    12,
-    21,
-    41,
-    43,
-    21,
-  ])
+  const linkedListWithDuplicates = makeLinkedList([12, 11, 12, 21, 41, 43, 21])
 
-  const dedupeLinkedList = removeDuplicates(linkedListWithDuplicates.head!)
-  console.log(dedupeLinkedList.toString())
   // Should convert the list to 12 -> 11 -> 21 -> 41 -> 43.
+  const dedupeLinkedList = removeDuplicates(linkedListWithDuplicates.head!)
+
+  assert.deepStrictEqual(dedupeLinkedList, makeLinkedList([12, 11, 21, 41, 43]).head)
 }
 // main()

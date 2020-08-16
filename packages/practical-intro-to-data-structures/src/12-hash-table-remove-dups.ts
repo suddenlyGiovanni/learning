@@ -1,9 +1,9 @@
 /* eslint-disable no-inline-comments */
-/*
+import assert from 'assert'
+
+/**
  * Write a function that removes duplicates characters from a string
  */
-
-import assert from './assert'
 
 /**
  * Removes duplicates characters from a string
@@ -20,7 +20,6 @@ export const removeDuplicates = (str: string): string => {
 }
 
 export const main = (): void => {
-  console.log(removeDuplicates('mississippi'))
-  assert(removeDuplicates('mississippi') === 'misp')
+  assert.strictEqual(removeDuplicates('mississippi'), 'misp')
 }
 // main()

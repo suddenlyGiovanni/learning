@@ -1,12 +1,13 @@
 /* eslint-disable no-plusplus, max-statements */
+import assert from 'assert'
+
+import { Stack } from './stack'
 
 /*
  * Write a function, is valid that checks if brackets in a string are balanced (properly closed) based on JavaScript syntax rules.
  * valid examples: '{([()])}()' or '()[]'
  * invalid examples: '(' or '[(])'
  */
-
-import { Stack } from './stack'
 
 /**
  * Checks for balanced brackets in a string of code.
@@ -62,12 +63,12 @@ export const main = (): void => {
    * Input: exp = '[()]{}{[()()]()}'
    * Output: Balanced
    */
-  console.log(isBalanced(balancedExpression))
+  assert.strictEqual(isBalanced(balancedExpression), true)
 
   /*
    * Input: exp = '[(])'
    * Output: Not Balanced
    */
-  console.log(isBalanced(unbalancedExpression))
+  assert.strictEqual(isBalanced(unbalancedExpression), false)
 }
 // main()

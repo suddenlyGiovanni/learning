@@ -1,5 +1,7 @@
 /* eslint-disable no-underscore-dangle, no-undefined, no-inline-comments, @typescript-eslint/ban-ts-comment, no-plusplus, max-statements, max-lines-per-function */
 
+import assert from 'assert'
+
 /**
  * A Queue is a collection of entities that are maintained in a sequence and can be modified by the
  * addition of entities at one end of the sequence and the removal of entities from the
@@ -7,6 +9,7 @@
  * FIFO: First-In-First-Out
  *
  * Time complexity in big O notation
+ *
  * Algorithm | Average| Worst case
  * ---------|----------|---------
  * Space  | O(n)  | O(n)
@@ -99,7 +102,7 @@ export class Queue<T> implements IQueue<T> {
   }
 
   public toString(): string {
-    return JSON.stringify(this)
+    return JSON.stringify(this, null, 2)
   }
 
   private decrementLength(): void {
@@ -118,104 +121,151 @@ export class Queue<T> implements IQueue<T> {
 // Example
 const main = (): void => {
   const testQueue = new Queue<string>()
-  testQueue.toString() // ?
-
-  /*
-   * {
-   *   "head": null,
-   *   "queue": {},
-   *   "length": 0
-   * }
-   */
+  assert.strictEqual(
+    testQueue.toString(),
+    JSON.stringify(
+      {
+        _queue: {},
+        _headIndex: null,
+        _length: 0,
+      },
+      null,
+      2
+    )
+  )
 
   testQueue.enqueue('zero')
-  testQueue.toString() // ?
-
-  /*
-   * {
-   *   "head": 0
-   *   "queue": {"0": "zero"},
-   *   "length": 1
-   * }
-   */
+  assert.strictEqual(
+    testQueue.toString(),
+    JSON.stringify(
+      {
+        _queue: {
+          '0': 'zero',
+        },
+        _headIndex: 0,
+        _length: 1,
+      },
+      null,
+      2
+    )
+  )
 
   testQueue.enqueue('one')
-  testQueue.toString() // ?
-
-  /*
-   * {
-   *   "head": 0
-   *   "queue": {"0": "zero", "1": "one"},
-   *   "length": 2
-   * }
-   */
+  assert.strictEqual(
+    testQueue.toString(),
+    JSON.stringify(
+      {
+        _queue: {
+          '0': 'zero',
+          '1': 'one',
+        },
+        _headIndex: 0,
+        _length: 2,
+      },
+      null,
+      2
+    )
+  )
 
   testQueue.enqueue('two')
-  testQueue.toString() // ?
+  assert.strictEqual(
+    testQueue.toString(),
+    JSON.stringify(
+      {
+        _queue: {
+          '0': 'zero',
+          '1': 'one',
+          '2': 'two',
+        },
+        _headIndex: 0,
+        _length: 3,
+      },
+      null,
+      2
+    )
+  )
 
-  /*
-   * {
-   *   "head": 0
-   *   "queue": {"0": "zero", "1": "one", "2": "two"},
-   *   "length": 3
-   * }
-   */
+  assert.strictEqual(testQueue.peek(), 'zero')
+  assert.strictEqual(testQueue.dequeue(), 'zero')
+  assert.strictEqual(
+    testQueue.toString(),
+    JSON.stringify(
+      {
+        _queue: {
+          '1': 'one',
+          '2': 'two',
+        },
+        _headIndex: 1,
+        _length: 2,
+      },
+      null,
+      2
+    )
+  )
 
-  testQueue.peek() // 'zero'
-  testQueue.dequeue() // 'zero'
-  testQueue.toString() // ?
+  assert.strictEqual(testQueue.peek(), 'one')
+  assert.strictEqual(testQueue.dequeue(), 'one')
+  assert.strictEqual(
+    testQueue.toString(),
+    JSON.stringify(
+      {
+        _queue: {
+          '2': 'two',
+        },
+        _headIndex: 2,
+        _length: 1,
+      },
+      null,
+      2
+    )
+  )
 
-  /*
-   * {
-   *   "head": 1
-   *   "queue": {"1": "one", "2": "two"},
-   *   "length": 2
-   * }
-   */
-
-  testQueue.peek() // 'one'
-  testQueue.dequeue() // 'one'
-  testQueue.toString() // ?
-
-  /*
-   * {
-   *   "head": 2
-   *   "queue": {"2": "two"},
-   *   "length": 1
-   * }
-   */
-
-  testQueue.peek() // 'two'
-  testQueue.dequeue() // 'two'
-  testQueue.toString() // ?
-
-  /*
-   * {
-   *   "head": null
-   *   "queue": {},
-   *   "length": 0
-   * }
-   */
+  assert.strictEqual(testQueue.peek(), 'two')
+  assert.strictEqual(testQueue.dequeue(), 'two')
+  assert.strictEqual(
+    testQueue.toString(),
+    JSON.stringify(
+      {
+        _queue: {},
+        _headIndex: null,
+        _length: 0,
+      },
+      null,
+      2
+    )
+  )
 
   testQueue.enqueue('three')
-  testQueue.toString() // ?
-
-  /*
-   * {
-   *   "head": 0
-   *   "queue": {"0": "three"},
-   *   "length": 1
-   * }
-   */
+  assert.strictEqual(
+    testQueue.toString(),
+    JSON.stringify(
+      {
+        _queue: {
+          '0': 'three',
+        },
+        _headIndex: 0,
+        _length: 1,
+      },
+      null,
+      2
+    )
+  )
 
   testQueue.enqueue('four')
-  testQueue.toString() // ?
-
-  /*
-   * {
-   *   "head": 0
-   *   "queue": {"0": "three", "1": "four"},
-   *   "length": 2
-   * }
-   */
+  assert.strictEqual(
+    testQueue.toString(),
+    JSON.stringify(
+      {
+        _queue: {
+          '0': 'three',
+          '1': 'four',
+        },
+        _headIndex: 0,
+        _length: 2,
+      },
+      null,
+      2
+    )
+  )
 }
+// main()

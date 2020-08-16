@@ -2,7 +2,7 @@
  * Write a function that returns the unique, non-repeated value in a list
  */
 
-import assert from './assert'
+import assert from 'assert'
 
 /**
  * Returns the unique, non-repeated value
@@ -45,7 +45,7 @@ export const main = (): void => {
     'd',
     'a',
   ]
-  assert(unique(listWithUniqueElement) === 'a')
-  assert(unique(listWithOutUniqueElement) === undefined)
+  assert.strictEqual(unique(listWithUniqueElement), 'a')
+  assert.strictEqual(unique(listWithOutUniqueElement), undefined)
 }
 // main()

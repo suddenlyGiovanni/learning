@@ -6,6 +6,8 @@
  * https://www.geeksforgeeks.org/wp-content/uploads/Stack-Queue.png
  */
 
+import assert from 'assert'
+
 import type { IQueue } from './queue'
 import { IStack, Stack } from './stack'
 
@@ -110,10 +112,10 @@ export const main = (): void => {
   testQueue.enqueue('forth')
   testQueue.enqueue('fifth')
   testQueue.enqueue('sixth')
-  testQueue.peek() //?
-  testQueue.dequeue() //?
-  testQueue.dequeue() //?
-  testQueue.dequeue() //?
+  assert.strictEqual(testQueue.peek(), 'first')
+  assert.strictEqual(testQueue.dequeue(), 'first')
+  assert.strictEqual(testQueue.dequeue(), 'second')
+  assert.strictEqual(testQueue.dequeue(), 'third')
   testQueue.enqueue('seventh')
   console.log(testQueue.toString()) //?
 }

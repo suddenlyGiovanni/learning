@@ -1,5 +1,9 @@
 /* eslint-disable no-underscore-dangle */
-// Write a function to search for a value in an array. Returns true if value is found.
+import assert from 'assert'
+
+/**
+ * Write a function to search for a value in an array. Returns true if value is found.
+ */
 
 /**
  * @template T
@@ -33,7 +37,8 @@ export const find = <T>(list: T[], val: T): boolean => {
 }
 
 export const main = (): void => {
-  console.log(find([1, 3, 4, 6, 7, 9, 10, 12], 9))
-  console.log(find([1, 3, 4, 6, 7, 9, 10, 12], 8))
+  const testList = [1, 3, 4, 6, 7, 9, 10, 12]
+  assert.strictEqual(find(testList, 9), true)
+  assert.strictEqual(find(testList, 8), false)
 }
-// main() //?
+// main()
