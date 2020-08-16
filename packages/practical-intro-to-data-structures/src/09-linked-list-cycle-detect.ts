@@ -1,6 +1,9 @@
-// Check if a linked list contains a cycle.
+import assert from 'assert'
 
-import { INode, Node, populateLinkedList } from './linked-list'
+import { INode, Node, makeLinkedList } from './linked-list'
+
+/** # Check if a linked list contains a cycle. */
+
 /**
  * Checks if a linked list contains a cycle / loop.
  * @param {Node} head - the head of the linked list
@@ -39,10 +42,10 @@ export const main = (): void => {
   }
 
   const circularLinkedList = makeCircularLinkedList()
-  const nonCircularLinkedList = populateLinkedList([1, 2, 3, 4, 5])
+  const nonCircularLinkedList = makeLinkedList([1, 2, 3, 4, 5]).head!
 
   // eslint-disable-next-line no-console
-  console.log(detectCycle(circularLinkedList))
-  console.log(detectCycle(nonCircularLinkedList.head!))
+  assert.strictEqual(detectCycle(circularLinkedList), true)
+  assert.strictEqual(detectCycle(nonCircularLinkedList), false)
 }
 // main()

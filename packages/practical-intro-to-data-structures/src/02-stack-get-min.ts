@@ -1,4 +1,7 @@
+/* eslint-disable max-lines-per-function */
 /* eslint-disable max-statements, no-unused-expressions, no-underscore-dangle, spaced-comment, dot-notation */
+import assert from 'assert'
+
 import { IStack, Stack } from './stack'
 
 /**
@@ -137,44 +140,44 @@ export const main = (): void => {
 
   testMinStack.push(10)
 
-  testMinStack.min() //?
-  testMinStack.max() //?
+  assert.strictEqual(testMinStack.min(), 10)
+  assert.strictEqual(testMinStack.max(), 10)
 
   testMinStack.push(9)
-  testMinStack.min() //?
-  testMinStack.max() //?
+  assert.strictEqual(testMinStack.min(), 9)
+  assert.strictEqual(testMinStack.max(), 10)
 
   testMinStack.push(11)
-  testMinStack.min() //?
-  testMinStack.max() //?
+  assert.strictEqual(testMinStack.min(), 9)
+  assert.strictEqual(testMinStack.max(), 11)
 
   testMinStack['_storage'] //?
   testMinStack['_minStack'] //?
   testMinStack['_maxStack'] //?
 
-  testMinStack.pop() //?
-  testMinStack.min() //?
-  testMinStack.max() //?
+  assert.strictEqual(testMinStack.pop(), 11)
+  assert.strictEqual(testMinStack.min(), 9)
+  assert.strictEqual(testMinStack.max(), 10)
 
-  testMinStack.pop() //?
-  testMinStack.min() //?
-  testMinStack.max() //?
+  assert.strictEqual(testMinStack.pop(), 9)
+  assert.strictEqual(testMinStack.min(), 10)
+  assert.strictEqual(testMinStack.max(), 10)
 
   testMinStack['_storage'] //?
   testMinStack['_minStack'] //?
   testMinStack['_maxStack'] //?
 
   testMinStack.push(8)
-  testMinStack.min() //?
-  testMinStack.max() //?
+  assert.strictEqual(testMinStack.min(), 8)
+  assert.strictEqual(testMinStack.max(), 10)
 
   testMinStack['_storage'] //?
   testMinStack['_minStack'] //?
   testMinStack['_maxStack'] //?
 
-  testMinStack.pop() //?
-  testMinStack.pop() //?
-  testMinStack.pop() //?
+  assert.strictEqual(testMinStack.pop(), 8)
+  assert.strictEqual(testMinStack.pop(), 10)
+  assert.strictEqual(testMinStack.pop(), undefined)
 
   testMinStack['_storage'] //?
   testMinStack['_minStack'] //?

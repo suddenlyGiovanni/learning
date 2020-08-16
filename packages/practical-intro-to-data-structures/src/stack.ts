@@ -1,4 +1,6 @@
-/* eslint-disable no-undefined, no-underscore-dangle, @typescript-eslint/ban-ts-comment, no-plusplus, max-statements */
+/* eslint-disable no-undefined, no-underscore-dangle, @typescript-eslint/ban-ts-comment, no-plusplus, max-statements, max-lines-per-function */
+
+import assert from 'assert'
 
 export interface IStack<T> {
   /**
@@ -102,18 +104,61 @@ export const feedStack: feedStack = (stack) => (elements) =>
   }, stack)
 
 // Examples
-const main = (): void => {
+export const main = (): void => {
   const testStack = new Stack<string>()
-  testStack.peek() // undefined
+
+  assert.strictEqual(testStack.peek(), undefined)
+
   testStack.push('first')
-  testStack.peek() // 'first'
-  testStack.toString() // '{ length: 1, stack: { 0: "first" } }'
+  assert.strictEqual(testStack.peek(), 'first')
+  assert.deepStrictEqual(
+    testStack.toString(),
+    JSON.stringify({ _stack: { 0: 'first' }, _length: 1 }, null, 2)
+  )
+
   testStack.push('second')
-  testStack.peek() // 'second
-  testStack.toString() // '{ length: 3, stack: { 0: "first", 1: "second", 2: "third" } }'
+  assert.strictEqual(testStack.peek(), 'second')
+  assert.deepStrictEqual(
+    testStack.toString(),
+    JSON.stringify(
+      {
+        _stack: {
+          '0': 'first',
+          '1': 'second',
+        },
+        _length: 2,
+      },
+      null,
+      2
+    )
+  )
+
   testStack.push('third')
-  testStack.toString() // '{ "length": 3, "stack": { "0": "first", "1": "second", "2": "third" } }'
-  testStack.peek() // 'third
-  testStack.pop() // 'third
-  testStack.toString() // '{ "length": 2, "stack": { "0": "first", "1": "second" } }'
+  assert.strictEqual(
+    testStack.toString(),
+    JSON.stringify(
+      {
+        _stack: {
+          '0': 'first',
+          '1': 'second',
+          '2': 'third',
+        },
+        _length: 3,
+      },
+      null,
+      2
+    )
+  )
+
+  assert.strictEqual(testStack.peek(), 'third')
+  assert.strictEqual(testStack.pop(), 'third')
+  assert.strictEqual(
+    testStack.toString(),
+    JSON.stringify(
+      { _stack: { '0': 'first', '1': 'second' }, _length: 2 },
+      null,
+      2
+    )
+  )
 }
+// main()

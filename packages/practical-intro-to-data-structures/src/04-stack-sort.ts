@@ -1,4 +1,5 @@
 /* eslint-disable no-plusplus, max-statements */
+import assert from 'assert'
 
 import { IStack, Stack, feedStack } from './stack'
 /**
@@ -43,6 +44,9 @@ export const main = (): void => {
   const unsortedStack = feedStack(new Stack<number>())([34, 3, 31, 98, 92, 23])
 
   const sortedSack = sortStack(unsortedStack)
-  console.log(JSON.stringify(sortedSack))
+  assert.deepEqual(sortedSack, {
+    _length: 6,
+    _stack: { '0': 98, '1': 92, '2': 34, '3': 31, '4': 23, '5': 3 },
+  })
 }
 // main()

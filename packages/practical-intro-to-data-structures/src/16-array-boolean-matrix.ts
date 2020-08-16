@@ -1,6 +1,8 @@
-/* eslint-disable max-statements */
-/* eslint-disable no-underscore-dangle */
-/*
+/* eslint-disable max-lines-per-function */
+/* eslint-disable max-statements, no-underscore-dangle, max-lines-per-function */
+import assert from 'assert'
+
+/**
  * Given a boolean matrix, modify it such that if a matrix cell matrix[i][j] is 1 (true) then
  * make all the cells of ith row and jth column as 1.
  * More here: https://www.geeksforgeeks.org/a-boolean-matrix-question/
@@ -41,47 +43,39 @@ export const markOnes = (matrix: Array<Array<1 | 0>>): Array<Array<1 | 0>> => {
 }
 
 export const main = (): void => {
-  /*
-   * Expected output:
-   * [
-   *   [1, 1],
-   *   [1, 0],
-   * ]
-   */
-  console.log(
+  assert.deepStrictEqual(
     markOnes([
       [1, 0],
       [0, 0],
-    ])
+    ]),
+    [
+      [1, 1],
+      [1, 0],
+    ]
   )
 
-  /*
-   * Expected output:
-   * [
-   *   [ 0, 0, 1 ],
-   *   [ 1, 1, 1 ]
-   * ]
-   */
-  console.log(
+  assert.deepStrictEqual(
     markOnes([
       [0, 0, 0],
       [0, 0, 1],
-    ])
+    ]),
+    [
+      [0, 0, 1],
+      [1, 1, 1],
+    ]
   )
 
-  /*
-   * [
-   *   [1, 1, 1, 1],
-   *   [1, 1, 1, 1],
-   *   [1, 0, 1, 1],
-   * ]
-   */
-  console.log(
+  assert.deepStrictEqual(
     markOnes([
       [1, 0, 0, 1],
       [0, 0, 1, 0],
       [0, 0, 0, 0],
-    ])
+    ]),
+    [
+      [1, 1, 1, 1],
+      [1, 1, 1, 1],
+      [1, 0, 1, 1],
+    ]
   )
 }
 // main()

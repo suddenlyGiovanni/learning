@@ -3,9 +3,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable id-length */
 /* eslint-disable class-methods-use-this */
+import nodeAssert from 'assert'
 
 import assert, { AssertionError } from './assert'
-
 /*
  * Create a data structure KStacks that represents a set of k stacks. It should only use one array.
  * The following methods must be supported by KStacks.
@@ -206,6 +206,7 @@ export class KStack<T> implements IKStack<T> {
   }
 }
 
+
 // Tests:
 export const main = (): void => {
   const testKStack = new KStack<string>(3) // KStackClass { k: 3, storage: [] }
@@ -214,14 +215,14 @@ export const main = (): void => {
   testKStack.push('s3&v="three"', 3)
   testKStack.push('s2&v="four"', 2)
   testKStack.push('s3&v="five"', 3)
-  testKStack.peek(3) //?
-  testKStack.pop(3) //?
-  testKStack.pop(3) //?
-  testKStack.pop(3) //?
-  testKStack.pop(3) //?
-  testKStack.peek(3) //?
-  testKStack.peek(1) //?
-  testKStack.peek(2) //?
+  nodeAssert.strictEqual(testKStack.peek(3), 's3&v="five"')
+  nodeAssert.strictEqual(testKStack.pop(3), 's3&v="five"')
+  nodeAssert.strictEqual(testKStack.pop(3), 's3&v="three"')
+  nodeAssert.strictEqual(testKStack.pop(3), 's3&v="two"')
+  nodeAssert.strictEqual(testKStack.pop(3), undefined)
+  nodeAssert.strictEqual(testKStack.peek(3), undefined)
+  nodeAssert.strictEqual(testKStack.peek(1), 's1&v="one"')
+  nodeAssert.strictEqual(testKStack.peek(2), 's2&v="four"')
   console.log(testKStack) // ?
 }
 // main()
