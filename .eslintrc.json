@@ -83,6 +83,13 @@
         "ignoreInlineComments": true
       }
     ],
+    "func-style": [
+      "error",
+      "declaration",
+      {
+        "allowArrowFunctions": true
+      }
+    ],
     "id-length": [
       "error",
       {
@@ -135,8 +142,8 @@
     "no-unused-vars": [
       "error",
       {
-        "ignoreRestSiblings": true,
-        "args": "after-used"
+        "args": "after-used",
+        "ignoreRestSiblings": true
       }
     ],
     "one-var": ["error", "never"],

@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-/* eslint-disable @typescript-eslint/camelcase */
+/* eslint-disable camelcase, @typescript-eslint/no-use-before-define */
 
 const fake_responses = {
   file1: 'The first text',
@@ -9,6 +8,7 @@ const fake_responses = {
 export type FileName = keyof typeof fake_responses
 
 export function output<T>(value: T): void {
+  // eslint-disable-next-line no-console
   console.log(String(value))
 }
 
