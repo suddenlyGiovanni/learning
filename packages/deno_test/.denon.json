@@ -1,0 +1,17 @@
+{
+    "files": [ "main.ts" ],
+    "quiet": false,
+    "debug": true,
+    "fullscreen": true,
+    "extensions": [ ".ts",".json" ],
+    "interval": 500,
+    "watch": [ "src/" ],
+    "deno_args":[
+        "--allow-net",
+        "--allow-env"
+    ],
+    "execute": {
+        ".ts": ["deno", "run"]
+    },
+    "fmt": false
+}

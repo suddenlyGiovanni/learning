@@ -1,0 +1,8 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "deno.enable": true,
+  "deno.alwaysShowStatus": true,
+  "deno.importmap": null,
+  "deno.log": "terse",
+  "deno.tsconfig": null
+}
