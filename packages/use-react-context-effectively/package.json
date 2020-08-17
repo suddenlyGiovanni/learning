@@ -1,0 +1,50 @@
+{
+  "author": "Giovanni Ravalico <ravalico.giovanni@gmail.com>",
+  "browserslist": {
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ]
+  },
+  "bugs": {
+    "url": "https://github.com/suddenlyGiovanni/learning/issues"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "5.11.3",
+    "@testing-library/react": "10.4.8",
+    "@testing-library/user-event": "12.1.1",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-scripts": "3.4.3"
+  },
+  "description": "> TODO: description",
+  "devDependencies": {
+    "@types/jest": "26.0.10",
+    "@types/node": "14.0.27",
+    "@types/react": "16.9.46",
+    "@types/react-dom": "16.9.8"
+  },
+  "directories": {},
+  "files": [],
+  "homepage": "https://github.com/suddenlyGiovanni/learning#readme",
+  "license": "ISC",
+  "main": "lib/use-react-context-effectively.js",
+  "name": "use-react-context-effectively",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suddenlyGiovanni/learning.git"
+  },
+  "scripts": {
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "start": "react-scripts start",
+    "test": "react-scripts test"
+  },
+  "version": "0.0.0"
+}

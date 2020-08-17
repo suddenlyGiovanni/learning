@@ -1,0 +1,21 @@
+.App {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 100vh;
+
+  color: white;
+}
+
+
+.App main {
+  padding: 10px;
+
+  border: solid thin white;
+}
+
+.App-renders{
+  margin-left: 11px;
+}

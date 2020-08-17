@@ -1,0 +1,24 @@
+.CountDisplay {
+	margin-top: 10px;
+	padding: 10px;
+
+	border: solid thin white;
+}
+
+.CountDisplay-count{
+  display: inline-block;
+
+  min-width: 20px;
+  margin: 0 6px;
+  padding: 2px 4px;
+
+  text-align: right;
+
+	color: maroon;
+  border-radius: 4;
+  background-color: #ccc;
+
+	font-size: 0.8rem;
+	font-weight: 600;
+
+}

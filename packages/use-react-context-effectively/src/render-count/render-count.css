@@ -1,0 +1,15 @@
+.RenderCount {
+  display: inline-block;
+
+  min-width: 20px;
+  margin: 0 6px;
+  padding: 2px 4px;
+
+  text-align: right;
+
+	color: black;
+  border-radius: 4;
+  background-color: #ccc;
+
+  font-size: 0.8rem;
+}
