@@ -12,10 +12,12 @@
     "type": "git",
     "url": "git+https://github.com/suddenlyGiovanni/learning.git"
   },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
-  },
   "bugs": {
     "url": "https://github.com/suddenlyGiovanni/learning/issues"
+  },
+  "scripts": {
+    "test": "jest --verbose",
+    "start": "parcel index.html --open",
+    "build": "parcel build index.html"
   }
 }
