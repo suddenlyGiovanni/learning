@@ -14,15 +14,28 @@ Immediately below, you can find the list of all the available sub repo and a lin
 
 ## Sub repositories
 
-| Repo                                     | Subject           | Source                                                                                                                   | Author            |
-| ---------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------- |
-| [a-practical-introduction-to-algorithms] | Algorithms        | [Front End Master](https://frontendmasters.com/courses/practical-algorithms/)                                            | [Bianca Gandolfo] |
-| [practical-intro-to-data-structures]     | Data structures   | [Front End Master](https://frontendmasters.com/courses/data-structures-interviews/)                                      | [Bianca Gandolfo] |
-| [algo-cast]                              | Algorithms        | [Udemy](https://www.udemy.com/course/coding-interview-bootcamp-algorithms-and-data-structure/)                           | [Stephen Grider]  |
-| [build-your-own-programming-language]    | Compilers and DSL | [Front End Master](https://frontendmasters.com/courses/programming-language/)                                            | [Steve Kinney]    |
-| [complete_intro_to_react_v5]             | React             | [Front End Master](https://frontendmasters.com/courses/complete-react-v5/)                                               | [Brian Holt]      |
-| [head-first-design-patterns]             | Design Patterns   | [Head First Design Patterns: A Brain-Friendly Guide](https://www.oreilly.com/library/view/head-first-design/0596007124/) |                   |
-| [rethinking-asynchronous-javascript]     | Asynchronicity    | [Front End Master](https://frontendmasters.com/courses/rethinking-async-js/)                                             | [Kyle Simpson]    |
+| Repo                                     | Subject                | Source                                                                                                                   | Author                                                       |
+| ---------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------ |
+| [algo-cast]                              | Algorithms             | [Udemy](https://www.udemy.com/course/coding-interview-bootcamp-algorithms-and-data-structure/)                           | [Stephen Grider]                                             |
+| [a-practical-introduction-to-algorithms] | Algorithms             | [Front End Master](https://frontendmasters.com/courses/practical-algorithms/)                                            | [Bianca Gandolfo]                                            |
+| [practical-intro-to-data-structures]     | Data structures        | [Front End Master](https://frontendmasters.com/courses/data-structures-interviews/)                                      | [Bianca Gandolfo]                                            |
+| [data-structures-and-algorithms]         | Data structures        | Gang of Four                                                                                                             | @suddenlyGiovanni                                            |
+| [head-first-design-patterns]             | Design Patterns        | [Head First Design Patterns: A Brain-Friendly Guide](https://www.oreilly.com/library/view/head-first-design/0596007124/) | @suddenlyGiovanni                                            |
+| [java-design-pattern]                    | Design Patterns        | [Code with Mosh](https://codewithmosh.com/courses/enrolled/733596)                                                       | Mosh Hamedani (@mosh)                                        |
+| [oop-design-patterns]                    | Design Patterns        | [YouTube Playlist](https://www.youtube.com/playlist?list=PLzvRQMJ9HDiSk1pnrKewLklYfCdu9Qjhy)                             | Xavier Decuyper ([@Savjee](Savjehttps://github.com/Savjeee)) |
+| [build-your-own-programming-language]    | Compilers and DSL      | [Front End Master](https://frontendmasters.com/courses/programming-language/)                                            | [Steve Kinney]                                               |
+| [functional-programming-ts]              | Functional Programming |                                                                                                                          | @suddenlyGiovanni                                            |
+| [hardcore-functional-js]                 | Functional Programming | [Front End Master](https://frontendmasters.com/courses/hardcore-js-v2/)                                                  | [Brian Lonsdorf]                                             |
+| [monads]                                 | Functional Programming |                                                                                                                          | @suddenlyGiovanni                                            |
+| [typescrip-like-in-haskell]              | Functional Programming | Lazy Evaluation [video](https://youtu.be/E5yAoMaVCp0)                                                                    | [@Tsoding](https://github.com/tsoding)                       |
+| [rethinking-asynchronous-javascript]     | Asynchronicity         | [Front End Master](https://frontendmasters.com/courses/rethinking-async-js/)                                             | [Kyle Simpson]                                               |
+| [composition-over-inheritance]           | Language               | [FunFunFunctions](https://youtu.be/wfMtDGfHWpA)                                                                          | [Mattias Petter Johansson] @MPJ                              |
+| [iterators-and-generators]               | Language               | [FunFunFunctions](https://github.com/mpj/funfuniterators)                                                                | [Mattias Petter Johansson] @MPJ                              |
+| [mooar-reduce]                           | Language               | [FunFunFunctions](https://youtu.be/1DMolJ2FrNY)                                                                          | [Mattias Petter Johansson] @MPJ                              |
+| [complete-intro-to-react-v5]             | React                  | [Front End Master](https://frontendmasters.com/courses/complete-react-v5/)                                               | [Brian Holt]                                                 |
+| [react-hooks-examples]                   | React                  |                                                                                                                          | @suddenlyGiovanni                                            |
+| [use-react-context-effectively]          | React                  | [Kent C. Dodds Blog](https://kentcdodds.com/blog/how-to-use-react-context-effectively)                                   | [Kent C. Dodds]                                              |
+| [deno-test]                              | Deno                   |                                                                                                                          | @suddenlyGiovanni                                            |
 
 ## Built With
 
@@ -31,7 +44,7 @@ Immediately below, you can find the list of all the available sub repo and a lin
 - [Lerna] - A tool for managing JavaScript projects with multiple packages.
 - [Jest] - JavaScript testing framework
 - [Wallaby] - A tests runner
-- [Quokka] - A rapid in editor prototyping playground
+- [Quokka] - A rapid in editor prototyping playgrounds
 
 ## Versioning
 
@@ -54,12 +67,28 @@ This project is licensed under the MIT License - see the [LICENSE.md] file for d
 [practical-intro-to-data-structures]: ./packages/practical-intro-to-data-structures/
 [algo-cast]: ./packages/algo-cast/
 [build-your-own-programming-language]: ./packages/build-your-own-programming-language/
-[complete_intro_to_react_v5]: ./packages/complete_intro_to_react_v5/
+[complete-intro-to-react-v5]: ./packages/complete-intro-to-react-v5/
 [head-first-design-patterns]: ./packages/head-first-design-patterns/
 [rethinking-asynchronous-javascript]: ./packages/rethinking-asynchronous-javascript/
+[composition-over-inheritance]: ./packages/composition-over-inheritance/
+[data-structures-and-algorithms]: ./packages/data-structures-and-algorithms/
+[deno-test]: ./packages/deno-test/
+[functional-programming-ts]: ./packages/functional-programming-ts/
+[hardcore-functional-js]: ./packages/hardcore-functional-js/
+[iterators-and-generators]: ./packages/iterators-and-generators/
+[java-design-pattern]: ./packages/java-design-pattern/
+[monads]: ./packages/monads/
+[mooar-reduce]: ./packages/mooar-reduce/
+[oop-design-patterns]: ./packages/oop-design-patterns/
+[react-hooks-examples]: ./packages/react-hooks-examples/
+[typescrip-like-in-haskell]: ./packages/typescrip-like-in-haskell/
+[use-react-context-effectively]: ./packages/use-react-context-effectively/
 [//]: # 'Authors'
 [bianca gandolfo]: https://github.com/bgando
 [steve kinney]: https://github.com/stevekinney
 [brian holt]: https://github.com/btholt
 [kyle simpson]: https://github.com/getify
 [stephen grider]: https://github.com/StephenGrider
+[mattias petter johansson]: https://github.com/mpj
+[brian lonsdorf]: https://github.com/DrBoolean/
+[kent c. dodds]: https://github.com/kentcdodds/
