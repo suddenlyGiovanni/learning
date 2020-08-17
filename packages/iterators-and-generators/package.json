@@ -1,0 +1,27 @@
+{
+  "name": "iterators-and-generators",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Giovanni Ravalico <ravalico.giovanni@gmail.com>",
+  "homepage": "https://github.com/suddenlyGiovanni/learning#readme",
+  "license": "ISC",
+  "main": "src/index.ts",
+  "dependencies": {
+    "random-number": "0.0.9"
+  },
+  "devDependencies": {
+    "@types/random-number": "0.0.0"
+  },
+  "directories": {},
+  "files": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suddenlyGiovanni/learning.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/suddenlyGiovanni/learning/issues"
+  }
+}
