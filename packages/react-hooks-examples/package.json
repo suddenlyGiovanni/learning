@@ -1,0 +1,50 @@
+{
+  "name": "react-hooks-examples",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Giovanni Ravalico <ravalico.giovanni@gmail.com>",
+  "homepage": "https://github.com/suddenlyGiovanni/learning#readme",
+  "license": "ISC",
+  "main": "lib/react-hooks-examples.js",
+  "directories": {},
+  "files": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suddenlyGiovanni/learning.git"
+  },
+  "bugs": {
+    "url": "https://github.com/suddenlyGiovanni/learning/issues"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "5.11.3",
+    "@testing-library/react": "10.4.8",
+    "@testing-library/user-event": "12.1.1",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-scripts": "3.4.3"
+  },
+  "devDependencies": {
+    "@types/jest": "26.0.10",
+    "@types/react-dom": "16.9.8",
+    "@types/react": "16.9.46",
+    "@types/node": "14.0.27"
+  }
+}
