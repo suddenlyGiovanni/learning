@@ -9,29 +9,47 @@
     "assert": "2.0.0"
   },
   "devDependencies": {
-    "@types/assert": "1.5.1",
-    "@typescript-eslint/eslint-plugin": "3.9.0",
-    "@typescript-eslint/parser": "3.9.0",
-    "commitizen": "4.1.2",
-    "cz-conventional-changelog": "3.2.0",
-    "dtslint": "3.6.14",
-    "eslint": "7.7.0",
-    "eslint-config-prettier": "6.11.0",
-    "eslint-plugin-import": "2.22.0",
-    "eslint-plugin-jest": "23.20.0",
-    "husky": "4.2.5",
-    "jest": "26.4.0",
-    "lerna": "3.22.1",
-    "typescript": "4.0.1-rc"
-  },
+  "@types/assert": "1.5.1",
+  "@types/jest": "26.0.10",
+  "@typescript-eslint/eslint-plugin": "3.9.1",
+  "@typescript-eslint/parser": "3.9.1",
+  "commitizen": "4.1.2",
+  "cz-conventional-changelog": "3.2.0",
+  "dtslint": "3.6.14",
+  "eslint": "7.7.0",
+  "eslint-config-prettier": "6.11.0",
+  "eslint-plugin-import": "2.22.0",
+  "eslint-plugin-jest": "23.20.0",
+  "husky": "4.2.5",
+  "jest": "26.4.0",
+  "lerna": "3.22.1",
+  "ts-jest": "26.2.0",
+  "ts-node": "8.10.2",
+  "ts-node-dev": "1.0.0",
+  "typescript": "4.0.1-rc"
+},
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
   "scripts": {
-    "git-cz": "git-cz"
+    "dev": "ts-node-dev --respawn --transpileOnly  --inspect -- src/index.ts",
+    "prod": "npm run build && node .src/lib/index.js",
+    "build": "tsc -p .",
+    "build:watch": "npm run build -- -w",
+    "cz": "git-cz",
+    "lint": "eslint \"src/**\"",
+    "format:base": "prettier --parser typescript",
+    "format:check": "npm run format:base -- --list-different \"src/**/*.{ts,tsx}\"",
+    "format:write": "npm run format:base -- --write \"src/**/*.{ts,tsx}\"",
+    "typecheck": "tsc --project tsconfig.json --incremental false --noEmit ",
+    "test": "jest",
+    "test-types": "dtslint --expectOnly --localTs node_modules/typescript/lib types",
+    "clean": "rm -rf lib",
+    "purge-node_modules": "rm -rf node_modules"
   },
+
   "husky": {
     "hooks": {
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
