@@ -1,11 +1,5 @@
 # `functional-programming-ts`
 
-> TODO: description
+## Description
+A personal education project 🏫on functional programming 🧙‍♂️in typescript 🔥
 
-## Usage
-
-```
-const functionalProgrammingTs = require('functional-programming-ts');
-
-// TODO: DEMONSTRATE API
-```
