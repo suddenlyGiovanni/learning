@@ -13,7 +13,7 @@
   "devDependencies": {
     "@types/accounting": "0.4.1",
     "@types/jest": "26.0.10",
-    "@types/node": "14.0.27",
+    "@types/node": "14.6.0",
     "@types/ramda": "0.27.14",
     "@types/sanctuary": "3.0.2",
     "jest": "26.4.0",
