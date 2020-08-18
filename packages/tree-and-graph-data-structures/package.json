@@ -1,13 +1,11 @@
 {
-  "name": "tree-and-graph-data-structures",
+  "name": "@learning/tree-and-graph-data-structures",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "Giovanni Ravalico <ravalico.giovanni@gmail.com>",
   "homepage": "https://github.com/suddenlyGiovanni/learning#readme",
+  "private": true,
   "license": "ISC",
-  "main": "lib/tree-and-graph-data-structures.js",
-  "directories": {},
-  "files": [],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/suddenlyGiovanni/learning.git"
@@ -16,8 +14,14 @@
     "url": "https://github.com/suddenlyGiovanni/learning/issues"
   },
   "scripts": {
-    "test": "jest --verbose",
-    "start": "parcel index.html --open",
-    "build": "parcel build index.html"
+    "start": "ts-node -r tsconfig-paths/register src/index.ts",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "26.0.10",
+    "jest": "26.4.0",
+    "ts-jest": "26.2.0",
+    "ts-node": "8.10.2",
+    "tsconfig-paths": "3.9.0"
   }
 }

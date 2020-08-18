@@ -1,13 +1,11 @@
 {
-  "name": "react-hooks-examples",
+  "name": "@learning/react-hooks-examples",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "Giovanni Ravalico <ravalico.giovanni@gmail.com>",
   "homepage": "https://github.com/suddenlyGiovanni/learning#readme",
+  "private": true,
   "license": "ISC",
-  "main": "lib/react-hooks-examples.js",
-  "directories": {},
-  "files": [],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/suddenlyGiovanni/learning.git"

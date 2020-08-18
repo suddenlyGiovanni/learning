@@ -1,19 +1,14 @@
 {
-  "name": "functional-programming-ts",
+  "name": "@learning/functional-programming-ts",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "Giovanni Ravalico <ravalico.giovanni@gmail.com>",
   "homepage": "https://github.com/suddenlyGiovanni/learning#readme",
+  "private": true,
   "license": "ISC",
-  "main": "src/index.ts",
-  "directories": {},
-  "files": [],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/suddenlyGiovanni/learning.git"
-  },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/suddenlyGiovanni/learning/issues"
@@ -24,6 +19,12 @@
   },
   "devDependencies": {
     "@types/lodash": "4.14.159",
-    "@types/ramda": "0.27.14"
+    "@types/ramda": "0.27.14",
+    "ts-node": "8.10.2",
+    "tsconfig-paths": "3.9.0"
+  },
+  "scripts": {
+    "start": "ts-node -r tsconfig-paths/register src/index.ts",
+    "test": "yarn run start"
   }
 }

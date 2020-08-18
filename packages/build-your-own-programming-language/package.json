@@ -1,5 +1,7 @@
 {
+  "name": "@learning/build-your-own-programming-language",
   "author": "Giovanni Ravalico <ravalico.giovanni@gmail.com>",
+  "private": true,
   "bugs": {
     "url": "https://github.com/suddenlyGiovanni/learning/issues"
   },
@@ -22,7 +24,6 @@
   "homepage": "https://github.com/suddenlyGiovanni/learning#readme",
   "license": "ISC",
   "main": "src/index.ts",
-  "name": "build-your-own-programming-language",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/suddenlyGiovanni/learning.git"

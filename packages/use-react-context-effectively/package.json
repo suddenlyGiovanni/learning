@@ -1,5 +1,7 @@
 {
+  "name": "@learning/use-react-context-effectively",
   "author": "Giovanni Ravalico <ravalico.giovanni@gmail.com>",
+  "private": true,
   "browserslist": {
     "development": [
       "last 1 chrome version",
@@ -20,13 +22,13 @@
     "@testing-library/react": "10.4.8",
     "@testing-library/user-event": "12.1.1",
     "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-scripts": "3.4.3"
+    "react-dom": "16.13.1"
   },
   "description": "> TODO: description",
   "devDependencies": {
+    "react-scripts": "3.4.3",
     "@types/jest": "26.0.10",
-    "@types/node": "14.0.27",
+    "@types/node": "14.6.0",
     "@types/react": "16.9.46",
     "@types/react-dom": "16.9.8"
   },
@@ -35,7 +37,6 @@
   "homepage": "https://github.com/suddenlyGiovanni/learning#readme",
   "license": "ISC",
   "main": "lib/use-react-context-effectively.js",
-  "name": "use-react-context-effectively",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/suddenlyGiovanni/learning.git"

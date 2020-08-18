@@ -1,7 +1,24 @@
 {
+  "name": "@learning/hardcore-functional-js",
   "author": "Giovanni Ravalico <ravalico.giovanni@gmail.com>",
+  "private": true,
   "bugs": {
     "url": "https://github.com/suddenlyGiovanni/learning/issues"
+  },
+  "description": "> TODO: description",
+  "engines": {
+    "node": "^14.0.0"
+  },
+  "homepage": "https://github.com/suddenlyGiovanni/learning#readme",
+  "license": "ISC",
+  "main": "dist/index",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suddenlyGiovanni/learning.git"
+  },
+  "scripts": {
+    "start": "ts-node -r tsconfig-paths/register src/index.ts",
+    "test": "yarn run start"
   },
   "dependencies": {
     "accounting-js": "1.1.1",
@@ -9,38 +26,16 @@
     "ramda": "0.27.1",
     "sanctuary": "3.1.0"
   },
-  "description": "> TODO: description",
   "devDependencies": {
+    "tsconfig-paths": "~3.9.0",
     "@types/accounting": "0.4.1",
     "@types/jest": "26.0.10",
-    "@types/node": "14.0.27",
+    "@types/node": "14.6.0",
     "@types/ramda": "0.27.14",
     "@types/sanctuary": "3.0.2",
     "jest": "26.4.0",
     "nodemon": "2.0.4",
     "ts-jest": "26.2.0",
     "ts-node": "8.10.2"
-  },
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
-  "engines": {
-    "node": "^14.0.0"
-  },
-  "files": [
-    "lib"
-  ],
-  "homepage": "https://github.com/suddenlyGiovanni/learning#readme",
-  "license": "ISC",
-  "main": "lib/hardcore-functional-js.js",
-  "name": "hardcore-functional",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/suddenlyGiovanni/learning.git"
-  },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
-  },
-  "version": "0.0.0"
+  }
 }
