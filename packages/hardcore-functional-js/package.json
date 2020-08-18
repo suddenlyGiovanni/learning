@@ -2,6 +2,7 @@
   "name": "@learning/hardcore-functional-js",
   "author": "Giovanni Ravalico <ravalico.giovanni@gmail.com>",
   "private": true,
+  "version": "0.0.0",
   "bugs": {
     "url": "https://github.com/suddenlyGiovanni/learning/issues"
   },
