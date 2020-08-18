@@ -1,13 +1,11 @@
 {
-  "name": "rethinking-asynchronous-javascript",
+  "name": "@learning/rethinking-asynchronous-javascript",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "Giovanni Ravalico <ravalico.giovanni@gmail.com>",
   "homepage": "https://github.com/suddenlyGiovanni/learning#readme",
+  "private": true,
   "license": "MIT",
-  "main": "src/index.ts",
-  "directories": {},
-  "files": [],
   "publishConfig": {
     "registry": "https://registry.yarnpkg.com"
   },
@@ -15,10 +13,15 @@
     "type": "git",
     "url": "git+https://github.com/suddenlyGiovanni/learning.git"
   },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
-  },
   "bugs": {
     "url": "https://github.com/suddenlyGiovanni/learning/issues"
+  },
+  "scripts": {
+    "start": "ts-node -r tsconfig-paths/register src/index.ts",
+    "test": "yarn run start"
+  },
+  "devDependencies": {
+    "ts-node": "8.10.2",
+    "tsconfig-paths": "3.9.0"
   }
 }

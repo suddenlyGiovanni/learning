@@ -1,19 +1,15 @@
 {
-  "name": "deno_test",
+  "name": "@learning/deno-test",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "Giovanni Ravalico <ravalico.giovanni@gmail.com>",
   "homepage": "https://github.com/suddenlyGiovanni/learning#readme",
+  "private": true,
   "license": "ISC",
   "main": "main.ts",
-  "directories": {},
-  "files": [],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/suddenlyGiovanni/learning.git"
-  },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
     "url": "https://github.com/suddenlyGiovanni/learning/issues"

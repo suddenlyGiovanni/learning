@@ -1,27 +1,27 @@
 {
-  "name": "iterators-and-generators",
+  "name": "@learning/iterators-and-generators",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "Giovanni Ravalico <ravalico.giovanni@gmail.com>",
   "homepage": "https://github.com/suddenlyGiovanni/learning#readme",
-  "license": "ISC",
-  "main": "src/index.ts",
-  "dependencies": {
-    "random-number": "0.0.9"
-  },
-  "devDependencies": {
-    "@types/random-number": "0.0.0"
-  },
-  "directories": {},
-  "files": [],
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/suddenlyGiovanni/learning.git"
   },
-  "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
-  },
   "bugs": {
     "url": "https://github.com/suddenlyGiovanni/learning/issues"
+  },
+  "dependencies": {
+    "random-number": "0.0.9"
+  },
+  "devDependencies": {
+    "@types/random-number": "0.0.0",
+    "ts-node": "8.10.2",
+    "tsconfig-paths": "3.9.0"
+  },
+  "scripts": {
+    "start": "ts-node -r tsconfig-paths/register src/index.ts",
+    "test": "yarn run start"
   }
 }

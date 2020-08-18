@@ -1,9 +1,10 @@
 {
-  "name": "java_design_pattern",
+  "name": "java-design-pattern",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "Giovanni Ravalico <ravalico.giovanni@gmail.com>",
   "homepage": "https://github.com/suddenlyGiovanni/learning#readme",
+  "private": true,
   "license": "ISC",
   "main": "lib/java_design_pattern.js",
   "directories": {
