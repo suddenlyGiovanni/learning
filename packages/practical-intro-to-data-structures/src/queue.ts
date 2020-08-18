@@ -39,6 +39,8 @@ export interface IQueue<T> {
    * @returns {T}
    */
   peek(): T | undefined
+
+  isEmpty(): boolean
 }
 
 export class Queue<T> implements IQueue<T> {
@@ -54,6 +56,9 @@ export class Queue<T> implements IQueue<T> {
     this._queue = {}
     this._headIndex = null
     this._length = 0
+  }
+  public isEmpty(): boolean {
+    return this._length > 0
   }
 
   public dequeue(): T | undefined {
@@ -119,7 +124,7 @@ export class Queue<T> implements IQueue<T> {
 }
 
 // Example
-const main = (): void => {
+export const main = (): void => {
   const testQueue = new Queue<string>()
   assert.strictEqual(
     testQueue.toString(),

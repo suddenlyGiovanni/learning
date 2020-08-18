@@ -1,5 +1,13 @@
-// Just a test class to collect value while traversing
-export class Logger<T> {
+export interface ILogger<T = unknown> {
+  values: T[]
+  clear(): void
+  log(value: T): void
+}
+
+/**
+ * Just a test class to collect value while traversing
+ */
+export class Logger<T> implements ILogger<T> {
   public values: T[]
 
   public constructor() {
