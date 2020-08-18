@@ -3,10 +3,10 @@
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
 
-const { pathsToModuleNameMapper } = require('ts-jest/utils')
+// const { pathsToModuleNameMapper } = require('ts-jest/utils')
 
 // Load the config which holds the path aliases.
-const { compilerOptions } = require('../../tsconfig.json')
+// const { compilerOptions } = require('../../tsconfig.json')
 
 module.exports = {
   // All imported modules in your tests should be mocked automatically
@@ -82,10 +82,10 @@ module.exports = {
   // ],
 
   // A map from regular expressions to module names that allow to stub out resources with a single module
-  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
-    // This has to match the baseUrl defined in tsconfig.json.
-    prefix: '<rootDir>/../../',
-  }),
+  // moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
+  //   // This has to match the baseUrl defined in tsconfig.json.
+  //   prefix: '<rootDir>/../../',
+  // }),
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
