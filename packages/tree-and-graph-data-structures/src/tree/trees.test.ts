@@ -1,6 +1,8 @@
 /* eslint-disable jest/no-hooks, jest/require-top-level-describe, init-declarations, jest/no-disabled-tests */
-import { ILogger, Logger } from './logger'
-import { ITree, Tree } from './trees'
+import { ILogger, Logger } from '../utils/logger'
+
+import type { ITree } from './tree.interface'
+import { Tree } from './trees'
 
 let tree: ITree<number>
 let logger: ILogger<number>

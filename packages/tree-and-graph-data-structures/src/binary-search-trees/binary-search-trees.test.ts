@@ -1,7 +1,11 @@
-import { BinarySearchTree, Node } from './binary-search-trees'
-import { Logger, ILogger } from './logger'
+/* eslint-disable max-statements */
+/* eslint-disable jest/require-top-level-describe */
+/* eslint-disable jest/no-hooks */
+import { ILogger, Logger } from '../utils/logger'
 
-let binarySearchTree
+import { BinarySearchTree, Node } from './binary-search-trees'
+
+let binarySearchTree: BinarySearchTree
 let logger: ILogger<number>
 
 beforeEach(() => {
@@ -9,26 +13,31 @@ beforeEach(() => {
 })
 
 test('it should be a function', () => {
+  expect.hasAssertions()
   expect(typeof BinarySearchTree).toBe('function')
 })
 
 test('should have a root property', () => {
+  expect.hasAssertions()
   expect(binarySearchTree.hasOwnProperty('root')).toBe(true)
 })
 
 describe('the insert function', () => {
-  test('should be a function', () => {
+  it('should be a function', () => {
+    expect.hasAssertions()
     expect(typeof binarySearchTree.insert).toBe('function')
   })
 
-  test('the child should be a Node instance', () => {
+  it('the child should be a Node instance', () => {
+    expect.hasAssertions()
     binarySearchTree.insert(2)
     binarySearchTree.insert(4)
 
     expect(binarySearchTree.root.right).toBeInstanceOf(Node)
   })
 
-  test('should insert in a manner consistent with that of a binary search tree', () => {
+  it('should insert in a manner consistent with that of a binary search tree', () => {
+    expect.hasAssertions()
     binarySearchTree.insert(4)
     binarySearchTree.insert(2)
     binarySearchTree.insert(6)
@@ -54,17 +63,20 @@ describe('the contains function', () => {
     binarySearchTree.insert(6)
   })
 
-  test('should be a function', () => {
+  it('should be a function', () => {
+    expect.hasAssertions()
     expect(typeof binarySearchTree.contains).toBe('function')
   })
 
-  test('should return true when the tree contains the value', () => {
+  it('should return true when the tree contains the value', () => {
+    expect.hasAssertions()
     expect(binarySearchTree.contains(4)).toBe(true)
     expect(binarySearchTree.contains(2)).toBe(true)
     expect(binarySearchTree.contains(6)).toBe(true)
   })
 
-  test('should return false when the tree does not contain the value', () => {
+  it('should return false when the tree does not contain the value', () => {
+    expect.hasAssertions()
     expect(binarySearchTree.contains(4.1)).toBe(false)
     expect(binarySearchTree.contains(11)).toBe(false)
   })
@@ -81,11 +93,13 @@ describe('the min function', () => {
     binarySearchTree.insert(7)
   })
 
-  test('should be a function', () => {
+  it('should be a function', () => {
+    expect.hasAssertions()
     expect(typeof binarySearchTree.min).toBe('function')
   })
 
-  test('should return the node containing the minimum value', () => {
+  it('should return the node containing the minimum value', () => {
+    expect.hasAssertions()
     expect(binarySearchTree.min(binarySearchTree.root)).toEqual(new Node(1))
     expect(binarySearchTree.min(binarySearchTree.root.right)).toEqual(
       new Node(5)
@@ -104,11 +118,13 @@ describe('the max function', () => {
     binarySearchTree.insert(7)
   })
 
-  test('should be a function', () => {
+  it('should be a function', () => {
+    expect.hasAssertions()
     expect(typeof binarySearchTree.max).toBe('function')
   })
 
-  test('should return the node containing the maximum value', () => {
+  it('should return the node containing the maximum value', () => {
+    expect.hasAssertions()
     expect(binarySearchTree.max(binarySearchTree.root)).toEqual(new Node(7))
     expect(binarySearchTree.max(binarySearchTree.root.left)).toEqual(
       new Node(3)
@@ -120,22 +136,24 @@ describe('the remove function', () => {
   beforeEach(() => {
     binarySearchTree = new BinarySearchTree()
   })
-  test('should be a function', () => {
+  it('should be a function', () => {
     expect(typeof binarySearchTree.remove).toBe('function')
   })
 
-  test('should remove the node with the given value when it has no children', () => {
+  it('should remove the node with the given value when it has no children', () => {
+    expect.hasAssertions()
     binarySearchTree.insert(2)
     binarySearchTree.insert(1)
     binarySearchTree.insert(3)
     binarySearchTree.remove(1)
 
     expect(binarySearchTree.root.value).toBe(2)
-    expect(binarySearchTree.root.left).toBe(null)
+    expect(binarySearchTree.root.left).toBeNull()
     expect(binarySearchTree.root.right.value).toBe(3)
   })
 
-  test('should remove the node with the given value and promote its child when it has one child', () => {
+  it('should remove the node with the given value and promote its child when it has one child', () => {
+    expect.hasAssertions()
     binarySearchTree.insert(2)
     binarySearchTree.insert(1)
     binarySearchTree.insert(0.5)
@@ -147,7 +165,8 @@ describe('the remove function', () => {
     expect(binarySearchTree.root.right.value).toBe(3)
   })
 
-  test('should remove the node with the given value and promote its successor when it has two children', () => {
+  it('should remove the node with the given value and promote its successor when it has two children', () => {
+    expect.hasAssertions()
     binarySearchTree.insert(2)
     binarySearchTree.insert(1)
     binarySearchTree.insert(0.5)
@@ -175,14 +194,16 @@ describe('the inOrderTraversal function', () => {
     logger = new Logger()
   })
 
-  test('should be a function', () => {
+  it('should be a function', () => {
+    expect.hasAssertions()
     expect(typeof binarySearchTree.inOrderTraversal).toBe('function')
   })
 
-  test('should visit all nodes in an in-order (left, root, right) pattern', () => {
+  it('should visit all nodes in an in-order (left, root, right) pattern', () => {
+    expect.hasAssertions()
     binarySearchTree.inOrderTraversal(binarySearchTree.root, logger.log)
 
-    // extract the values out of the logger
+    // Extract the values out of the logger
     const values = logger.values.map(
       (currentBinaryTree) => currentBinaryTree.value
     )
@@ -204,14 +225,15 @@ describe('the preOrderTraversal function', () => {
     logger = new Logger()
   })
 
-  test('should be a function', () => {
+  it('should be a function', () => {
     expect(typeof binarySearchTree.preOrderTraversal).toBe('function')
   })
 
-  test('should visit all nodes in an pre-order (root, left, right) pattern', () => {
+  it('should visit all nodes in an pre-order (root, left, right) pattern', () => {
+    expect.hasAssertions()
     binarySearchTree.preOrderTraversal(binarySearchTree.root, logger.log)
 
-    // extract the values out of the logger
+    // Extract the values out of the logger
     const values = logger.values.map(
       (currentBinaryTree) => currentBinaryTree.value
     )
@@ -232,18 +254,20 @@ describe('the postOrderTraversal function', () => {
     logger = new Logger()
   })
 
-  test('should be a function', () => {
+  it('should be a function', () => {
+    expect.hasAssertions()
     expect(typeof binarySearchTree.postOrderTraversal).toBe('function')
   })
 
-  test('should visit all nodes in an post-order (left, right, root) pattern', () => {
+  it('should visit all nodes in an post-order (left, right, root) pattern', () => {
+    expect.hasAssertions()
     binarySearchTree.postOrderTraversal(binarySearchTree.root, logger.log)
 
-    // extract the values out of the logger
+    // Extract the values out of the logger
     const values = logger.values.map(
       (currentBinaryTree) => currentBinaryTree.value
     )
 
-    expect(values).toEqual([1, 3, 2, 5, 7, 6, 4])
+    expect(values).toStrictEqual([1, 3, 2, 5, 7, 6, 4])
   })
 })
