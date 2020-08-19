@@ -1,7 +1,10 @@
 /* eslint-disable max-statements, jest/no-hooks, init-declarations, jest/require-top-level-describe, jest/no-disabled-tests, multiline-comment-style, capitalized-comments, @typescript-eslint/unbound-method, no-magic-numbers */
 
-import { BinaryTree, IBinaryTree } from './binary-trees'
-import { ILogger, Logger } from './logger'
+import { ILogger, Logger } from '../utils/logger'
+
+import type { IBinaryTree } from './binary-tree.interface'
+import { BinaryTree } from './binary-trees'
+
 
 let binaryTree: IBinaryTree<number>
 let logger: ILogger

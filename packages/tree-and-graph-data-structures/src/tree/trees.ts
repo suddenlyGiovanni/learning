@@ -1,44 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable class-methods-use-this, @typescript-eslint/member-ordering */
 
-export interface ITreeNode<T> {
-  children: null | ITree<T>[]
-  value: T
-}
-
-/**
- * # Tree interface
- * @template T
- *
- * Common operation on tree:
- * - Enumerating all the items
- * - Enumerating a section of a tree
- * - Searching for an item
- * - Adding a new item at a certain position on the tree
- * - Deleting an item
- * - Pruning: Removing a whole section of a tree
- * - Grafting: Adding a whole section to a tree
- * - Finding the root for any node
- * - Finding the lowest common ancestor of two nodes
- */
-export interface ITree<T> extends ITreeNode<T> {
-  contains(searchValue: T): boolean
-  insert(parentTree: ITree<T>, value: T): void
-
-  /**
-   * Adds a new value as a child of the tree
-   * @param {T} value - the value to add
-   */
-  insertChild(value: T): void
-
-  /**
-   * Removes a value from the tree
-   * @param {T} value - the value to remove
-   */
-  remove(value: T): void
-
-  reorder(node1: ITreeNode<T>, node2: ITreeNode<T>): void
-}
+import { ITree } from './tree.interface'
 
 /** Class representing a Tree. */
 export class Tree<T> implements ITree<T> {
@@ -97,7 +60,7 @@ export class Tree<T> implements ITree<T> {
       delete this
     }
     this._children.forEach((child, index) => {
-      if(child.value === value) {
+      if (child.value === value) {
         this._children.splice(index, 1)
       } else {
         child.remove(value)
@@ -126,10 +89,4 @@ export class Tree<T> implements ITree<T> {
       Tree.traverse(child, func)
     })
   }
-}
-
-export const main = (): void => {
-  const myTree = new Tree(1)
-  // eslint-disable-next-line no-console
-  console.log(myTree)
 }
