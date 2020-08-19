@@ -150,13 +150,14 @@ export class BinaryTree<T> implements IBinaryTree<T> {
   }
 
   public contains<A extends T>(value: A): boolean {
-    let response = false
-    this.preOrderTraversal((tree): void => {
-      if (tree.value === value) {
-        response = response || true
-      }
-    })
-    return response
+    if (this._value === value) {
+      return true
+    }
+
+    return (
+      Boolean(this._left?.contains(value)) ||
+      Boolean(this._right?.contains(value))
+    )
   }
 
   /**
