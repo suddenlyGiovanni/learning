@@ -1,10 +1,21 @@
-/* eslint-disable max-statements, jest/no-hooks, init-declarations, jest/require-top-level-describe, jest/no-disabled-tests, multiline-comment-style, capitalized-comments, @typescript-eslint/unbound-method, no-magic-numbers */
+/*
+  eslint-disable
+  capitalized-comments,
+  multiline-comment-style,
+  init-declarations,
+  jest/no-hooks,
+  jest/require-top-level-describe,
+  jest/no-disabled-tests,
+  @typescript-eslint/unbound-method,
+  no-magic-numbers,
+  max-statements,
+  max-lines-per-function
+*/
 
 import { ILogger, Logger } from '../utils/logger'
 
 import type { IBinaryTree } from './binary-tree.interface'
-import { BinaryTree } from './binary-trees'
-
+import { BinaryTree, countLeaf } from './binary-trees'
 
 let binaryTree: IBinaryTree<number>
 let logger: ILogger
@@ -209,5 +220,60 @@ describe('the `contain` function', () => {
     expect.hasAssertions()
     expect(binaryTree.contains(0)).toBe(false)
     expect(binaryTree.contains(100)).toBe(false)
+  })
+})
+
+describe('the `countLeafs` function', () => {
+  afterEach(() => {
+    binaryTree.left = null
+    binaryTree.right = null
+  })
+  it('should be a function', () => {
+    expect.hasAssertions()
+    expect(typeof countLeaf).toBe('function')
+  })
+
+  it('should return the correct number of leaf nodes - 1', () => {
+    expect.hasAssertions()
+    expect(countLeaf(binaryTree)).toBe(1)
+
+    binaryTree.insertChild(2)
+    expect(countLeaf(binaryTree)).toBe(1)
+  })
+
+  it('should return the correct number of leaf nodes - 2', () => {
+    expect.hasAssertions()
+
+    binaryTree.insertChild(2)
+    binaryTree.insertChild(3)
+    expect(countLeaf(binaryTree)).toBe(2)
+
+    binaryTree.insertChild(4)
+    expect(countLeaf(binaryTree)).toBe(2)
+  })
+  it('should return the correct number of leaf nodes - 3', () => {
+    expect.hasAssertions()
+
+    binaryTree.insertChild(2)
+    binaryTree.insertChild(3)
+    binaryTree.insertChild(4)
+    binaryTree.insertChild(5)
+    expect(countLeaf(binaryTree)).toBe(3)
+
+    binaryTree.insertChild(6)
+    expect(countLeaf(binaryTree)).toBe(3)
+  })
+
+  it('should return the correct number of leaf nodes - 4', () => {
+    expect.hasAssertions()
+
+    binaryTree.insertChild(2)
+    binaryTree.insertChild(3)
+    binaryTree.insertChild(4)
+    binaryTree.insertChild(5)
+    binaryTree.insertChild(6)
+    binaryTree.insertChild(7)
+
+    expect(countLeaf(binaryTree)).toBe(4)
   })
 })

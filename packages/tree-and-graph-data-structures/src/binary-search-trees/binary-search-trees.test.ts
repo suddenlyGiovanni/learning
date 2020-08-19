@@ -1,6 +1,10 @@
-/* eslint-disable max-statements */
-/* eslint-disable jest/require-top-level-describe */
-/* eslint-disable jest/no-hooks */
+/*
+  eslint-disable
+  jest/no-hooks,
+  max-statements,
+  jest/require-top-level-describe
+*/
+
 import { ILogger, Logger } from '../utils/logger'
 
 import { BinarySearchTree, Node } from './binary-search-trees'

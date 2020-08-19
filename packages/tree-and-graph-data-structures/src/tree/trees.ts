@@ -1,5 +1,9 @@
-/* eslint-disable no-console */
-/* eslint-disable class-methods-use-this, @typescript-eslint/member-ordering */
+/*
+  eslint-disable
+  class-methods-use-this,
+  @typescript-eslint/member-ordering,
+  no-console
+*/
 
 import { ITree } from './tree.interface'
 

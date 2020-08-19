@@ -1,5 +1,5 @@
 /* eslint-disable max-statements */
-import type { IBinaryTree } from './binary-tree.interface'
+import type { IBinaryTree, IBinaryTreeNode } from './binary-tree.interface'
 
 /**
  * Class representing a Binary Tree.
@@ -158,4 +158,23 @@ export class BinaryTree<T> implements IBinaryTree<T> {
   public set right(rightNode: null | IBinaryTree<T>) {
     this._right = rightNode
   }
+}
+
+export function countLeaf<T>(node: null | IBinaryTreeNode<T>): number {
+  /*
+   * If node is null, return 0.
+   * elseIf left and right child nodes are null, return 1
+   * else recursively calculate
+   * Leaf count of left subtree +
+   * Leaf count of right subtree
+   */
+
+  if (!node) {
+    return 0
+  }
+  if (!node.left && !node.right) {
+    return 1
+  }
+
+  return countLeaf(node.left) + countLeaf(node.right)
 }
