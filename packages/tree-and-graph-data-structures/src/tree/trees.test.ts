@@ -1,4 +1,10 @@
-/* eslint-disable jest/no-hooks, jest/require-top-level-describe, init-declarations, jest/no-disabled-tests */
+/*
+  eslint-disable
+  jest/no-hooks,
+  jest/require-top-level-describe,
+  init-declarations,
+  jest/no-disabled-tests
+*/
 import { ILogger, Logger } from '../utils/logger'
 
 import type { ITree } from './tree.interface'

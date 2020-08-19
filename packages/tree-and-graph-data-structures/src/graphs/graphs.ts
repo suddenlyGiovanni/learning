@@ -1,4 +1,4 @@
-class Graph {
+export class Graph {
   constructor() {
     this.nodes = [];
     this.adjList = {};
@@ -22,5 +22,3 @@ class Graph {
   breadthFirstTraversal(startingNode, func = console.log) {
   }
 }
-
-export default Graph;
