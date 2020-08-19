@@ -1,0 +1,70 @@
+{
+	"folders": [
+    {
+      "path": "packages/tree-and-graph-data-structures"
+    },
+    {
+      "path": "packages/a-practical-introduction-to-algorithms"
+    },
+    {
+      "path": "packages/algo-cast"
+    },
+    {
+      "path": "packages/build-your-own-programming-language"
+    },
+    {
+      "path": "packages/complete-intro-to-react-v5"
+    },
+    {
+      "path": "packages/composition-over-inheritance"
+    },
+    {
+      "path": "packages/data-structures-and-algorithms"
+    },
+    {
+      "path": "packages/deno-test"
+    },
+    {
+      "path": "packages/functional-programming-ts"
+    },
+    {
+      "path": "packages/hardcore-functional-js"
+    },
+    {
+      "path": "packages/head-first-design-patterns"
+    },
+    {
+      "path": "packages/iterators-and-generators"
+    },
+    {
+      "path": "packages/java-design-pattern"
+    },
+    {
+      "path": "packages/monads"
+    },
+    {
+      "path": "packages/mooar-reduce"
+    },
+    {
+      "path": "packages/oop-design-patterns"
+    },
+    {
+      "path": "packages/practical-intro-to-data-structures"
+    },
+    {
+      "path": "packages/react-hooks-examples"
+    },
+    {
+      "path": "packages/rethinking-asynchronous-javascript"
+    },
+    {
+      "path": "packages/typescrip-like-in-haskell"
+    },
+    {
+      "path": "packages/use-react-context-effectively"
+    }
+  ],
+	"settings": {
+		"typescript.tsdk": "node_modules/typescript/lib"
+	}
+}
