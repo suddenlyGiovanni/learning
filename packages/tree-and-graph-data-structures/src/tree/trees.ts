@@ -5,7 +5,7 @@
   no-console
 */
 
-import { ITree } from './tree.interface'
+import type { ITree, ITreeNode } from './tree.interface'
 
 /** Class representing a Tree. */
 export class Tree<T> implements ITree<T> {
@@ -80,8 +80,18 @@ export class Tree<T> implements ITree<T> {
     throw new Error('Method no implemented yet')
   }
 
-  static size(tree): void {
-    throw new Error('Method no implemented yet')
+  static size<A>(tree: ITreeNode<A>): number {
+    // throw new Error('Method no implemented yet')
+    if (!tree) {
+      return 0
+    }
+    if (!tree.children.length) {
+      return 1
+    }
+
+    return tree.children.reduce((acc, child) => {
+      return acc + Tree.size(child)
+    }, 1)
   }
 
   static traverse<A>(

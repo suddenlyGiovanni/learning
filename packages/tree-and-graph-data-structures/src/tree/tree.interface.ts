@@ -1,5 +1,5 @@
 export interface ITreeNode<T> {
-  children: null | ITree<T>[]
+  children: ITree<T>[]
   value: T
 }
 

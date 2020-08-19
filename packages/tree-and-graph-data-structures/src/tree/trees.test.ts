@@ -1,5 +1,6 @@
 /*
   eslint-disable
+  max-statements,
   jest/no-hooks,
   jest/require-top-level-describe,
   init-declarations,
@@ -15,7 +16,7 @@ let logger: ILogger<number>
 
 // eslint-disable-next-line jest/no-hooks
 beforeEach(() => {
-  tree = new Tree(1)
+  tree = new Tree<number>(1)
 })
 
 test('it should be a function', () => {
@@ -40,8 +41,8 @@ describe('the insertChild function', () => {
 
   it('the child should be a Tree instance', () => {
     expect.hasAssertions()
-    expect(tree.children![0]).toBeInstanceOf(Tree)
-    expect(tree.children![0]).toStrictEqual(new Tree(2))
+    expect(tree.children?.[0]).toBeInstanceOf(Tree)
+    expect(tree.children?.[0]).toStrictEqual(new Tree(2))
   })
 })
 
@@ -110,7 +111,7 @@ describe('the contains function', () => {
   })
 })
 
-describe.skip('the size function', () => {
+describe('the size function', () => {
   afterEach(() => {
     tree = new Tree(1)
   })
@@ -123,11 +124,32 @@ describe.skip('the size function', () => {
   it('should return a number equaling the size of the tree', () => {
     expect.hasAssertions()
     expect(typeof Tree.size(tree)).toBe('number')
+
     expect(Tree.size(tree)).toBe(1)
+
     tree.insertChild(2)
     expect(Tree.size(tree)).toBe(2)
-    tree.children![0].insertChild(3)
+
+    tree.insertChild(3)
     expect(Tree.size(tree)).toBe(3)
+
+    tree.insertChild(4)
+    expect(Tree.size(tree)).toBe(4)
+
+    tree.children?.[0].insertChild(2.1)
+    expect(Tree.size(tree)).toBe(5)
+
+    tree.children?.[0].insertChild(2.2)
+    expect(Tree.size(tree)).toBe(6)
+
+    tree.children?.[0].insertChild(2.3)
+    expect(Tree.size(tree)).toBe(7)
+
+    tree.children?.[0].children?.[1].insertChild(2.21)
+    expect(Tree.size(tree)).toBe(8)
+
+    tree.children?.[0].children?.[1].insertChild(2.22)
+    expect(Tree.size(tree)).toBe(9)
   })
 })
 
