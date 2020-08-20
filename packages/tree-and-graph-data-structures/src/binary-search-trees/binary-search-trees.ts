@@ -1,42 +1,75 @@
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.left = null;
-    this.right = null;
+/*
+  eslint-disable
+  max-classes-per-file,
+  class-methods-use-this,
+  no-unused-vars,
+  @typescript-eslint/no-unused-vars
+*/
+
+import {
+  IBinarySearchTree,
+  INode,
+  VariadicFunction,
+} from './binary-search-trees.interface'
+export class Node<T> implements INode<T> {
+  left: null | Node<T>
+
+  right: null | Node<T>
+
+  value: T
+
+  constructor(value: T) {
+    this.value = value
+    this.left = null
+    this.right = null
   }
 }
 
-class BinarySearchTree {
-  constructor() {
-    this.root = null;
+export class BinarySearchTree<T> implements IBinarySearchTree<T> {
+  root: INode<T> | null
+
+  public constructor() {
+    this.root = null
   }
 
-  insert(value) {
+  public contains(value: T): boolean {
+    throw new Error('Method not implemented.')
   }
 
-  contains(value) {
+  public inOrderTraversal(
+    node: INode<T>,
+    func: VariadicFunction<[INode<T>], void>
+  ): void {
+    throw new Error('Method not implemented.')
   }
 
-  min(node = null) {
+  public insert(value: T): void {
+    throw new Error('Method not implemented.')
   }
 
-  max(node) {
+  public max(node: INode<T>): void {
+    throw new Error('Method not implemented.')
   }
 
-  remove(value) {
+  public min(node: INode<T> | null): void {
+    throw new Error('Method not implemented.')
   }
 
-  // left, root, right
-  inOrderTraversal(node, func = console.log) {
+  public postOrderTraversal(
+    node: INode<T>,
+    func: VariadicFunction<[INode<T>], void>
+  ): void {
+    throw new Error('Method not implemented.')
   }
 
-  // root, left, right
-  preOrderTraversal(node, func = console.log) {
+  public preOrderTraversal(
+    node: INode<T>,
+    func: VariadicFunction<[INode<T>], void>
+  ): void {
+    throw new Error('Method not implemented.')
   }
 
-  // left, right, root
-  postOrderTraversal(node, func = console.log) {
+  public remove(value: T): void {
+    throw new Error('Method not implemented.')
   }
 }
-
-export { BinarySearchTree, Node };
