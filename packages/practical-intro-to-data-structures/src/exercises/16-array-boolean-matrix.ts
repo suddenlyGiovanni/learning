@@ -1,5 +1,11 @@
-/* eslint-disable max-lines-per-function */
-/* eslint-disable max-statements, no-underscore-dangle, max-lines-per-function */
+/*
+  eslint-disable
+  max-statements,
+  no-underscore-dangle,
+  max-lines-per-function,
+  max-lines-per-function
+*/
+
 import assert from 'assert'
 
 /**

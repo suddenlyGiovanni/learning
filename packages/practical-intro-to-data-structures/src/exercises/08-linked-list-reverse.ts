@@ -1,7 +1,7 @@
 /* eslint-disable prefer-destructuring */
 import assert from 'assert'
 
-import { INode, makeLinkedList } from './linked-list'
+import { INode, makeLinkedList } from '../linked-list/linked-list'
 
 /*
  * Given pointer to the head node of a linked list, reverse the linked list.

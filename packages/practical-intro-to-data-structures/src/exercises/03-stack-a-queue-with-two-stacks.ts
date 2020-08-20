@@ -1,4 +1,9 @@
-/* eslint-disable max-statements, no-plusplus */
+/*
+  eslint-disable
+  max-statements,
+  no-plusplus
+*/
+
 /*
  * We are given a stack data structure with push and pop operations, the task is to implement
  * a queue using instances of stack data structure and operations on them.
@@ -8,8 +13,8 @@
 
 import assert from 'assert'
 
-import type { IQueue } from './queue'
-import { IStack, Stack } from './stack'
+import type { IQueue } from '../queue/queue'
+import { IStack, Stack } from '../stack/stack'
 
 export class QueueClass<T> implements IQueue<T> {
   private activeStack: 'stackA' | 'stackB'

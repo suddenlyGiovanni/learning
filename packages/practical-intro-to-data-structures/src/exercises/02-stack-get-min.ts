@@ -1,8 +1,16 @@
-/* eslint-disable max-lines-per-function */
-/* eslint-disable max-statements, no-unused-expressions, no-underscore-dangle, spaced-comment, dot-notation */
+/*
+  eslint-disable
+  dot-notation,
+  max-lines-per-function,
+  max-statements,
+  no-underscore-dangle,
+  no-unused-expressions,
+  spaced-comment,
+*/
+
 import assert from 'assert'
 
-import { IStack, Stack } from './stack'
+import { IStack, Stack } from '../stack/stack'
 
 /**
  * # Exercise:

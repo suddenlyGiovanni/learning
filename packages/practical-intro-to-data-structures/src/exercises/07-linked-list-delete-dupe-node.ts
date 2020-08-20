@@ -1,6 +1,8 @@
-import assert from 'assert'
 /* eslint-disable max-statements */
-import { INode, makeLinkedList } from './linked-list'
+
+import assert from 'assert'
+
+import { INode, makeLinkedList } from '../linked-list/linked-list'
 
 /**
  * Write a removeDuplicates() function which takes a `list` and deletes any duplicate nodes

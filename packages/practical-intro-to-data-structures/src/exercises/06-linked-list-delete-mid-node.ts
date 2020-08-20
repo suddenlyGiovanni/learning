@@ -1,5 +1,7 @@
-import assert from 'assert'
 /* eslint-disable max-statements */
+import assert from 'assert'
+
+
 /**
  * Given a singly linked list, delete middle of the linked list.
  *
@@ -10,7 +12,7 @@ import assert from 'assert'
  * If the input linked list has 1 node, then this node should be deleted and new head should be returned.
  */
 
-import { INode, Node, makeLinkedList } from './linked-list'
+import { INode, Node, makeLinkedList } from '../linked-list/linked-list'
 
 const isEven = (x: number): boolean => x % 2 === 0
 const calculateLength = <T>(head: INode<T>): number => {

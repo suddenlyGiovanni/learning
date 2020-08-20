@@ -1,7 +1,8 @@
 /* eslint-disable no-plusplus, max-statements */
+
 import assert from 'assert'
 
-import { IStack, Stack, feedStack } from './stack'
+import { IStack, Stack, feedStack } from '../stack/stack'
 /**
  * Implement the function `sortStack`
  *

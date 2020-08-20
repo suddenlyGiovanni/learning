@@ -1,11 +1,15 @@
-/* eslint-disable max-statements */
-/* eslint-disable max-classes-per-file */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-/* eslint-disable id-length */
-/* eslint-disable class-methods-use-this */
+/*
+  eslint-disable
+  @typescript-eslint/no-non-null-assertion,
+  class-methods-use-this,
+  id-length,
+  max-classes-per-file,
+  max-statements,
+*/
+
 import nodeAssert from 'assert'
 
-import assert, { AssertionError } from './assert'
+import assert, { AssertionError } from '../utils/assert'
 /*
  * Create a data structure KStacks that represents a set of k stacks. It should only use one array.
  * The following methods must be supported by KStacks.
@@ -205,7 +209,6 @@ export class KStack<T> implements IKStack<T> {
     this.hashTableKTails.set(k, newKTailIndex)
   }
 }
-
 
 // Tests:
 export const main = (): void => {
