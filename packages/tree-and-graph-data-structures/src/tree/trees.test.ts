@@ -12,7 +12,7 @@ import type { ITree } from './tree.interface'
 import { Tree } from './trees'
 
 let tree: ITree<number>
-let logger: ILogger<number>
+let logger: ILogger<ITree<number>>
 
 beforeEach(() => {
   tree = new Tree<number>(1)
@@ -245,7 +245,7 @@ describe('the remove function', () => {
   })
 })
 
-describe.skip('the reorder function', () => {
+describe('the reorder function', () => {
   beforeEach(() => {
     tree.insertChild(2)
     tree.insertChild(3)

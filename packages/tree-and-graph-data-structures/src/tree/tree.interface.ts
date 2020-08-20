@@ -35,5 +35,5 @@ export interface ITree<T> extends ITreeNode<T> {
    */
   remove(value: T): void
 
-  reorder(node1: ITreeNode<T>, node2: ITreeNode<T>): void
+  reorder(nodeValue1: T, nodeValue2: T): void
 }
