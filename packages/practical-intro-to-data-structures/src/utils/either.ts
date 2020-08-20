@@ -1,7 +1,11 @@
-/* eslint-disable id-length */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable max-classes-per-file */
-/* eslint-disable class-methods-use-this */
+/*
+  eslint-disable
+  id-length,
+  no-underscore-dangle,
+  max-classes-per-file,
+  class-methods-use-this
+*/
+
 export type Either<L, R> = Left<L, R> | Right<L, R>
 export type Fn<A, B> = (a: A) => B
 

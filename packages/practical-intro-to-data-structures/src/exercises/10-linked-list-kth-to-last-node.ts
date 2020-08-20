@@ -4,7 +4,7 @@ import assert from 'assert'
  * returns the value at the k’th node from end of the linked list.
  */
 
-import { INode, makeLinkedList } from './linked-list'
+import { INode, makeLinkedList } from '../linked-list/linked-list'
 
 /**
  * Returns the k-to-the-last node in a singly-linked list

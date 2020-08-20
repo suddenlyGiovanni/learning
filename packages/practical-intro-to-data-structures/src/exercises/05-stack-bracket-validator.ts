@@ -1,7 +1,7 @@
 /* eslint-disable no-plusplus, max-statements */
 import assert from 'assert'
 
-import { Stack } from './stack'
+import { Stack } from '../stack/stack'
 
 /*
  * Write a function, is valid that checks if brackets in a string are balanced (properly closed) based on JavaScript syntax rules.

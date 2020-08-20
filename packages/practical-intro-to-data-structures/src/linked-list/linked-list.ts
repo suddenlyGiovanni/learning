@@ -1,4 +1,16 @@
-/* eslint-disable spaced-comment, no-inline-comments, no-plusplus, max-classes-per-file, class-methods-use-this, no-underscore-dangle, max-statements, no-console, max-lines-per-function, max-lines */
+/*
+  eslint-disable
+  class-methods-use-this,
+  max-classes-per-file,
+  max-lines,
+  max-lines-per-function,
+  max-statements,
+  no-console,
+  no-inline-comments,
+  no-plusplus,
+  no-underscore-dangle,
+  spaced-comment,
+*/
 
 import assert from 'assert'
 

@@ -1,4 +1,11 @@
-/* eslint-disable class-methods-use-this, max-statements, no-underscore-dangle, max-lines, max-lines-per-function */
+/*
+  eslint-disable
+  class-methods-use-this,
+  max-lines-per-function,
+  max-lines,
+  max-statements,
+  no-underscore-dangle,
+*/
 
 import assert from 'assert'
 

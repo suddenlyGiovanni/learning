@@ -1,4 +1,12 @@
-/* eslint-disable no-undefined, no-underscore-dangle, @typescript-eslint/ban-ts-comment, no-plusplus, max-statements, max-lines-per-function */
+/*
+  eslint-disable
+  @typescript-eslint/ban-ts-comment,
+  max-lines-per-function ,
+  max-statements,
+  no-plusplus,
+  no-undefined,
+  no-underscore-dangle,
+*/
 
 import assert from 'assert'
 

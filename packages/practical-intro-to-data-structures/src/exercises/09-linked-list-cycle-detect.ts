@@ -1,6 +1,6 @@
 import assert from 'assert'
 
-import { INode, Node, makeLinkedList } from './linked-list'
+import { INode, Node, makeLinkedList } from '../linked-list/linked-list'
 
 /** # Check if a linked list contains a cycle. */
 
