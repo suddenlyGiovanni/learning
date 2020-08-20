@@ -51,11 +51,11 @@ describe('the traverse function', () => {
     tree.insertChild(2)
     tree.insertChild(3)
     tree.insertChild(4)
-    tree.children![0].insertChild(2.1)
-    tree.children![0].insertChild(2.2)
-    tree.children![0].insertChild(2.3)
-    tree.children![0].children![1].insertChild(2.21)
-    tree.children![0].children![1].insertChild(2.22)
+    tree.children?.[0].insertChild(2.1)
+    tree.children?.[0].insertChild(2.2)
+    tree.children?.[0].insertChild(2.3)
+    tree.children?.[0].children?.[1].insertChild(2.21)
+    tree.children?.[0].children?.[1].insertChild(2.22)
 
     logger = new Logger()
   })
@@ -81,11 +81,11 @@ describe('the contains function', () => {
     tree.insertChild(2)
     tree.insertChild(3)
     tree.insertChild(4)
-    tree.children![0].insertChild(2.1)
-    tree.children![0].insertChild(2.2)
-    tree.children![0].insertChild(2.3)
-    tree.children![0].children![1].insertChild(2.21)
-    tree.children![0].children![1].insertChild(2.22)
+    tree.children?.[0].insertChild(2.1)
+    tree.children?.[0].insertChild(2.2)
+    tree.children?.[0].insertChild(2.3)
+    tree.children?.[0].children?.[1].insertChild(2.21)
+    tree.children?.[0].children?.[1].insertChild(2.22)
   })
 
   afterEach(() => {
@@ -153,16 +153,16 @@ describe('the size function', () => {
   })
 })
 
-describe.skip('the find function', () => {
+describe('the find function', () => {
   beforeEach(() => {
     tree.insertChild(2)
     tree.insertChild(3)
     tree.insertChild(4)
-    tree.children![0].insertChild(2.1)
-    tree.children![0].insertChild(2.2)
-    tree.children![0].insertChild(2.3)
-    tree.children![0].children![1].insertChild(2.22)
-    tree.children![0].children![1].insertChild(2.21)
+    tree.children?.[0].insertChild(2.1)
+    tree.children?.[0].insertChild(2.2)
+    tree.children?.[0].insertChild(2.3)
+    tree.children?.[0].children?.[1].insertChild(2.22)
+    tree.children?.[0].children?.[1].insertChild(2.21)
   })
 
   afterEach(() => {
@@ -178,13 +178,13 @@ describe.skip('the find function', () => {
     expect.hasAssertions()
     const result = Tree.find(tree, 2.3)
     expect(result).toBeInstanceOf(Tree)
-    expect(result.value).toBe(2.3)
+    expect(result?.value).toBe(2.3)
   })
 
   it('should return false if the tree does not contain the value', () => {
     expect.hasAssertions()
     const result = Tree.find(tree, 9)
-    expect(result).toBe(false)
+    expect(result).toBeUndefined()
   })
 })
 
@@ -193,11 +193,11 @@ describe.skip('the insert function', () => {
     tree.insertChild(2)
     tree.insertChild(3)
     tree.insertChild(4)
-    tree.children![0].insertChild(2.1)
-    tree.children![0].insertChild(2.2)
-    tree.children![0].insertChild(2.3)
-    tree.children![0].children![1].insertChild(2.22)
-    tree.children![0].children![1].insertChild(2.21)
+    tree.children?.[0].insertChild(2.1)
+    tree.children?.[0].insertChild(2.2)
+    tree.children?.[0].insertChild(2.3)
+    tree.children?.[0].children?.[1].insertChild(2.22)
+    tree.children?.[0].children?.[1].insertChild(2.21)
   })
 
   afterEach(() => {
@@ -223,11 +223,11 @@ describe('the remove function', () => {
     tree.insertChild(2)
     tree.insertChild(3)
     tree.insertChild(4)
-    tree.children![0].insertChild(2.1)
-    tree.children![0].insertChild(2.2)
-    tree.children![0].insertChild(2.3)
-    tree.children![0].children![1].insertChild(2.21)
-    tree.children![0].children![1].insertChild(2.22)
+    tree.children?.[0].insertChild(2.1)
+    tree.children?.[0].insertChild(2.2)
+    tree.children?.[0].insertChild(2.3)
+    tree.children?.[0].children?.[1].insertChild(2.21)
+    tree.children?.[0].children?.[1].insertChild(2.22)
   })
 
   afterEach(() => {
@@ -251,11 +251,11 @@ describe.skip('the reorder function', () => {
     tree.insertChild(2)
     tree.insertChild(3)
     tree.insertChild(4)
-    tree.children![0].insertChild(2.1)
-    tree.children![0].insertChild(2.2)
-    tree.children![0].insertChild(2.3)
-    tree.children![0].children![1].insertChild(2.21)
-    tree.children![0].children![1].insertChild(2.22)
+    tree.children?.[0].insertChild(2.1)
+    tree.children?.[0].insertChild(2.2)
+    tree.children?.[0].insertChild(2.3)
+    tree.children?.[0].children?.[1].insertChild(2.21)
+    tree.children?.[0].children?.[1].insertChild(2.22)
 
     logger = new Logger()
   })

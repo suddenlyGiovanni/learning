@@ -27,11 +27,18 @@ export class Tree<T> implements ITree<T> {
   }
 
   public contains(searchValue: T): boolean {
-    let result = false
-    Tree.traverse(this, (treeNode) => {
-      result = result || treeNode.value === searchValue
-    })
-    return result
+    if (this._value === searchValue) {
+      return true
+    }
+    return (
+      Boolean(this._children) &&
+      Boolean(
+        this._children.reduce(
+          (acc, child) => acc || Boolean(child.contains(searchValue)),
+          false
+        )
+      )
+    )
   }
 
   public insert(parentTree: ITree<T>, value: T): void {
@@ -76,8 +83,25 @@ export class Tree<T> implements ITree<T> {
     throw new Error('Method no implemented yet')
   }
 
-  static find(tree, value): void {
-    throw new Error('Method no implemented yet')
+  /**
+   * Find returns the tree containing the value or undefined
+   * @static
+   * @template A
+   * @param {ITreeNode<A>} tree
+   * @param {A} value
+   * @returns {ITreeNode<A> | undefined} return the tree containing the value
+   * @memberof Tree
+   */
+  static find<A>(tree: ITree<A>, value: A): undefined | ITree<A> {
+    // eslint-disable-next-line init-declarations
+    let result: undefined | ITree<A>
+    Tree.traverse(tree, (node) => {
+      if (node.value === value) {
+        result = node
+      }
+    })
+
+    return result
   }
 
   static size<A>(tree: ITreeNode<A>): number {
