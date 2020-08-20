@@ -11,7 +11,7 @@ import type { ITree, ITreeNode } from './tree.interface'
 export class Tree<T> implements ITree<T> {
   private readonly _children: ITree<T>[]
 
-  private readonly _value: T
+  private _value: T
 
   public constructor(value: T) {
     this._value = value
@@ -20,6 +20,10 @@ export class Tree<T> implements ITree<T> {
 
   public get value(): T {
     return this._value
+  }
+
+  public set value(value: T) {
+    this._value = value
   }
 
   public get children(): ITree<T>[] {
@@ -90,8 +94,20 @@ export class Tree<T> implements ITree<T> {
     })
   }
 
-  public reorder(node1, node2): void {
-    throw new Error('Method no implemented yet')
+  /**
+   * Should swap two given nodes in the tree
+   * should not the change the order of nodes not being reordered
+   * @param {ITreeNode<T>} node1Value
+   * @param {ITreeNode<T>} node2Value
+   * @memberof Tree
+   */
+  public reorder(node1Value: T, node2Value: T): void {
+    const leaf1 = Tree.find(this, node1Value)
+    const leaf2 = Tree.find(this, node2Value)
+    if (leaf1 && leaf2) {
+      leaf1.value = node2Value
+      leaf2.value = node1Value
+    }
   }
 
   /**
