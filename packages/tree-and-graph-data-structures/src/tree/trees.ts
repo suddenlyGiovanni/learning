@@ -41,8 +41,19 @@ export class Tree<T> implements ITree<T> {
     )
   }
 
-  public insert(parentTree: ITree<T>, value: T): void {
-    throw new Error('Method no implemented yet')
+  /**
+   * Insert a new Tree as child of the given Trees
+   * @param {ITree<T>} parentTree
+   * @param {T} value
+   * @returns {(undefined | ITree<T>)}
+   * @memberof Tree
+   */
+  public insert(parentTree: ITree<T>, value: T): undefined | ITree<T> {
+    const leaf = Tree.find(this, parentTree.value)
+    if (leaf) {
+      leaf.insertChild(value)
+    }
+    return leaf
   }
 
   /**
