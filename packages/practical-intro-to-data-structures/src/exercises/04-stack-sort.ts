@@ -2,7 +2,8 @@
 
 import assert from 'assert'
 
-import { IStack, Stack, feedStack } from '../stack/stack'
+import { Stack, feedStack } from '../stack/stack'
+import { IStack } from "../stack/stack.interface"
 /**
  * Implement the function `sortStack`
  *

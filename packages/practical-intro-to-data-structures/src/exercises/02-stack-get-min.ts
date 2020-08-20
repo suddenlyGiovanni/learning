@@ -10,7 +10,8 @@
 
 import assert from 'assert'
 
-import { IStack, Stack } from '../stack/stack'
+import { Stack } from '../stack/stack'
+import { IStack } from "../stack/stack.interface"
 
 /**
  * # Exercise:

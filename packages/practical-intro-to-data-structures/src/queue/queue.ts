@@ -10,46 +10,7 @@
 
 import assert from 'assert'
 
-/**
- * A Queue is a collection of entities that are maintained in a sequence and can be modified by the
- * addition of entities at one end of the sequence and the removal of entities from the
- * other end of the sequence.
- * FIFO: First-In-First-Out
- *
- * Time complexity in big O notation
- *
- * Algorithm | Average| Worst case
- * ---------|----------|---------
- * Space  | O(n)  | O(n)
- * Search | O(n)  | O(n)
- * Insert | O(1)  | O(1)
- * Delete | O(1)  | O(1)
- *
- */
-export interface IQueue<T> {
-  /**
-   * Removes and returns the most recently added member to the collection
-   * @throws `stack underflow` if the stack is empty
-   * @returns {T}
-   */
-  dequeue(): T | undefined
-
-  /**
-   * Adds a member to the collection
-   * @throws `queue overflow` if the queue has grown over the bounded size
-   * @param {T} x
-   */
-  enqueue(x: T): void
-
-  /**
-   * Returns the most Head of the stack without removing it
-   * @throws `stack underflow` if the stack is empty
-   * @returns {T}
-   */
-  peek(): T | undefined
-
-  isEmpty(): boolean
-}
+import { IQueue } from './queue.interface'
 
 export class Queue<T> implements IQueue<T> {
   // Zero base index
@@ -64,9 +25,6 @@ export class Queue<T> implements IQueue<T> {
     this._queue = {}
     this._headIndex = null
     this._length = 0
-  }
-  public isEmpty(): boolean {
-    return this._length > 0
   }
 
   public dequeue(): T | undefined {
@@ -105,6 +63,10 @@ export class Queue<T> implements IQueue<T> {
       this._queue[tail] = value
       this.incrementLength()
     }
+  }
+
+  public isEmpty(): boolean {
+    return this._length > 0
   }
 
   public peek(): T | undefined {
@@ -281,4 +243,4 @@ export const main = (): void => {
     )
   )
 }
-// main()
+// Main()
