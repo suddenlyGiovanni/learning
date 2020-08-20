@@ -1,5 +1,6 @@
 /*
   eslint-disable
+  init-declarations,
   jest/no-hooks,
   max-statements,
   jest/require-top-level-describe
@@ -9,8 +10,10 @@ import { ILogger, Logger } from '../utils/logger'
 
 import { BinarySearchTree, Node } from './binary-search-trees'
 
-let binarySearchTree: BinarySearchTree
-let logger: ILogger<number>
+import type { IBinarySearchTree } from './binary-search-trees.interface'
+
+let binarySearchTree: IBinarySearchTree<number>
+let logger: ILogger<IBinarySearchTree<number>>
 
 beforeEach(() => {
   binarySearchTree = new BinarySearchTree()
@@ -23,6 +26,7 @@ test('it should be a function', () => {
 
 test('should have a root property', () => {
   expect.hasAssertions()
+  // eslint-disable-next-line no-prototype-builtins
   expect(binarySearchTree.hasOwnProperty('root')).toBe(true)
 })
 
