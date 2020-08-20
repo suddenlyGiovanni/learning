@@ -14,7 +14,6 @@ import { Tree } from './trees'
 let tree: ITree<number>
 let logger: ILogger<number>
 
-// eslint-disable-next-line jest/no-hooks
 beforeEach(() => {
   tree = new Tree<number>(1)
 })
@@ -188,7 +187,7 @@ describe('the find function', () => {
   })
 })
 
-describe.skip('the insert function', () => {
+describe('the insert function', () => {
   beforeEach(() => {
     tree.insertChild(2)
     tree.insertChild(3)
@@ -212,9 +211,9 @@ describe.skip('the insert function', () => {
   it('should insert a new Tree as child of the given Tree', () => {
     expect.hasAssertions()
     const result = Tree.find(tree, 2.3)
-    expect(result.contains(8)).toBe(false)
-    tree.insert(result, 8)
-    expect(result.contains(8)).toBe(true)
+    expect(result?.contains(8)).toBe(false)
+    tree.insert(result!, 8)
+    expect(result?.contains(8)).toBe(true)
   })
 })
 
