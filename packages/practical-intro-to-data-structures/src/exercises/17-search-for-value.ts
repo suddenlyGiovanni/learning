@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-import assert from 'assert'
 
 /**
  * Write a function to search for a value in an array. Returns true if value is found.
@@ -35,10 +34,3 @@ export const find = <T>(list: T[], val: T): boolean => {
 
   return binarySearch(0, _list.length - 1)
 }
-
-export const main = (): void => {
-  const testList = [1, 3, 4, 6, 7, 9, 10, 12]
-  assert.strictEqual(find(testList, 9), true)
-  assert.strictEqual(find(testList, 8), false)
-}
-// main()

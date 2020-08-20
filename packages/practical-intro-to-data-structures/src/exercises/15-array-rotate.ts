@@ -1,4 +1,3 @@
-import assert from 'assert'
 
 /**
  * Write a function to rotate an array by n places
@@ -23,8 +22,3 @@ export const rotateArr = <T>(list: T[], n: number): T[] => {
   }
   return array
 }
-
-export const main = (): void => {
-  assert.deepStrictEqual(rotateArr([1, 2, 3, 4, 5, 6], 2), [ 3, 4, 5, 6, 1, 2 ])
-}
-// main()

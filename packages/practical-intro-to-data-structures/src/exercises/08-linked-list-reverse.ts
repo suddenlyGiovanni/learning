@@ -1,7 +1,6 @@
 /* eslint-disable prefer-destructuring */
-import assert from 'assert'
 
-import { INode, makeLinkedList } from '../linked-list/linked-list'
+import { ILinkedListNode } from '../linked-list/linked-list.interface'
 
 /*
  * Given pointer to the head node of a linked list, reverse the linked list.
@@ -13,10 +12,10 @@ import { INode, makeLinkedList } from '../linked-list/linked-list'
  * @param {Node} head - the head of the linked list
  * @return {Node} - the head of the linked list, reversed
  */
-export const reverse = <T>(head: INode<T>): INode<T> => {
-  let previous: null | INode<T> = null
-  let current: null | INode<T> = head
-  let next: null | INode<T> = null
+export const reverse = <T>(head: ILinkedListNode<T>): ILinkedListNode<T> => {
+  let previous: null | ILinkedListNode<T> = null
+  let current: null | ILinkedListNode<T> = head
+  let next: null | ILinkedListNode<T> = null
 
   while (current) {
     // Assign current.next to next variable
@@ -31,11 +30,3 @@ export const reverse = <T>(head: INode<T>): INode<T> => {
 
   return previous!
 }
-
-// Test
-export const main = (): void => {
-  const { head } = makeLinkedList([1, 2, 3, 4, 5])
-  const reversed = reverse(head!)
-  assert.deepStrictEqual(reversed, makeLinkedList([5, 4, 3, 2, 1]).head)
-}
-// main()

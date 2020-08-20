@@ -1,8 +1,6 @@
 /* eslint-disable max-statements */
 
-import assert from 'assert'
-
-import { INode, makeLinkedList } from '../linked-list/linked-list'
+import { ILinkedListNode } from '../linked-list/linked-list.interface'
 
 /**
  * Write a removeDuplicates() function which takes a `list` and deletes any duplicate nodes
@@ -22,7 +20,7 @@ import { INode, makeLinkedList } from '../linked-list/linked-list'
  * @param {INode<T>} head - the head of the linked list
  * @return {LinkedListNodeT>} - the head of the linked list without any duplicates
  */
-export const removeDuplicates = <T>(head: INode<T>): INode<T> => {
+export const removeDuplicates = <T>(head: ILinkedListNode<T>): ILinkedListNode<T> => {
   if (!head.next) {
     return head
   }
@@ -50,14 +48,3 @@ export const removeDuplicates = <T>(head: INode<T>): INode<T> => {
 
   return head
 }
-
-// Tests:
-export const main = (): void => {
-  const linkedListWithDuplicates = makeLinkedList([12, 11, 12, 21, 41, 43, 21])
-
-  // Should convert the list to 12 -> 11 -> 21 -> 41 -> 43.
-  const dedupeLinkedList = removeDuplicates(linkedListWithDuplicates.head!)
-
-  assert.deepStrictEqual(dedupeLinkedList, makeLinkedList([12, 11, 21, 41, 43]).head)
-}
-// main()

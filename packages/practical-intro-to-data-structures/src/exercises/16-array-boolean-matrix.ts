@@ -6,7 +6,6 @@
   max-lines-per-function
 */
 
-import assert from 'assert'
 
 /**
  * Given a boolean matrix, modify it such that if a matrix cell matrix[i][j] is 1 (true) then
@@ -47,41 +46,3 @@ export const markOnes = (matrix: Array<Array<1 | 0>>): Array<Array<1 | 0>> => {
 
   return _matrix
 }
-
-export const main = (): void => {
-  assert.deepStrictEqual(
-    markOnes([
-      [1, 0],
-      [0, 0],
-    ]),
-    [
-      [1, 1],
-      [1, 0],
-    ]
-  )
-
-  assert.deepStrictEqual(
-    markOnes([
-      [0, 0, 0],
-      [0, 0, 1],
-    ]),
-    [
-      [0, 0, 1],
-      [1, 1, 1],
-    ]
-  )
-
-  assert.deepStrictEqual(
-    markOnes([
-      [1, 0, 0, 1],
-      [0, 0, 1, 0],
-      [0, 0, 0, 0],
-    ]),
-    [
-      [1, 1, 1, 1],
-      [1, 1, 1, 1],
-      [1, 0, 1, 1],
-    ]
-  )
-}
-// main()

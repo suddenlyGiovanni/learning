@@ -1,5 +1,4 @@
 /* eslint-disable no-inline-comments */
-import assert from 'assert'
 
 /**
  * Write a function that removes duplicates characters from a string
@@ -18,8 +17,3 @@ export const removeDuplicates = (str: string): string => {
       : (duplicates.add(chr), acc + chr) // add the chr to the duplicate map and also to the output
   }, '')
 }
-
-export const main = (): void => {
-  assert.strictEqual(removeDuplicates('mississippi'), 'misp')
-}
-// main()

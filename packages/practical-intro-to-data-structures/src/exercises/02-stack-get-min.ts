@@ -8,10 +8,8 @@
   spaced-comment,
 */
 
-import assert from 'assert'
-
 import { Stack } from '../stack/stack'
-import { IStack } from "../stack/stack.interface"
+import { IStack } from '../stack/stack.interface'
 
 /**
  * # Exercise:
@@ -142,54 +140,3 @@ export default class MinMaxStack<T> implements IStack<T>, Min<T>, Max<T> {
     return this._storage.length === 0
   }
 }
-
-// Examples:
-export const main = (): void => {
-  const testMinStack = new MinMaxStack<number>()
-
-  testMinStack.push(10)
-
-  assert.strictEqual(testMinStack.min(), 10)
-  assert.strictEqual(testMinStack.max(), 10)
-
-  testMinStack.push(9)
-  assert.strictEqual(testMinStack.min(), 9)
-  assert.strictEqual(testMinStack.max(), 10)
-
-  testMinStack.push(11)
-  assert.strictEqual(testMinStack.min(), 9)
-  assert.strictEqual(testMinStack.max(), 11)
-
-  testMinStack['_storage'] //?
-  testMinStack['_minStack'] //?
-  testMinStack['_maxStack'] //?
-
-  assert.strictEqual(testMinStack.pop(), 11)
-  assert.strictEqual(testMinStack.min(), 9)
-  assert.strictEqual(testMinStack.max(), 10)
-
-  assert.strictEqual(testMinStack.pop(), 9)
-  assert.strictEqual(testMinStack.min(), 10)
-  assert.strictEqual(testMinStack.max(), 10)
-
-  testMinStack['_storage'] //?
-  testMinStack['_minStack'] //?
-  testMinStack['_maxStack'] //?
-
-  testMinStack.push(8)
-  assert.strictEqual(testMinStack.min(), 8)
-  assert.strictEqual(testMinStack.max(), 10)
-
-  testMinStack['_storage'] //?
-  testMinStack['_minStack'] //?
-  testMinStack['_maxStack'] //?
-
-  assert.strictEqual(testMinStack.pop(), 8)
-  assert.strictEqual(testMinStack.pop(), 10)
-  assert.strictEqual(testMinStack.pop(), undefined)
-
-  testMinStack['_storage'] //?
-  testMinStack['_minStack'] //?
-  testMinStack['_maxStack'] //?
-}
-// main()
