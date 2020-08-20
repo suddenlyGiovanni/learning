@@ -1,4 +1,3 @@
-import assert from 'assert'
 
 /**
  * # URLify a given string (Replace spaces is %20)
@@ -22,10 +21,3 @@ export const replaceSpaces = (str: string): string =>
     .reduce((acc, chr) => {
       return chr === ' ' ? `${acc}%20` : acc + chr
     }, '')
-
-// Examples:
-export const main = (): void => {
-  assert.strictEqual(replaceSpaces('Mr John Smith'), 'Mr%20John%20Smith')
-  assert.strictEqual(replaceSpaces('Mr John Smith   '),  'Mr%20John%20Smith')
-}
-// main()

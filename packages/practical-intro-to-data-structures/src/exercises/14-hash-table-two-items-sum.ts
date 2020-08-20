@@ -2,7 +2,6 @@
  * Write a function returns the first two items in a list whose value add up exactly to k
  */
 
-import assert from 'assert'
 
 /**
  * Returns the first two items in a list whose value add up exactly to k
@@ -32,8 +31,3 @@ export const findSumK = (
   }
   return undefined
 }
-
-export const main = (): void => {
-  assert.deepStrictEqual(findSumK([1, 3, 7, 2, 5, 9], 8), [1, 7])
-}
-// main()

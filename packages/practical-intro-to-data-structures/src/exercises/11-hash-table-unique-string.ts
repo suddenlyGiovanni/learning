@@ -1,4 +1,3 @@
-import assert from 'assert'
 
 /**
  * Write a function that returns whether a string has only unique characters or not
@@ -21,9 +20,3 @@ export const unique = (str: string): boolean => {
 
   return true
 }
-
-export const main = (): void => {
-  assert.strictEqual(unique('abcdefghijk'), true)
-  assert.strictEqual(unique('mississippi'), false)
-}
-// main()

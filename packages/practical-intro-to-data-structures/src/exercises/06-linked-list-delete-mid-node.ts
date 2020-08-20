@@ -1,5 +1,4 @@
 /* eslint-disable max-statements */
-import assert from 'assert'
 
 
 /**
@@ -12,7 +11,7 @@ import assert from 'assert'
  * If the input linked list has 1 node, then this node should be deleted and new head should be returned.
  */
 
-import { INode, Node, makeLinkedList } from '../linked-list/linked-list'
+import { INode, Node } from '../linked-list/linked-list'
 
 const isEven = (x: number): boolean => x % 2 === 0
 const calculateLength = <T>(head: INode<T>): number => {
@@ -53,11 +52,3 @@ export const deleteMiddleNode = <T>(head: INode<T>): null | INode<T> => {
   node.next = null
   return node
 }
-
-// Test
-export const main = (): void => {
-  const { head } = makeLinkedList([1, 2, 3, 4, 5])
-  assert.deepStrictEqual(deleteMiddleNode(head!), new Node(3, null))
-  assert.deepStrictEqual(head, makeLinkedList([1, 2, 4, 5]).head)
-}
-// main()

@@ -7,8 +7,6 @@
   max-statements,
 */
 
-import nodeAssert from 'assert'
-
 import assert, { AssertionError } from '../utils/assert'
 /*
  * Create a data structure KStacks that represents a set of k stacks. It should only use one array.
@@ -18,7 +16,7 @@ import assert, { AssertionError } from '../utils/assert'
  * pop(stackNumber) –> pops an element from stack number ‘sn’ where sn is from 0 to k-1
  */
 
-type Brand<K, T extends string> = K & { __brand: T }
+export type Brand<K, T extends string> = K & { __brand: T }
 
 type Int = Brand<number, 'Int'>
 
@@ -101,32 +99,6 @@ export class KStack<T> implements IKStack<T> {
     return kTail
   }
 
-  /*
-   * Expected outcome
-   * 1 - testKStack.push('s1&v="one"', 1)
-   * 2 - testKStack.push('s3&v="two"', 3)
-   * 3 - testKStack.push('s3&v="three"', 3)
-   * 4 - testKStack.push('s2&v="four"', 2)
-   *  -----------------------
-   * 1 - { k: 3, storage: [0: 's1&v="one"'] }
-   * 2 - { k: 3, storage: [0: 's1&v="one"', 1: undefined, 2: 's3&v="two"'] }
-   * 3 - { k: 3, storage: [
-   *    0: 's1&v="one"',
-   *    1: undefined,
-   *    2: 's3&v="two"',
-   *    3: undefined,
-   *    4: undefined,
-   *    5: 's3&v="three"',
-   *  ] }
-   * 4 - { k: 3, storage: [
-   *    0: 's1&v="one"',
-   *    1: 's2&v="four"',
-   *    2: 's3&v="two"',
-   *    3: undefined,
-   *    4: undefined,
-   *    5: 's3&v="three"',
-   *  ] }
-   */
   public push(x: T, stackNumber: number): void {
     this.assertPositiveIntWithout0(stackNumber)
     this.assertValidKStack(stackNumber)
@@ -209,23 +181,3 @@ export class KStack<T> implements IKStack<T> {
     this.hashTableKTails.set(k, newKTailIndex)
   }
 }
-
-// Tests:
-export const main = (): void => {
-  const testKStack = new KStack<string>(3) // KStackClass { k: 3, storage: [] }
-  testKStack.push('s1&v="one"', 1)
-  testKStack.push('s3&v="two"', 3)
-  testKStack.push('s3&v="three"', 3)
-  testKStack.push('s2&v="four"', 2)
-  testKStack.push('s3&v="five"', 3)
-  nodeAssert.strictEqual(testKStack.peek(3), 's3&v="five"')
-  nodeAssert.strictEqual(testKStack.pop(3), 's3&v="five"')
-  nodeAssert.strictEqual(testKStack.pop(3), 's3&v="three"')
-  nodeAssert.strictEqual(testKStack.pop(3), 's3&v="two"')
-  nodeAssert.strictEqual(testKStack.pop(3), undefined)
-  nodeAssert.strictEqual(testKStack.peek(3), undefined)
-  nodeAssert.strictEqual(testKStack.peek(1), 's1&v="one"')
-  nodeAssert.strictEqual(testKStack.peek(2), 's2&v="four"')
-  console.log(testKStack) // ?
-}
-// main()

@@ -2,7 +2,6 @@
  * Write a function that returns the unique, non-repeated value in a list
  */
 
-import assert from 'assert'
 
 /**
  * Returns the unique, non-repeated value
@@ -30,22 +29,3 @@ export const unique = <T>(list: T[]): undefined | T => {
   }
   return undefined
 }
-
-export const main = (): void => {
-  const listWithUniqueElement = ['c', 'b', 'c', 'a', 'b', 'b', 'd', 'c', 'd']
-  const listWithOutUniqueElement = [
-    'c',
-    'b',
-    'c',
-    'a',
-    'b',
-    'b',
-    'd',
-    'c',
-    'd',
-    'a',
-  ]
-  assert.strictEqual(unique(listWithUniqueElement), 'a')
-  assert.strictEqual(unique(listWithOutUniqueElement), undefined)
-}
-// main()
