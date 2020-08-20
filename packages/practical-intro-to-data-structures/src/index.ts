@@ -1,3 +1,9 @@
-export { Queue, IQueue } from './queue/queue'
-export { Stack, IStack } from './stack/stack'
-export { LinkedList, ILinkedList, INode } from './linked-list/linked-list'
+export { Queue } from './queue/queue'
+export { IQueue } from './queue/queue.interface'
+export { Stack } from './stack/stack'
+export { IStack } from './stack/stack.interface'
+export { LinkedList } from './linked-list/linked-list'
+export {
+  ILinkedList,
+  ILinkedListNode,
+} from './linked-list/linked-list.interface'

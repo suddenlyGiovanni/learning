@@ -13,8 +13,9 @@
 
 import assert from 'assert'
 
-import type { IQueue } from '../queue/queue'
-import { IStack, Stack } from '../stack/stack'
+import { Stack } from '../stack/stack'
+import { IStack } from "../stack/stack.interface"
+import { IQueue } from '../queue/queue.interface'
 
 export class QueueClass<T> implements IQueue<T> {
   private activeStack: 'stackA' | 'stackB'
