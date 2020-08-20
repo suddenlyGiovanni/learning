@@ -1,52 +1,101 @@
-
 export interface ILinkedListNode<T> {
-  data: T
-  next: null | ILinkedListNode<T>
+  element: T
+  next: undefined | ILinkedListNode<T>
 }
 
-
 export interface ILinkedList<T> {
-  head: null | ILinkedListNode<T>
+  head: undefined | ILinkedListNode<T>
 
-  length: number
-
-  /*
-   * Searches the linked list and returns true if it contains the value passed
-   * @param {T} value - the value to search for
-   * @return {boolean} - true if value is found, otherwise false
+  /**
+   * Iterator of elements in the LinkedList
+   * @returns {IterableIterator<T>}
+   * @memberof ILinkedList
    */
-  contains(value: T): boolean
+  [Symbol.iterator](): IterableIterator<T>
 
-  /*
-   * Inserts a new value to the end of the linked list
-   * @param {T} value - the value to insert
-   */
-  insert(value: T): void
 
-  /*
-   * Checks if a node is the head of the linked list
-   * @param {ILinkedListNode<T>} node - the node to check
-   * @return {boolean} - true if node is the head, otherwise false
+  /**
+   * Clears the list
+   * @memberof ILinkedList
    */
-  isHead(node: ILinkedListNode<T>): boolean
+  clear(): void
 
-  /*
-   * Checks if a node is the tail of the linked list
-   * @param {ILinkedListNode<T>} node - the node to check
-   * @return {boolean} - true if node is the tail, otherwise false
+  /**
+   * This method returns the element of a specific position in the list.
+   * If the element does not exist in the list, it returns undefined.
+   * @param {number} index
+   * @memberof ILinkedList
    */
-  isTail(node: ILinkedListNode<T>): boolean
+  getElementAt(index: number): undefined | ILinkedListNode<T>
 
-  /*
-   * Deletes a node
-   * @param {ILinkedListNode<T>} node - the node to remove
-   * @return {null | T} value - the deleted node's value
-   */
-  remove(node: ILinkedListNode<T>): null | T
 
-  /*
-   * Removes the value at the end of the linked list
-   * @return {T} - the removed value
+  /**
+   * This method returns the head of the list.
+   * @returns {(undefined | ILinkedListNode<T>)}
+   * @memberof ILinkedList
    */
-  removeTail(): null | T
+  getHead(): undefined | ILinkedListNode<T>
+
+  /**
+   * This method returns the index of the element in the list.
+   * If the element does not exist in the list, it returns -1.
+   * @param {T} element
+   * @returns { -1 | number} - index of the element in the list
+   * @memberof ILinkedList
+   */
+  indexOf(element: T): -1 | number
+
+  /**
+   * Inserts a new element at a specified index in the list
+   * @param {T} element - the element to insert
+   * @memberof ILinkedList
+   */
+  insert(element: T, index: number): boolean
+
+  /**
+   * This method returns true if the linked list does not contain any elements,
+   * and false if the size of the linked list is bigger than 0
+   * @returns {boolean}
+   * @memberof ILinkedList
+   */
+  isEmpty(): boolean
+
+  /**
+   * This method adds a new element to the end of the list
+   * @param {T} element
+   * @memberof ILinkedList
+   */
+  push(element: T): void
+
+  /**
+   * This method removes an element from the list
+   * @param {T} element
+   * @returns {(undefined | ILinkedListNode<T>)}
+   * @memberof ILinkedList
+   */
+  remove(element: T): undefined | ILinkedListNode<T>
+
+  /**
+   * This method removes an item from a specified index in the list.
+   * @param {number} index
+   * @memberof ILinkedList
+   */
+  removeAt(index: number): undefined | ILinkedListNode<T>
+
+  /**
+   * This method returns the number of elements the linked list contains.
+   * It is similar to the length property of the array.
+   * @returns {number}
+   * @memberof ILinkedList
+   */
+  size(): number
+
+  /**
+   * This method returns a string representation of the linked list.
+   * As the list uses a Node class as an element, we need to overwrite the default toString method
+   * inherited from the JavaScript Object class to output only the element values   *
+   * @returns {string}
+   * @memberof ILinkedList
+   */
+  toString(): string
 }

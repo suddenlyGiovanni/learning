@@ -1,28 +1,31 @@
 import type { ILinkedListNode } from './linked-list.interface'
 
 export class Node<T> implements ILinkedListNode<T> {
-  #data: T
+  #element: T
 
-  #next: null | ILinkedListNode<T>
+  #next: undefined | ILinkedListNode<T>
 
-  public constructor(data: T, next: null | ILinkedListNode<T> = null) {
-    this.#data = data
+  public constructor(
+    element: T,
+    next: undefined | ILinkedListNode<T> = undefined
+  ) {
+    this.#element = element
     this.#next = next
   }
 
-  public get data(): T {
-    return this.#data
+  public get element(): T {
+    return this.#element
   }
 
-  public set data(data: T) {
-    this.#data = data
+  public set element(data: T) {
+    this.#element = data
   }
 
-  public get next(): null | ILinkedListNode<T> {
+  public get next(): undefined | ILinkedListNode<T> {
     return this.#next
   }
 
-  public set next(next: null | ILinkedListNode<T>) {
+  public set next(next: undefined | ILinkedListNode<T>) {
     this.#next = next
   }
 }
