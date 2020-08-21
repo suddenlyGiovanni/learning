@@ -17,21 +17,74 @@ export function defaultEqualityPredicate<A>(x: A, y: A): boolean {
 }
 
 export class LinkedList<T> implements ILinkedList<T> {
-  private count: number
+  private comparatorStrategy: (x: T, y: T) => boolean
 
-  private equalityPredicate: (x: T, y: T) => boolean
+  private count: number
 
   private head: INode<T> | undefined
 
   private tail: INode<T> | undefined
 
-  constructor(
+  public constructor(
     equalityPredicate: (x: T, y: T) => boolean = defaultEqualityPredicate
   ) {
     this.head = undefined
     this.tail = this.head
     this.count = 0
-    this.equalityPredicate = equalityPredicate
+    this.comparatorStrategy = equalityPredicate
+  }
+
+  /**
+   * Traverse the linked list sequentially and call the provided cb with the current node and index
+   * an explicit (and truthy) return from the callback function will stop the traversal and
+   * return that value out of to the traverse
+   * @static
+   * @template A
+   * @template B
+   * @param {ILinkedList<A>} linkedList
+   * @param {((
+   *       nodes: {
+   *         currentNode: INode<A>
+   *         nextNode: undefined | INode<A>
+   *         previousNode: undefined | INode<A>
+   *       },
+   *       index: number,
+   *       length: number
+   *     ) => B)} cb
+   * @returns {(undefined | B)}
+   * @memberof LinkedList
+   */
+  private static traverse<A, B>(
+    linkedList: ILinkedList<A>,
+    cb: (
+      nodes: {
+        currentNode: INode<A>
+        nextNode: undefined | INode<A>
+        previousNode: undefined | INode<A>
+      },
+      index: number,
+      length: number
+    ) => B
+  ): undefined | B {
+    // eslint-disable-next-line no-undef-init
+    let previousNode: undefined | INode<A> = undefined
+    let currentNode: undefined | INode<A> = linkedList.getHead()
+    let nextNode: undefined | INode<A> = currentNode?.next
+
+    for (let i = 0; currentNode && i < linkedList.size(); i++) {
+      const resp = cb(
+        { currentNode, nextNode, previousNode },
+        i,
+        linkedList.size()
+      )
+      if (resp) {
+        return resp
+      }
+      previousNode = currentNode
+      nextNode = currentNode.next?.next
+      currentNode = currentNode.next
+    }
+    return undefined
   }
 
   /**
@@ -75,8 +128,20 @@ export class LinkedList<T> implements ILinkedList<T> {
    * This method returns the index of the element in the list.
    * If the element does not exist in the list, it returns -1.
    */
-  public indexOf(element: T): number {
-    throw new Error('Method not implemented.')
+  public indexOf(element: T): -1 | number {
+    if (this.head) {
+      if (this.comparatorStrategy(this.head.element, element)) {
+        return 0
+      }
+
+      const index = LinkedList.traverse(this, ({ currentNode }, i) => {
+        if (currentNode.element === element) {
+          return i
+        }
+      })
+      return index ? index : -1
+    }
+    return -1
   }
 
   /**
