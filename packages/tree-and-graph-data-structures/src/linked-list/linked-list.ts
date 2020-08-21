@@ -4,6 +4,7 @@
   @typescript-eslint/no-non-null-assertion,
   no-plusplus,
   max-lines-per-function,
+  max-lines,
 */
 
 import { Node } from './linked-list-node'
@@ -242,41 +243,9 @@ export class LinkedList<T> implements ILinkedList<T> {
     )
 
     if (nodes) {
-      // Case: remove from the head
-      if (!nodes.previousNode) {
-        // Current node is the head
-        if (!nodes.nextNode) {
-          /*
-           * Sub case .a: Linked list of size 1
-           * once the node is removed the linked list is empty
-           */
-          // eslint-disable-next-line no-underscore-dangle
-          const _element = nodes.currentNode.element
-          this.clear()
-          return _element
-        }
-        /*
-         * Sub case .b: Linked list of size n
-         */
-        this.head = nodes.nextNode
-        nodes.currentNode.next = undefined
-        this.count--
-        return nodes.currentNode.element
-      }
-
-      if (!nodes.nextNode) {
-        // Current node is the tail
-        nodes.previousNode.next = undefined
-        this.tail = nodes.previousNode
-        this.count--
-        return nodes.currentNode.element
-      }
-
-      // Case: remove from the middle
-      nodes.previousNode.next = nodes.nextNode
-      nodes.currentNode.next = undefined
-      this.count--
-      return nodes.currentNode.element
+      const { previousNode, currentNode, nextNode } = nodes
+      const node = this.removeNode(previousNode, currentNode, nextNode)
+      return node.element
     }
     return undefined
   }
@@ -285,7 +254,18 @@ export class LinkedList<T> implements ILinkedList<T> {
    * This method removes an item from a specified index in the list.
    */
   public removeAt(index: number): T | undefined {
-    throw new Error('Method not implemented.')
+    if (Number.isInteger(index) && index >= 0 && index <= this.count) {
+      const nodes = LinkedList.traverse(this, (_nodes, i) =>
+        i === index ? _nodes : undefined
+      )
+
+      if (nodes) {
+        const { previousNode, currentNode, nextNode } = nodes
+        const { element } = this.removeNode(previousNode, currentNode, nextNode)
+        return element
+      }
+    }
+    return undefined
   }
 
   /**
@@ -303,5 +283,46 @@ export class LinkedList<T> implements ILinkedList<T> {
    */
   public toString(): string {
     throw new Error('Method not implemented.')
+  }
+
+  private removeNode(
+    previousNode: undefined | INode<T>,
+    currentNode: INode<T>,
+    nextNode: undefined | INode<T>
+  ): INode<T> {
+    // Case: remove from the head
+    if (!previousNode) {
+      // Current node is the head
+      if (!nextNode) {
+        /*
+         * Sub case .a: Linked list of size 1
+         * once the node is removed the linked list is empty
+         */
+        const node = new Node(currentNode.element)
+        this.clear()
+        return node
+      }
+      /*
+       * Sub case .b: Linked list of size n
+       */
+      this.head = nextNode
+      currentNode.next = undefined
+      this.count--
+      return currentNode
+    }
+
+    if (!nextNode) {
+      // Current node is the tail
+      previousNode.next = undefined
+      this.tail = previousNode
+      this.count--
+      return currentNode
+    }
+
+    // Case: remove from the middle
+    previousNode.next = nextNode
+    currentNode.next = undefined
+    this.count--
+    return currentNode
   }
 }
