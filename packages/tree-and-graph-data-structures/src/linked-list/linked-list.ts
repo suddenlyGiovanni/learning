@@ -77,6 +77,7 @@ export class LinkedList<T> implements ILinkedList<T> {
         i,
         linkedList.size()
       )
+
       if (resp) {
         return resp
       }
@@ -99,6 +100,7 @@ export class LinkedList<T> implements ILinkedList<T> {
    */
   public clear(): void {
     this.head = undefined
+    this.tail = undefined
     this.count = 0
   }
 
@@ -232,14 +234,57 @@ export class LinkedList<T> implements ILinkedList<T> {
   /**
    * This method removes an element from the list
    */
-  public remove(element: T): INode<T> | undefined {
-    throw new Error('Method not implemented.')
+  public remove(element: T): undefined | T {
+    const nodes = LinkedList.traverse(this, (_nodes) =>
+      this.comparatorStrategy(_nodes.currentNode.element, element)
+        ? _nodes
+        : undefined
+    )
+
+    if (nodes) {
+      // Case: remove from the head
+      if (!nodes.previousNode) {
+        // Current node is the head
+        if (!nodes.nextNode) {
+          /*
+           * Sub case .a: Linked list of size 1
+           * once the node is removed the linked list is empty
+           */
+          // eslint-disable-next-line no-underscore-dangle
+          const _element = nodes.currentNode.element
+          this.clear()
+          return _element
+        }
+        /*
+         * Sub case .b: Linked list of size n
+         */
+        this.head = nodes.nextNode
+        nodes.currentNode.next = undefined
+        this.count--
+        return nodes.currentNode.element
+      }
+
+      if (!nodes.nextNode) {
+        // Current node is the tail
+        nodes.previousNode.next = undefined
+        this.tail = nodes.previousNode
+        this.count--
+        return nodes.currentNode.element
+      }
+
+      // Case: remove from the middle
+      nodes.previousNode.next = nodes.nextNode
+      nodes.currentNode.next = undefined
+      this.count--
+      return nodes.currentNode.element
+    }
+    return undefined
   }
 
   /**
    * This method removes an item from a specified index in the list.
    */
-  public removeAt(index: number): INode<T> | undefined {
+  public removeAt(index: number): T | undefined {
     throw new Error('Method not implemented.')
   }
 

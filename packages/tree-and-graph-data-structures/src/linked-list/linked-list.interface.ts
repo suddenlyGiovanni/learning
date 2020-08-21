@@ -68,17 +68,18 @@ export interface ILinkedList<T> {
   /**
    * This method removes an element from the list
    * @param {T} element
-   * @returns {(undefined | ILinkedListNode<T>)}
+   * @returns {(undefined | T)}
    * @memberof ILinkedList
    */
-  remove(element: T): undefined | ILinkedListNode<T>
+  remove(element: T): undefined | T
 
   /**
    * This method removes an item from a specified index in the list.
    * @param {number} index
+   * @returns {(undefined | T)}
    * @memberof ILinkedList
    */
-  removeAt(index: number): undefined | ILinkedListNode<T>
+  removeAt(index: number): undefined | T
 
   /**
    * This method returns the number of elements the linked list contains.

@@ -179,7 +179,7 @@ describe('data structure - LinkedList', () => {
 
   it('removes valid elements', () => {
     expect.hasAssertions()
-    let element
+    let element: undefined | number
 
     pushesElements()
 
@@ -188,6 +188,21 @@ describe('data structure - LinkedList', () => {
       expect(element).not.toBeUndefined()
       expect(element).toBe(i)
     }
+
+    pushesElements()
+
+    for (let i = max; i >= min; i--) {
+      element = list.remove(i)
+      expect(element).not.toBeUndefined()
+      expect(element).toBe(i)
+    }
+
+    pushesElements()
+
+    const middleIndex = Math.floor((min + max) / 2)
+    element = list.remove(middleIndex)
+    expect(element).not.toBeUndefined()
+    expect(element).toBe(middleIndex)
   })
 
   it('removes invalid elements', () => {
