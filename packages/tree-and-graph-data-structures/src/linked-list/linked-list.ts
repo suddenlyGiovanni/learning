@@ -48,7 +48,14 @@ export class LinkedList<T> implements ILinkedList<T> {
    * If the element does not exist in the list, it returns undefined.
    */
   public getElementAt(index: number): INode<T> | undefined {
-    throw new Error('Method not implemented.')
+    if (index >= 0 && index <= this.count) {
+      let node = this.head
+      for (let i = 0; node && i < index; i++) {
+        node = node.next
+      }
+      return node
+    }
+    return undefined
   }
 
   /**
@@ -87,7 +94,7 @@ export class LinkedList<T> implements ILinkedList<T> {
   public push(element: T): void {
     const node = new Node(element)
     // eslint-disable-next-line no-negated-condition
-    if(!this.head){
+    if (!this.head) {
       this.head = node
       this.tail = this.head
     } else {
