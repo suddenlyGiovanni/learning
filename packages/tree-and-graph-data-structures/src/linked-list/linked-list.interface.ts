@@ -4,7 +4,7 @@ export interface ILinkedListNode<T> {
 }
 
 export interface ILinkedList<T> {
-  head: undefined | ILinkedListNode<T>
+  // head: undefined | ILinkedListNode<T>
 
   /**
    * Iterator of elements in the LinkedList
@@ -12,7 +12,6 @@ export interface ILinkedList<T> {
    * @memberof ILinkedList
    */
   [Symbol.iterator](): IterableIterator<T>
-
 
   /**
    * Clears the list
@@ -27,7 +26,6 @@ export interface ILinkedList<T> {
    * @memberof ILinkedList
    */
   getElementAt(index: number): undefined | ILinkedListNode<T>
-
 
   /**
    * This method returns the head of the list.
@@ -93,7 +91,7 @@ export interface ILinkedList<T> {
   /**
    * This method returns a string representation of the linked list.
    * As the list uses a Node class as an element, we need to overwrite the default toString method
-   * inherited from the JavaScript Object class to output only the element values   *
+   * inherited from the JavaScript Object class to output only the element values
    * @returns {string}
    * @memberof ILinkedList
    */
