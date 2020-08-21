@@ -21,7 +21,7 @@
     "@types/assert": "1.5.1",
     "@types/jest": "26.0.10",
     "@types/node": "14.6.0",
-    "jest": "26.4.0",
+    "jest": "26.4.1",
     "ts-jest": "26.2.0",
     "ts-node": "8.10.2",
     "tsconfig-paths": "3.9.0"
