@@ -9,6 +9,7 @@
   jest/no-conditional-expect,
   max-lines,
   jest/no-hooks,
+  id-length,
 */
 
 import { LinkedList } from './linked-list'
@@ -38,6 +39,14 @@ describe('data structure - LinkedList', () => {
     for (let i = min; i <= max; i++) {
       list.push(i)
     }
+  }
+
+  function arrayFromIntBounds(a: number, z: number): number[] {
+    const array: number[] = []
+    for (let i = a; i <= z; i++) {
+      array.push(i)
+    }
+    return array
   }
 
   function verifyList(): void {
@@ -416,5 +425,69 @@ describe('data structure - LinkedList', () => {
 
     ds.push(new MyObj(3, 4))
     expect(ds.toString()).toBe('1|2,3|4')
+  })
+
+  it('implements the iterator protocol', () => {
+    expect.hasAssertions()
+    expect(typeof list[Symbol.iterator]).toBe('function')
+
+    min = 1
+    max = 10
+
+    const elements = []
+    pushesElements()
+
+    for (const { element } of list) {
+      elements.push(element)
+    }
+
+    expect(elements).toStrictEqual(arrayFromIntBounds(min, max))
+  })
+
+  it('forEach', () => {
+    expect.hasAssertions()
+    min = 1
+    max = 10
+
+    expect(typeof list.forEach).toBe('function')
+    const elements: number[] = []
+    pushesElements()
+
+    const double = (n: number): number => n * 2
+
+    // Applied/mutated double to the element of the list
+    const doubleList = list
+      .forEach((node) => {
+        // eslint-disable-next-line no-param-reassign
+        node.element = double(node.element)
+      })
+      .forEach((node) => elements.push(node.element))
+
+    expect(doubleList).toBe(list)
+
+    expect(elements).toStrictEqual(arrayFromIntBounds(min, max).map(double))
+  })
+
+  it('map', () => {
+    expect.hasAssertions()
+    const double = (n: number): number => n * 2
+    min = 1
+    max = 10
+
+    expect(typeof list.map).toBe('function')
+    pushesElements()
+
+    const doubleList = list.map(double)
+    expect(doubleList).toBeInstanceOf(LinkedList)
+    expect(list).not.toBe(doubleList)
+
+    let node: undefined | ILinkedListNode<number> = list.getHead()
+    let nodeDouble: undefined | ILinkedListNode<number> = doubleList.getHead()
+
+    while (node && nodeDouble) {
+      expect(nodeDouble.element).toStrictEqual(double(node.element))
+      node = node.next
+      nodeDouble = nodeDouble.next
+    }
   })
 })

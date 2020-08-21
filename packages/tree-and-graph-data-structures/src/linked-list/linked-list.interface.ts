@@ -11,13 +11,21 @@ export interface ILinkedList<T> {
    * @returns {IterableIterator<T>}
    * @memberof ILinkedList
    */
-  [Symbol.iterator](): IterableIterator<T>
+  [Symbol.iterator](): IterableIterator<ILinkedListNode<T>>
 
   /**
    * Clears the list
    * @memberof ILinkedList
    */
   clear(): void
+
+  /**
+   * This method behave similarly to the well known Array.prototype.forEach method
+   * @param {(node: ILinkedListNode<T>) => void} cb
+   * @returns {this}
+   * @memberof ILinkedList
+   */
+  forEach(cb: (node: ILinkedListNode<T>) => void): this
 
   /**
    * This method returns the element of a specific position in the list.
@@ -57,6 +65,17 @@ export interface ILinkedList<T> {
    * @memberof ILinkedList
    */
   isEmpty(): boolean
+
+
+  /**
+   * This method maps over the content of each node in the fashion of A -> B,
+   * and returns a brand new LinkedList<B>
+   * @template U
+   * @param {(element: T) => U} cb
+   * @returns {ILinkedList<U>}
+   * @memberof ILinkedList
+   */
+  map<U>(cb: (element: T) => U): ILinkedList<U>
 
   /**
    * This method adds a new element to the end of the list
