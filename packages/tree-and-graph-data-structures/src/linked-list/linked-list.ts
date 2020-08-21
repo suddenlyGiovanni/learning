@@ -18,7 +18,7 @@ export function defaultEqualityPredicate<A>(x: A, y: A): boolean {
 }
 
 export class LinkedList<T> implements ILinkedList<T> {
-  private comparatorStrategy: (x: T, y: T) => boolean
+  private readonly comparatorStrategy: (x: T, y: T) => boolean
 
   private count: number
 
@@ -282,7 +282,16 @@ export class LinkedList<T> implements ILinkedList<T> {
    * inherited from the JavaScript Object class to output only the element values
    */
   public toString(): string {
-    throw new Error('Method not implemented.')
+    if (!this.head) {
+      return ''
+    }
+    let objString = String(this.head.element)
+    let current = this.head.next
+    for (let i = 1; i < this.size() && current; i++) {
+      objString = `${objString},${String(current.element)}`
+      current = current.next
+    }
+    return objString
   }
 
   private removeNode(
