@@ -1,5 +1,11 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-/* eslint-disable no-plusplus */
+/*
+  eslint-disable
+  max-statements,
+  @typescript-eslint/no-non-null-assertion,
+  no-plusplus,
+  max-lines-per-function,
+*/
+
 import { Node } from './linked-list-node'
 import type {
   ILinkedList,
@@ -77,7 +83,60 @@ export class LinkedList<T> implements ILinkedList<T> {
    * Inserts a new element at a specified index in the list
    */
   public insert(element: T, index: number): boolean {
-    throw new Error('Method not implemented.')
+    if (Number.isInteger(index) && index >= 0 && index <= this.count) {
+      const node = new Node(element)
+
+      if (index === 0) {
+        // eslint-disable-next-line no-negated-condition
+        if (!this.head) {
+          /*
+           * Case: empty list
+           * 1. set head to be the new node
+           * 2. set tail to also point to the new node
+           */
+          this.head = node
+          this.tail = node
+        } else {
+          /*
+           * Case: inset to the head of a list of size 1 or more
+           * 1. point the current head to the next property of the new node
+           * 2. set the new node to be the new head
+           */
+          node.next = this.head
+          this.head = node
+        }
+        this.count++
+        return true
+      }
+
+      if (!this.head) {
+        return false
+      }
+
+      // Case: inserting at the tail of the list
+      if (index === this.count) {
+        this.tail!.next = node
+        this.tail = node
+        this.count++
+        return true
+      }
+
+      /*
+       * Case: inserting at any other position
+       * 1. iterate throughout the whole list and stop on the node preceding the desired index
+       * 2. set the new node next to point to the node at specified index (node.next = current.next)
+       * 3. set the current.next to point to the new node
+       */
+      let current = this.head
+      for (let i = 1; current.next && i < index; i++) {
+        current = current.next
+      }
+      node.next = current.next
+      current.next = node
+      this.count++
+      return true
+    }
+    return false
   }
 
   /**
