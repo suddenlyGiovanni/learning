@@ -92,8 +92,12 @@ export class LinkedList<T> implements ILinkedList<T> {
   /**
    * Iterator of elements in the LinkedList
    */
-  [Symbol.iterator](): IterableIterator<T> {
-    throw new Error('Method not implemented.')
+  *[Symbol.iterator](): IterableIterator<INode<T>> {
+    let node = this.head
+    while (node) {
+      yield node
+      node = node.next
+    }
   }
 
   /**
@@ -103,6 +107,13 @@ export class LinkedList<T> implements ILinkedList<T> {
     this.head = undefined
     this.tail = undefined
     this.count = 0
+  }
+
+  public forEach(cb: (node: INode<T>) => void): this {
+    for (const node of this) {
+      cb(node)
+    }
+    return this
   }
 
   /**
@@ -213,6 +224,14 @@ export class LinkedList<T> implements ILinkedList<T> {
    */
   public isEmpty(): boolean {
     return this.size() === 0
+  }
+
+  public map<U>(cb: (element: T) => U): ILinkedList<U> {
+    const linkedList = new LinkedList<U>()
+    for (const node of this) {
+      linkedList.push(cb(node.element))
+    }
+    return linkedList
   }
 
   /**
