@@ -397,21 +397,18 @@ describe('data structure - LinkedList', () => {
 
   it('returns toString objects', () => {
     expect.hasAssertions()
-    class MyObj {
-      public el1: any
+    class MyObj<T> {
+      // eslint-disable-next-line no-useless-constructor
+      public constructor(
+        public el1: T & { toString(): string },
+        public el2: T & { toString(): string }
+      ) {}
 
-      public el2: any
-
-      constructor(el1: any, el2: any) {
-        this.el1 = el1
-        this.el2 = el2
-      }
-
-      toString() {
+      public toString() {
         return `${this.el1.toString()}|${this.el2.toString()}`
       }
     }
-    const ds = new LinkedList<MyObj>()
+    const ds = new LinkedList<MyObj<number>>()
     expect(ds.toString()).toBe('')
 
     ds.push(new MyObj(1, 2))
