@@ -1,9 +1,10 @@
 /*
   eslint-disable
-  jest/require-top-level-describe,
+  init-declarations,
   jest/no-hooks,
+  jest/require-top-level-describe,
   max-statements,
-  no-magic-numbers
+  no-magic-numbers,
 */
 
 import { LinkedList } from '../linked-list/linked-list'
@@ -11,9 +12,7 @@ import { ILogger, Logger } from '../utils/logger'
 
 import { Graph } from './graphs'
 
-// eslint-disable-next-line init-declarations
 let graph: Graph<number>
-// eslint-disable-next-line init-declarations
 let logger: ILogger
 
 beforeEach(() => {
