@@ -1,5 +1,6 @@
 /*
   eslint-disable
+  no-console,
   @typescript-eslint/no-non-null-assertion
 */
 
@@ -42,7 +43,10 @@ export class Graph<T> {
     return undefined
   }
 
-  public depthFirstTraversal(startingNode: T, func = console.log) {
+  public breadthFirstTraversal(
+    startingNode: T,
+    func: (graph: Graph<T>) => void = console.log
+  ) {
     throw new Error('Method not yet implemented')
   }
 
@@ -59,6 +63,29 @@ export class Graph<T> {
 
   // eslint-disable-next-line class-methods-use-this
   public removeNode(node: T): void {
-    throw new Error('Method not yet implemented')
+    if (this.nodes.indexOf(node) !== -1) {
+      /*
+       * 1. remove the Node from the `Adjacency List` (keys)
+       * 2. remove any edge pointing to this Node in the rest of the `Adjacency List` (values)
+       * 3. remove the Node from the list of nodes
+       */
+      const nodeIdx = this.nodes.indexOf(node)
+
+      // Step 1
+      this.adjList.delete(node)
+
+      // Step 2
+      this.adjList.forEach((edgeLinkedList) => {
+        edgeLinkedList.forEach(({ element }) => {
+          if (element === node) {
+            edgeLinkedList.remove(element)
+          }
+        })
+      })
+
+      // Step 3
+      this.nodes.splice(nodeIdx, 1)
+    }
+    return undefined
   }
 }
