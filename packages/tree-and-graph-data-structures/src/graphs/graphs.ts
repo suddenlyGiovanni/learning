@@ -22,25 +22,28 @@ export class Graph<T> {
     equalityPredicate: (x: T, y: T) => boolean = defaultEqualityPredicate
   ) {
     this.nodes = []
-    this.adjList = new Map<T, ILinkedList<T>>()
     this.comparatorStrategy = equalityPredicate
+    this.adjList = new Map<T, ILinkedList<T>>()
   }
 
   public addEdge(node1: T, node2: T): void {
-    const linkedListNode1 = this.adjList.get(node1)!
-    const linkedListNode2 = this.adjList.get(node2)!
-    linkedListNode1.push(node2)
-    linkedListNode2.push(node1)
+    if (this.nodes.includes(node1) && this.nodes.includes(node2)) {
+      const node1Edges = this.adjList.get(node1)!
+      const node2Edges = this.adjList.get(node2)!
+      node1Edges.push(node2)
+      node2Edges.push(node1)
+    } else {
+      throw new Error('Please pass in valid Vertices/Nodes')
+    }
   }
 
   public addNode(node: T): void {
-    // TODO: should the nodes be unique?
     if (this.nodes.indexOf(node) === -1) {
       this.nodes.push(node)
-      this.adjList.set(node, new LinkedList<T>())
-      return undefined
+      this.adjList.set(node, new LinkedList<T>(this.comparatorStrategy))
+    } else {
+      throw new Error('Not unique Vertex/Node')
     }
-    return undefined
   }
 
   public breadthFirstTraversal(
@@ -58,11 +61,26 @@ export class Graph<T> {
   }
 
   public removeEdge(node1: T, node2: T): void {
-    throw new Error('Method not yet implemented')
+    if (
+      this.nodes.includes(node1) &&
+      this.nodes.includes(node2) &&
+      (this.adjList.has(node1) || this.adjList.has(node2))
+    ) {
+      /*
+       * 1. remove from adjList of node1 the edge pointer of node2
+       * 2. remove from adjList of node2 the edge pointer of node1
+       */
+      const node1Edges = this.adjList.get(node1)!
+      const node2Edges = this.adjList.get(node2)!
+      node1Edges.remove(node2)
+      node2Edges.remove(node1)
+    } else {
+      throw new Error('Please pass in valid Vertices/Nodes')
+    }
   }
 
-  // eslint-disable-next-line class-methods-use-this
   public removeNode(node: T): void {
+    // eslint-disable-next-line no-negated-condition
     if (this.nodes.indexOf(node) !== -1) {
       /*
        * 1. remove the Node from the `Adjacency List` (keys)
@@ -85,7 +103,8 @@ export class Graph<T> {
 
       // Step 3
       this.nodes.splice(nodeIdx, 1)
+    } else {
+      throw new Error('Please pass in valid Vertex')
     }
-    return undefined
   }
 }
