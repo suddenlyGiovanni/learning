@@ -2,18 +2,22 @@
   eslint-disable
   jest/require-top-level-describe,
   jest/no-hooks,
-  max-statements
+  max-statements,
+  no-magic-numbers
 */
 
+import { LinkedList } from '../linked-list/linked-list'
 import { ILogger, Logger } from '../utils/logger'
 
 import { Graph } from './graphs'
 
-let graph: Graph
+// eslint-disable-next-line init-declarations
+let graph: Graph<number>
+// eslint-disable-next-line init-declarations
 let logger: ILogger
 
 beforeEach(() => {
-  graph = new Graph()
+  graph = new Graph<number>()
 })
 
 test('it should be a function', () => {
@@ -23,6 +27,7 @@ test('it should be a function', () => {
 
 test('should have an "adjList" property', () => {
   expect.hasAssertions()
+  // eslint-disable-next-line no-prototype-builtins
   expect(graph.hasOwnProperty('adjList')).toBe(true)
 })
 
@@ -41,7 +46,7 @@ describe('the addNode function', () => {
   it('should add an empty array for the nodes adjacency list', () => {
     expect.hasAssertions()
     graph.addNode(2)
-    expect(graph.adjList[2]).toEqual([])
+    expect(graph.adjList.get(2)).toStrictEqual(new LinkedList())
   })
 })
 
@@ -56,7 +61,7 @@ describe('the removeNode function', () => {
   })
 
   afterEach(() => {
-    graph = new Graph()
+    graph = new Graph<number>()
   })
 
   it('should be a function', () => {
@@ -71,13 +76,13 @@ describe('the removeNode function', () => {
 
   it('should remove the node from adjLists of all its neighbors', () => {
     expect.hasAssertions()
-    expect(graph.adjList[1]).not.toContain(2)
-    expect(graph.adjList[3]).not.toContain(2)
+    expect(graph.adjList.get(1)).not.toContain(2)
+    expect(graph.adjList.get(3)).not.toContain(2)
   })
 
   it('should remove the adjacency list for removed node', () => {
     expect.hasAssertions()
-    expect(graph.adjList[2]).toBeUndefined()
+    expect(graph.adjList.get(2)).toBeUndefined()
   })
 })
 
