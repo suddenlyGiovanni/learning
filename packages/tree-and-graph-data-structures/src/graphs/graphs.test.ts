@@ -112,8 +112,12 @@ describe('the removeEdge function', () => {
 
   it('should return an error message when the indices are not valid', () => {
     expect.hasAssertions()
-    expect(() => graph.removeEdge(1, 5)).toThrow('Please pass in valid Vertices/Nodes')
-    expect(() => graph.removeEdge(7, 2)).toThrow('Please pass in valid Vertices/Nodes')
+    expect(() => graph.removeEdge(1, 5)).toThrow(
+      'Please pass in valid Vertices/Nodes'
+    )
+    expect(() => graph.removeEdge(7, 2)).toThrow(
+      'Please pass in valid Vertices/Nodes'
+    )
   })
 })
 
@@ -145,7 +149,9 @@ describe('the depth first traversal function', () => {
 
   it('should return a warning when a not valid starting node is provided', () => {
     expect.hasAssertions()
-    expect(() => graph.depthFirstTraversal(7)).toThrow('Invalid starting node was provided')
+    expect(() => graph.depthFirstTraversal(7)).toThrow(
+      'Invalid starting node was provided'
+    )
   })
 
   it('should return nodes on opposite ends in a nonsecutive order', () => {
@@ -161,8 +167,7 @@ describe('the depth first traversal function', () => {
   })
 })
 
-// eslint-disable-next-line jest/no-disabled-tests
-describe.skip('the breadth first traversal function', () => {
+describe('the breadth first traversal function', () => {
   beforeEach(() => {
     graph.addNode(1)
     graph.addNode(2)
@@ -189,15 +194,15 @@ describe.skip('the breadth first traversal function', () => {
 
   it('should return a warning when a starting node is not provided', () => {
     expect.hasAssertions()
-    expect(graph.breadthFirstTraversal()).toEqual(
-      'No starting node was provided'
+    expect(() => graph.breadthFirstTraversal(7)).toThrow(
+      'Invalid starting node was provided'
     )
   })
 
   it('should return nodes the same distance from starting consecutively', () => {
-    // Do a depth first traversal and log the result the logger class to store the result
+    // Do a breadth first traversal and log the result the logger class to store the result
     expect.hasAssertions()
-    graph.depthFirstTraversal(1, logger.log)
+    graph.breadthFirstTraversal(1, logger.log)
 
     const nodeOnOneEnd = logger.values.indexOf(3)
     const nodeOnOtherEnd = logger.values.indexOf(5)
