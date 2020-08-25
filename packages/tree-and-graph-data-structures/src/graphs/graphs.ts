@@ -7,6 +7,7 @@
 
 import { LinkedList } from '../linked-list/linked-list'
 import type { ILinkedList } from '../linked-list/linked-list.interface'
+import { Queue } from '../queue/queue'
 import { Stack } from '../stack/stack'
 
 export function defaultEqualityPredicate<A>(x: A, y: A): boolean {
@@ -50,9 +51,48 @@ export class Graph<T> {
 
   public breadthFirstTraversal(
     startingNode: T,
-    func: (node: T) => void = console.log
-  ) {
-    throw new Error('Method not yet implemented')
+    cb: (node: T) => void = console.log
+  ): void {
+    if (this.nodes.includes(startingNode)) {
+      /*
+       * Algorithms:
+       * 1. Enqueue the first vertex
+       * 2. mark the first vertex as visited
+       * 3. repeat this routine:
+       *   a. visit the next vertex adjacent to the first vertex
+       *   b. mark this vertex as visited
+       *   c. enqueue this vertex
+       * 3. repeat until all adjacent vertices visited
+       * 4. repeat this routine:
+       *   a. dequeue next vertex from the queue
+       *      repeat
+       *        aa. visit next unvisited vertex adjacent to that at the front of the queue
+       *        ab. mark this vertex as visited
+       *        ac. enqueue this vertex
+       *      until all adjacent vertices visited
+       * 4. until the queue is empty
+       */
+      const nodeQueue = new Queue<T>()
+      const visitedSet = new Set<T>()
+
+      nodeQueue.enqueue(startingNode)
+      visitedSet.add(startingNode)
+
+      while (!nodeQueue.isEmpty()) {
+        const current = nodeQueue.dequeue()!
+        const adjacentVertices = this.adjList.get(current)!
+        cb(current)
+
+        adjacentVertices.forEach(({ element: adjacentVertex }) => {
+          if (!visitedSet.has(adjacentVertex)) {
+            nodeQueue.enqueue(adjacentVertex)
+            visitedSet.add(adjacentVertex)
+          }
+        })
+      }
+    } else {
+      throw new Error('Invalid starting node was provided')
+    }
   }
 
   public depthFirstTraversal(
