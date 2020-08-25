@@ -13,7 +13,7 @@ import { ILogger, Logger } from '../utils/logger'
 import { Graph } from './graphs'
 
 let graph: Graph<number>
-let logger: ILogger
+let logger: ILogger<number>
 
 beforeEach(() => {
   graph = new Graph<number>()
@@ -118,7 +118,7 @@ describe('the removeEdge function', () => {
 })
 
 // eslint-disable-next-line jest/no-disabled-tests
-describe.skip('the depth first traversal function', () => {
+describe('the depth first traversal function', () => {
   beforeEach(() => {
     graph.addNode(1)
     graph.addNode(2)
@@ -143,9 +143,9 @@ describe.skip('the depth first traversal function', () => {
     expect(typeof graph.depthFirstTraversal).toBe('function')
   })
 
-  it('should return a warning when a starting node is not provided', () => {
+  it('should return a warning when a not valid starting node is provided', () => {
     expect.hasAssertions()
-    expect(graph.depthFirstTraversal()).toEqual('No starting node was provided')
+    expect(() => graph.depthFirstTraversal(7)).toThrow('Invalid starting node was provided')
   })
 
   it('should return nodes on opposite ends in a nonsecutive order', () => {

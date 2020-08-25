@@ -1,11 +1,13 @@
 /*
   eslint-disable
+  @typescript-eslint/no-non-null-assertion,
+  max-statements,
   no-console,
-  @typescript-eslint/no-non-null-assertion
 */
 
 import { LinkedList } from '../linked-list/linked-list'
 import type { ILinkedList } from '../linked-list/linked-list.interface'
+import { Stack } from '../stack/stack'
 
 export function defaultEqualityPredicate<A>(x: A, y: A): boolean {
   return x === y
@@ -48,16 +50,50 @@ export class Graph<T> {
 
   public breadthFirstTraversal(
     startingNode: T,
-    func: (graph: Graph<T>) => void = console.log
+    func: (node: T) => void = console.log
   ) {
     throw new Error('Method not yet implemented')
   }
 
   public depthFirstTraversal(
     startingNode: T,
-    func: (graph: Graph<T>) => void = console.log
+    cb: (node: T) => void = console.log
   ): void {
-    throw new Error('Method not yet implemented')
+    if (this.nodes.includes(startingNode)) {
+      /*
+       * Algorithms:
+       * 1. Push the first vertex onto the stack
+       * 2. mark this vertex as visited
+       * 3. repeat this routine:
+       *   a. visit the next vertex adjacent to the one on the top of the stack
+       *   b. push this vertex onto the stack
+       *   c. mark this vertex as visited
+       *   d. if there isn't a vertex to visit
+       *        pop this vertex off the stack
+       *      end if
+       * 3. repeat until stack is empty
+       */
+      const nodeStack = new Stack<T>()
+      const visitedSet = new Set<T>()
+
+      nodeStack.push(startingNode)
+      visitedSet.add(startingNode)
+
+      while (!nodeStack.isEmpty()) {
+        const current = nodeStack.pop()!
+        const adjacentVertices = this.adjList.get(current)!
+        cb(current)
+
+        adjacentVertices.forEach(({ element: adjacentVertex }) => {
+          if (!visitedSet.has(adjacentVertex)) {
+            nodeStack.push(adjacentVertex)
+            visitedSet.add(adjacentVertex)
+          }
+        })
+      }
+    } else {
+      throw new Error('Invalid starting node was provided')
+    }
   }
 
   public removeEdge(node1: T, node2: T): void {
