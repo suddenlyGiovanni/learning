@@ -120,12 +120,15 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
     return insertionHelper(this.root, value)
   }
 
-  public max(node: null | INode<T>): INode<T> {
-    throw new Error('Method not implemented.')
+  public max(node: null | INode<T>): null | INode<T> {
+    if (node === null) return node
+    return node.right === null
+      ? node // This is the leaf node at the most right side of the tree
+      : this.max(node.right) // Keep traversing the right sub-tree
   }
 
-  public min(node: null | INode<T>): undefined | INode<T> {
-    if (!node) return undefined
+  public min(node: null | INode<T>): null | INode<T> {
+    if (node === null) return node
 
     return node.left === null
       ? node // This is a leaf node

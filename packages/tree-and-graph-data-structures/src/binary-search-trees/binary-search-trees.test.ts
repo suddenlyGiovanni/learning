@@ -1,7 +1,9 @@
 /*
   eslint-disable
+  @typescript-eslint/no-non-null-assertion,
   init-declarations,
   jest/no-hooks,
+  jest/require-top-level-describe,
   max-statements,
   jest/require-top-level-describe
 */
@@ -98,7 +100,7 @@ describe('the contains function', () => {
   })
 })
 
-describe.only('the min function', () => {
+describe('the min function', () => {
   beforeEach(() => {
     binarySearchTree.insert(4)
     binarySearchTree.insert(2)
@@ -143,14 +145,14 @@ describe('the max function', () => {
 
   it('should return the node containing the maximum value', () => {
     expect.hasAssertions()
-    expect(binarySearchTree.max(binarySearchTree.root)).toEqual(new Node(7))
-    expect(binarySearchTree.max(binarySearchTree.root.left)).toEqual(
+    expect(binarySearchTree.max(binarySearchTree.root)).toStrictEqual(new Node(7))
+    expect(binarySearchTree.max(binarySearchTree.root!.left)).toStrictEqual(
       new Node(3)
     )
   })
 })
 
-describe('the remove function', () => {
+describe.skip('the remove function', () => {
   beforeEach(() => {
     binarySearchTree = new BinarySearchTree()
   })
@@ -199,7 +201,7 @@ describe('the remove function', () => {
   })
 })
 
-describe('the inOrderTraversal function', () => {
+describe.skip('the inOrderTraversal function', () => {
   beforeEach(() => {
     binarySearchTree.insert(4)
     binarySearchTree.insert(2)
@@ -230,7 +232,7 @@ describe('the inOrderTraversal function', () => {
   })
 })
 
-describe('the preOrderTraversal function', () => {
+describe.skip('the preOrderTraversal function', () => {
   beforeEach(() => {
     binarySearchTree.insert(4)
     binarySearchTree.insert(2)
@@ -259,7 +261,7 @@ describe('the preOrderTraversal function', () => {
   })
 })
 
-describe('the postOrderTraversal function', () => {
+describe.skip('the postOrderTraversal function', () => {
   beforeEach(() => {
     binarySearchTree.insert(4)
     binarySearchTree.insert(2)
