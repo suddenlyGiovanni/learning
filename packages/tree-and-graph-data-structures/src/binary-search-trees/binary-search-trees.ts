@@ -6,6 +6,7 @@
   max-lines-per-function,
   max-statements,
   no-inline-comments,
+  no-param-reassign,
   no-unused-vars,
 */
 
@@ -150,6 +151,84 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
   }
 
   public remove(value: T): void {
-    throw new Error('Method not implemented.')
+    const removeHelper = (node: null | INode<T>): null | INode<T> => {
+      /*
+       * Algorithm:
+       * 1. _value is equal to the current node value => Algorith to remove node
+       * 2. _value is smaller than the current node value => search the left sub-tree
+       * 3. _value is greater than the current node value => search the right sub-tree
+       */
+
+      if (node !== null && value === node.value) {
+        /*
+         * Case 1.
+         * a. current node does not have any child nodes
+         * b. current node has one child node
+         * c. current node has two child nodes
+         */
+        if (node.left === null && node.right === null) {
+          /* Case a. => remove node and return */
+          node = null
+          return node
+        }
+
+        /* Case b. = only one child */
+        if (node.left === null) {
+          node = node.right
+          return node
+        }
+        if (node.right === null) {
+          node = node.left
+          return node
+        }
+        /*
+         * Case c. = two child
+         *
+         *                           +---+
+         *                           | 2 |
+         *                           +-+-+
+         *                             |
+         *                             |
+         *                      +------+-------+
+         *                      |              |
+         *                      |              |
+         *                    +-v-+          +-v-+
+         *                    | 1 |          | 3 |
+         *                    +-+-+          +---+
+         *                      |
+         *                      |
+         *           +----------+----------+
+         *           |                     |
+         *           |                     |
+         *         +-v-+                 +-v-+
+         *         |0.5|                 |1.5|
+         *         +-+-+                 +-+-+
+         *           |                     |
+         *           |                     |
+         *   +-------+             +-------+-------+
+         *   |                     |               |
+         *   |                     |               |
+         * +-v-+                 +-v-+           +-v-+
+         * |0.5|                 |1.2|           |1.7|
+         * +---+                 +---+           +---+
+         */
+
+        const successor = this.min(node.right)!
+        successor.left = node.left
+        node = node.right
+        return node
+      } else if (node !== null && node.left !== null && value < node.value) {
+        // Case 2.
+        node.left = removeHelper(node.left)
+      } else if (node !== null && node.right !== null && value > node.value) {
+        // Case 3.
+        node.right = removeHelper(node.right)
+      }
+      return node
+    }
+
+    if (this.root) {
+      this.root = removeHelper(this.root)
+    }
   }
 }

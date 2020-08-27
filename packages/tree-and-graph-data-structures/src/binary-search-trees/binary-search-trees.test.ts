@@ -2,10 +2,12 @@
   eslint-disable
   @typescript-eslint/no-non-null-assertion,
   init-declarations,
+  jest/no-disabled-tests,
   jest/no-hooks,
   jest/require-top-level-describe,
+  max-lines-per-function,
   max-statements,
-  jest/require-top-level-describe
+  no-magic-numbers,
 */
 
 import { ILogger, Logger } from '../utils/logger'
@@ -145,18 +147,21 @@ describe('the max function', () => {
 
   it('should return the node containing the maximum value', () => {
     expect.hasAssertions()
-    expect(binarySearchTree.max(binarySearchTree.root)).toStrictEqual(new Node(7))
+    expect(binarySearchTree.max(binarySearchTree.root)).toStrictEqual(
+      new Node(7)
+    )
     expect(binarySearchTree.max(binarySearchTree.root!.left)).toStrictEqual(
       new Node(3)
     )
   })
 })
 
-describe.skip('the remove function', () => {
+describe('the remove function', () => {
   beforeEach(() => {
     binarySearchTree = new BinarySearchTree()
   })
   it('should be a function', () => {
+    expect.hasAssertions()
     expect(typeof binarySearchTree.remove).toBe('function')
   })
 
@@ -167,9 +172,9 @@ describe.skip('the remove function', () => {
     binarySearchTree.insert(3)
     binarySearchTree.remove(1)
 
-    expect(binarySearchTree.root.value).toBe(2)
-    expect(binarySearchTree.root.left).toBeNull()
-    expect(binarySearchTree.root.right.value).toBe(3)
+    expect(binarySearchTree.root!.value).toBe(2)
+    expect(binarySearchTree.root!.left).toBeNull()
+    expect(binarySearchTree.root!.right!.value).toBe(3)
   })
 
   it('should remove the node with the given value and promote its child when it has one child', () => {
@@ -180,9 +185,9 @@ describe.skip('the remove function', () => {
     binarySearchTree.insert(3)
     binarySearchTree.remove(1)
 
-    expect(binarySearchTree.root.value).toBe(2)
-    expect(binarySearchTree.root.left.value).toBe(0.5)
-    expect(binarySearchTree.root.right.value).toBe(3)
+    expect(binarySearchTree.root!.value).toBe(2)
+    expect(binarySearchTree.root!.left!.value).toBe(0.5)
+    expect(binarySearchTree.root!.right!.value).toBe(3)
   })
 
   it('should remove the node with the given value and promote its successor when it has two children', () => {
@@ -190,14 +195,20 @@ describe.skip('the remove function', () => {
     binarySearchTree.insert(2)
     binarySearchTree.insert(1)
     binarySearchTree.insert(0.5)
+    binarySearchTree.insert(0.3)
     binarySearchTree.insert(1.5)
+    binarySearchTree.insert(1.7)
+    binarySearchTree.insert(1.2)
     binarySearchTree.insert(3)
     binarySearchTree.remove(1)
 
-    expect(binarySearchTree.root.value).toBe(2)
-    expect(binarySearchTree.root.left.value).toBe(1.5)
-    expect(binarySearchTree.root.left.left.value).toBe(0.5)
-    expect(binarySearchTree.root.right.value).toBe(3)
+    expect(binarySearchTree.root!.value).toBe(2)
+    expect(binarySearchTree.root!.right!.value).toBe(3)
+    expect(binarySearchTree.root!.left!.value).toBe(1.5)
+    expect(binarySearchTree.root!.left!.right!.value).toBe(1.7)
+    expect(binarySearchTree.root!.left!.left!.value).toBe(1.2)
+    expect(binarySearchTree.root!.left!.left!.left!.value).toBe(0.5)
+    expect(binarySearchTree.root!.left!.left!.left!.left!.value).toBe(0.3)
   })
 })
 
