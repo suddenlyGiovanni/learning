@@ -16,7 +16,7 @@ let binarySearchTree: IBinarySearchTree<number>
 let logger: ILogger<IBinarySearchTree<number>>
 
 beforeEach(() => {
-  binarySearchTree = new BinarySearchTree()
+  binarySearchTree = new BinarySearchTree<number>()
 })
 
 test('it should be a function', () => {
@@ -30,7 +30,7 @@ test('should have a root property', () => {
   expect(binarySearchTree.hasOwnProperty('root')).toBe(true)
 })
 
-describe('the insert function', () => {
+describe.only('the insert function', () => {
   it('should be a function', () => {
     expect.hasAssertions()
     expect(typeof binarySearchTree.insert).toBe('function')
@@ -41,7 +41,7 @@ describe('the insert function', () => {
     binarySearchTree.insert(2)
     binarySearchTree.insert(4)
 
-    expect(binarySearchTree.root.right).toBeInstanceOf(Node)
+    expect(binarySearchTree.root?.right).toBeInstanceOf(Node)
   })
 
   it('should insert in a manner consistent with that of a binary search tree', () => {
@@ -54,13 +54,13 @@ describe('the insert function', () => {
     binarySearchTree.insert(5)
     binarySearchTree.insert(7)
 
-    expect(binarySearchTree.root.value).toBe(4)
-    expect(binarySearchTree.root.left.value).toBe(2)
-    expect(binarySearchTree.root.right.value).toBe(6)
-    expect(binarySearchTree.root.left.left.value).toBe(1)
-    expect(binarySearchTree.root.left.right.value).toBe(3)
-    expect(binarySearchTree.root.right.left.value).toBe(5)
-    expect(binarySearchTree.root.right.right.value).toBe(7)
+    expect(binarySearchTree.root?.value).toBe(4)
+    expect(binarySearchTree.root?.left?.value).toBe(2)
+    expect(binarySearchTree.root?.right?.value).toBe(6)
+    expect(binarySearchTree.root?.left?.left?.value).toBe(1)
+    expect(binarySearchTree.root?.left?.right?.value).toBe(3)
+    expect(binarySearchTree.root?.right?.left?.value).toBe(5)
+    expect(binarySearchTree.root?.right?.right?.value).toBe(7)
   })
 })
 
