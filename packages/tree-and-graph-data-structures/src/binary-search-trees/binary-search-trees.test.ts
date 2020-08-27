@@ -7,6 +7,7 @@
   jest/no-hooks,
   jest/require-top-level-describe,
   max-lines-per-function,
+  max-lines,
   max-statements,
   no-magic-numbers,
 */
@@ -274,7 +275,7 @@ describe('the preOrderTraversal function', () => {
   })
 })
 
-describe.skip('the postOrderTraversal function', () => {
+describe('the postOrderTraversal function', () => {
   beforeEach(() => {
     binarySearchTree.insert(4)
     binarySearchTree.insert(2)
