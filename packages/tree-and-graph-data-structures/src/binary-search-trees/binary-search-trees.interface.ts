@@ -58,16 +58,18 @@ export interface IBinarySearchTree<T> {
   insert(value: T): void
 
   /**
-   * @param {INode<T>} node
+   * @param {(null | INode<T>)} node
+   * @returns {(null | INode<T>)}
    * @memberof IBinarySearchTree
    */
-  max(node: null | INode<T>): undefined | INode<T>
+  max(node: null | INode<T>): null | INode<T>
 
   /**
-   * @param {INode<T>} node
+   * @param {(null | INode<T>)} node
+   * @returns {(null | INode<T>)}
    * @memberof IBinarySearchTree
    */
-  min(node: null | INode<T>): undefined | INode<T>
+  min(node: null | INode<T>): null | INode<T>
 
   /**
    * Left, right, root
