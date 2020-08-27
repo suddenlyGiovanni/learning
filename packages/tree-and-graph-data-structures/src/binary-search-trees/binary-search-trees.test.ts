@@ -64,7 +64,7 @@ describe('the insert function', () => {
   })
 })
 
-describe.only('the contains function', () => {
+describe('the contains function', () => {
   beforeEach(() => {
     binarySearchTree.insert(4)
     binarySearchTree.insert(2)
@@ -73,7 +73,6 @@ describe.only('the contains function', () => {
     binarySearchTree.insert(5)
     binarySearchTree.insert(3)
     binarySearchTree.insert(15)
-
   })
 
   it('should be a function', () => {
@@ -99,7 +98,7 @@ describe.only('the contains function', () => {
   })
 })
 
-describe('the min function', () => {
+describe.only('the min function', () => {
   beforeEach(() => {
     binarySearchTree.insert(4)
     binarySearchTree.insert(2)
@@ -117,8 +116,10 @@ describe('the min function', () => {
 
   it('should return the node containing the minimum value', () => {
     expect.hasAssertions()
-    expect(binarySearchTree.min(binarySearchTree.root)).toEqual(new Node(1))
-    expect(binarySearchTree.min(binarySearchTree.root.right)).toEqual(
+    expect(binarySearchTree.min(binarySearchTree.root)).toStrictEqual(
+      new Node(1)
+    )
+    expect(binarySearchTree.min(binarySearchTree.root!.right)).toStrictEqual(
       new Node(5)
     )
   })
