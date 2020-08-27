@@ -148,10 +148,18 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
   }
 
   public postOrderTraversal(
-    node: INode<T>,
+    node: null | INode<T>,
     func: VariadicFunction<[INode<T>], void>
   ): void {
-    throw new Error('Method not implemented.')
+    if (node !== null) {
+      if (node.left !== null) {
+        this.postOrderTraversal(node.left, func)
+      }
+      if (node.right !== null) {
+        this.postOrderTraversal(node.right, func)
+      }
+      func(node)
+    }
   }
 
   public preOrderTraversal(
