@@ -44,7 +44,15 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
   }
 
   public contains(value: T): boolean {
-    throw new Error('Method not implemented.')
+    const containsHelper = (_node: null | INode<T>, _value: T): boolean => {
+      if (_node === null) return false
+      if (_value === _node.value) return true
+      return _value < _node.value
+        ? containsHelper(_node.left, _value)
+        : containsHelper(_node.right, _value)
+    }
+
+    return containsHelper(this.root, value)
   }
 
   public inOrderTraversal(

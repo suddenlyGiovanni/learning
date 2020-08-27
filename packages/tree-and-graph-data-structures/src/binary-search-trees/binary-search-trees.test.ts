@@ -30,7 +30,7 @@ test('should have a root property', () => {
   expect(binarySearchTree.hasOwnProperty('root')).toBe(true)
 })
 
-describe.only('the insert function', () => {
+describe('the insert function', () => {
   it('should be a function', () => {
     expect.hasAssertions()
     expect(typeof binarySearchTree.insert).toBe('function')
@@ -64,11 +64,16 @@ describe.only('the insert function', () => {
   })
 })
 
-describe('the contains function', () => {
+describe.only('the contains function', () => {
   beforeEach(() => {
     binarySearchTree.insert(4)
     binarySearchTree.insert(2)
     binarySearchTree.insert(6)
+    binarySearchTree.insert(1)
+    binarySearchTree.insert(5)
+    binarySearchTree.insert(3)
+    binarySearchTree.insert(15)
+
   })
 
   it('should be a function', () => {
@@ -81,6 +86,10 @@ describe('the contains function', () => {
     expect(binarySearchTree.contains(4)).toBe(true)
     expect(binarySearchTree.contains(2)).toBe(true)
     expect(binarySearchTree.contains(6)).toBe(true)
+    expect(binarySearchTree.contains(1)).toBe(true)
+    expect(binarySearchTree.contains(5)).toBe(true)
+    expect(binarySearchTree.contains(3)).toBe(true)
+    expect(binarySearchTree.contains(15)).toBe(true)
   })
 
   it('should return false when the tree does not contain the value', () => {
