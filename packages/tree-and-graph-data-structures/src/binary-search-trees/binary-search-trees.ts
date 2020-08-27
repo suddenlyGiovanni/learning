@@ -57,10 +57,21 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
   }
 
   public inOrderTraversal(
-    node: INode<T>,
+    node: null | INode<T>,
     func: VariadicFunction<[INode<T>], void>
   ): void {
-    throw new Error('Method not implemented.')
+    // 1. base case
+    if (node !== null) {
+      // 2. recursive case
+      if (node.left !== null) {
+        this.inOrderTraversal(node.left, func)
+      }
+      func(node)
+
+      if (node.right !== null) {
+        this.inOrderTraversal(node.right, func)
+      }
+    }
   }
 
   public insert(value: T): undefined | INode<T> {
