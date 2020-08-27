@@ -1,6 +1,8 @@
+
 /*
   eslint-disable
   @typescript-eslint/no-non-null-assertion,
+  @typescript-eslint/unbound-method,
   init-declarations,
   jest/no-disabled-tests,
   jest/no-hooks,
@@ -14,10 +16,10 @@ import { ILogger, Logger } from '../utils/logger'
 
 import { BinarySearchTree, Node } from './binary-search-trees'
 
-import type { IBinarySearchTree } from './binary-search-trees.interface'
+import type { IBinarySearchTree, INode } from './binary-search-trees.interface'
 
 let binarySearchTree: IBinarySearchTree<number>
-let logger: ILogger<IBinarySearchTree<number>>
+let logger: ILogger<INode<number>>
 
 beforeEach(() => {
   binarySearchTree = new BinarySearchTree<number>()
@@ -212,7 +214,7 @@ describe('the remove function', () => {
   })
 })
 
-describe.skip('the inOrderTraversal function', () => {
+describe('the inOrderTraversal function', () => {
   beforeEach(() => {
     binarySearchTree.insert(4)
     binarySearchTree.insert(2)
@@ -232,14 +234,14 @@ describe.skip('the inOrderTraversal function', () => {
 
   it('should visit all nodes in an in-order (left, root, right) pattern', () => {
     expect.hasAssertions()
-    binarySearchTree.inOrderTraversal(binarySearchTree.root, logger.log)
+    binarySearchTree.inOrderTraversal(binarySearchTree.root!, logger.log)
 
     // Extract the values out of the logger
     const values = logger.values.map(
       (currentBinaryTree) => currentBinaryTree.value
     )
 
-    expect(values).toEqual([1, 2, 3, 4, 5, 6, 7])
+    expect(values).toStrictEqual([1, 2, 3, 4, 5, 6, 7])
   })
 })
 

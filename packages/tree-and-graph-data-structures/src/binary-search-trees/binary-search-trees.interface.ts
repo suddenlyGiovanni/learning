@@ -42,12 +42,12 @@ export interface IBinarySearchTree<T> {
 
   /**
    * Left, root, right
-   * @param {INode<T>} node
-   * @param {<A extends unknown[], B>(...xs: [...A]) => B} func
+   * @param {(null |INode<T>)} node
+   * @param {VariadicFunction<[INode<T>], void>} func
    * @memberof IBinarySearchTree
    */
   inOrderTraversal(
-    node: INode<T>,
+    node: null |INode<T>,
     func: VariadicFunction<[INode<T>], void>
   ): void
 
