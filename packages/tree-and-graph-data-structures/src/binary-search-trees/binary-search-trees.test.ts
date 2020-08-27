@@ -1,4 +1,3 @@
-
 /*
   eslint-disable
   @typescript-eslint/no-non-null-assertion,
@@ -245,7 +244,7 @@ describe('the inOrderTraversal function', () => {
   })
 })
 
-describe.skip('the preOrderTraversal function', () => {
+describe('the preOrderTraversal function', () => {
   beforeEach(() => {
     binarySearchTree.insert(4)
     binarySearchTree.insert(2)
@@ -259,18 +258,19 @@ describe.skip('the preOrderTraversal function', () => {
   })
 
   it('should be a function', () => {
+    expect.hasAssertions()
     expect(typeof binarySearchTree.preOrderTraversal).toBe('function')
   })
 
   it('should visit all nodes in an pre-order (root, left, right) pattern', () => {
     expect.hasAssertions()
-    binarySearchTree.preOrderTraversal(binarySearchTree.root, logger.log)
+    binarySearchTree.preOrderTraversal(binarySearchTree.root!, logger.log)
 
     // Extract the values out of the logger
     const values = logger.values.map(
       (currentBinaryTree) => currentBinaryTree.value
     )
-    expect(values).toEqual([4, 2, 1, 3, 6, 5, 7])
+    expect(values).toStrictEqual([4, 2, 1, 3, 6, 5, 7])
   })
 })
 

@@ -84,12 +84,12 @@ export interface IBinarySearchTree<T> {
 
   /**
    * Root, left, right
-   * @param {INode<T>} node
+   * @param {(null | INode<T>)} node
    * @param {VariadicFunction<[INode<T>], void>} func
    * @memberof IBinarySearchTree
    */
   preOrderTraversal(
-    node: INode<T>,
+    node: null | INode<T>,
     func: VariadicFunction<[INode<T>], void>
   ): void
 
