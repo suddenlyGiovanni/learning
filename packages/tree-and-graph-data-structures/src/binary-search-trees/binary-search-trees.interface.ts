@@ -61,13 +61,13 @@ export interface IBinarySearchTree<T> {
    * @param {INode<T>} node
    * @memberof IBinarySearchTree
    */
-  max(node: INode<T>): void
+  max(node: null | INode<T>): undefined | INode<T>
 
   /**
-   * @param {(null | INode<T>)} node
+   * @param {INode<T>} node
    * @memberof IBinarySearchTree
    */
-  min(node: null | INode<T>): void
+  min(node: null | INode<T>): undefined | INode<T>
 
   /**
    * Left, right, root
@@ -75,7 +75,10 @@ export interface IBinarySearchTree<T> {
    * @param {VariadicFunction<[INode<T>], void>} func
    * @memberof IBinarySearchTree
    */
-  postOrderTraversal(node: INode<T>, func: VariadicFunction<[INode<T>], void>): void
+  postOrderTraversal(
+    node: INode<T>,
+    func: VariadicFunction<[INode<T>], void>
+  ): void
 
   /**
    * Root, left, right
@@ -83,7 +86,10 @@ export interface IBinarySearchTree<T> {
    * @param {VariadicFunction<[INode<T>], void>} func
    * @memberof IBinarySearchTree
    */
-  preOrderTraversal(node: INode<T>, func: VariadicFunction<[INode<T>], void>): void
+  preOrderTraversal(
+    node: INode<T>,
+    func: VariadicFunction<[INode<T>], void>
+  ): void
 
   /**
    * @param {T} value
