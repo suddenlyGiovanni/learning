@@ -93,7 +93,23 @@
     "id-length": [
       "error",
       {
-        "exceptions": ["x", "xs", "y", "ys", "f", "i", "j", "n", "z", "_"]
+        "exceptions": [
+          "_",
+          "a",
+          "b",
+          "c",
+          "f",
+          "i",
+          "j",
+          "m",
+          "n",
+          "n",
+          "x",
+          "xs",
+          "y",
+          "ys",
+          "z"
+        ]
       }
     ],
     "import/extensions": ["warn", "never"],

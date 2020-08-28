@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 export const loopNTimes = (num: number): string => {
   console.log('num ===', num)
 
@@ -9,4 +11,6 @@ export const loopNTimes = (num: number): string => {
   return loopNTimes(num - 1)
 }
 
-console.log( loopNTimes(3))
+export const main = (): void => {
+  console.log(loopNTimes(3))
+}
