@@ -1,5 +1,16 @@
-/* eslint-disable init-declarations, max-statements, spaced-comment */
-// TASK: Implement binary search.
+/*
+  eslint-disable
+  init-declarations,
+  max-statements,
+  spaced-comment
+*/
+
+import assert from 'assert'
+
+/*
+ * # TASK:
+ * Implement binary search.
+ */
 
 export const binarySearch = <A>(list: A[], item: A): -1 | number => {
   // Set up the bounds
@@ -29,7 +40,7 @@ export const binarySearch = <A>(list: A[], item: A): -1 | number => {
 export const recursiveBinarySearch = <A>(list: A[], item: A): -1 | number => {
   const recurse = (min: number, max: number): -1 | number => {
     // Pick an index at the middle
-    const index = Math.floor((min + max) / 2) //?
+    const index = Math.floor((min + max) / 2)
     // Verify if the item is smaller or bigger than the element at the center
     if (min > max) {
       //  Bottom case the item is not present in the list
@@ -49,5 +60,10 @@ export const recursiveBinarySearch = <A>(list: A[], item: A): -1 | number => {
   return recurse(0, list.length - 1) //?
 }
 
-binarySearch([2, 6, 7, 90, 103, 120], 90) //?
-recursiveBinarySearch([2, 6, 7, 90, 103, 120], 90) //?
+export const main = (): void => {
+  assert.strictEqual(binarySearch([2, 6, 7, 90, 103, 120], 90) /* ?.$ */, 3)
+  assert.strictEqual(
+    recursiveBinarySearch([2, 6, 7, 90, 103, 120], 90) /* ?.$ */,
+    3
+  )
+}

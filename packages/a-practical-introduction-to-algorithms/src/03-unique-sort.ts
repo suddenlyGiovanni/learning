@@ -1,21 +1,27 @@
 /*
- * Task: Transform this simple sorting algorithm into a unique sort.
- * It should not return any duplicate values in the sorted array.
- */
+  eslint-disable
+  no-magic-numbers,
+  no-inline-comments
+*/
+import assert from 'assert'
+type uniqSort = <A>(xs: A[]) => A[]
 
 /*
+ * Task: Transform this simple sorting algorithm into a unique sort.
+ * It should not return any duplicate values in the sorted array.
+ *
  * Input: [1,5,2,1] => output: [1,2,5]
  * input: [4,2,2,3,2,2,2] => output: [2,3,4]
  */
 
-type uniqSort = <A>(xs: A[]) => A[]
 /**
  * UniqueSort is an `endomorphic` function that goes from ( A[] ) -> A[]
  * in the process it
  * - removes duplicate
  * - sorts the elements
- * @param {*} array
- * @returns array
+ * @template A
+ * @param {A[]} xs - array
+ * @returns {A[]} - array
  */
 export const uniqSort = <A>(xs: A[]): A[] => {
   const cache = new Map<A, boolean>()
@@ -47,5 +53,6 @@ export const uniqSort = <A>(xs: A[]): A[] => {
   return arr.sort(compareFunction)
 }
 
-// => [2,3,4]
-console.log(uniqSort([4, 2, 2, 3, 2, 2, 2]))
+export const main = (): void => {
+  assert.deepStrictEqual(uniqSort([4, 2, 2, 3, 2, 2, 2]), [2, 3, 4]) // => [2,3,4]
+}

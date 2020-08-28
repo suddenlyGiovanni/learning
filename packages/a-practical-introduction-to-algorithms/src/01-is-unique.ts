@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+
+import assert from 'assert'
 type isUnique = <a>(xs: a[]) => boolean
 
 /**
@@ -26,5 +29,7 @@ export const isUnique: isUnique = (arr) => {
   return result
 }
 
-console.log(isUnique([1, 2, 3]) === true)
-console.log(isUnique([1, 1, 3]) === false)
+export const main = (): void => {
+  assert(isUnique([1, 2, 3]) === true, 'list of unique elements')
+  assert(isUnique([1, 1, 3]) === false, 'list of not-unique elements')
+}

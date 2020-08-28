@@ -1,6 +1,14 @@
-// TASK: Implement linear search.
+/* eslint-disable no-magic-numbers */
+
+import assert from 'assert'
 
 const NOT_FOUND = -1
+
+/*
+ * # TASK:
+ * Implement linear search.
+ */
+
 /**
  * A linear search fn that works for collection of string and number
  * ISSUE: this elegant implementation cleverly uses reduce/fold to accomplish the search.
@@ -39,5 +47,7 @@ export const linearSearch = <A extends string | number>(
   return index
 }
 
-linearSearchFold([2, 6, 7, 90, 103, 90], 90) //?
-linearSearch([2, 6, 7, 90, 103, 90], 90) //?
+export const main = (): void => {
+  assert.strictEqual(linearSearchFold([2, 6, 7, 90, 103, 90], 90), 5)
+  assert.strictEqual(linearSearch([2, 6, 7, 90, 103, 90], 90), 3)
+}

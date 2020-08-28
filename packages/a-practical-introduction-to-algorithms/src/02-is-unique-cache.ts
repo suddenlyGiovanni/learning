@@ -1,3 +1,12 @@
+/*
+  eslint-disable
+  max-statements,
+  no-console,
+  no-underscore-dangle
+*/
+
+import assert from 'assert'
+
 type isUnique = <A>(xs: A[]) => boolean
 
 /**
@@ -34,9 +43,6 @@ const isUnique = (arr: number[]): boolean => {
   return result
 }
 
-console.log(isUnique([1, 2, 3]) === true)
-console.log(isUnique([1, 1, 3]) === false)
-
 const _isUnique = <T>(arr: T[]): boolean => {
   const cache = new Map<T, boolean>()
   let result = true
@@ -51,5 +57,12 @@ const _isUnique = <T>(arr: T[]): boolean => {
   return result
 }
 
-console.log(isUnique([1, 2, 3]) === _isUnique([1, 2, 3]))
-console.log(isUnique([1, 1, 3]) === _isUnique([1, 1, 3]))
+export const main = (): void => {
+  // Assert for isUnique
+  assert(isUnique([1, 2, 3]) === true)
+  assert(isUnique([1, 1, 3]) === false)
+
+  // Assert for _isUnique
+  assert(isUnique([1, 2, 3]) === _isUnique([1, 2, 3]))
+  assert(isUnique([1, 1, 3]) === _isUnique([1, 1, 3]))
+}
