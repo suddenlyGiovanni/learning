@@ -21,7 +21,7 @@
     "test": "yarn run start"
   },
   "devDependencies": {
-    "ts-node": "8.10.2",
+    "ts-node": "9.0.0",
     "tsconfig-paths": "3.9.0"
   }
 }
