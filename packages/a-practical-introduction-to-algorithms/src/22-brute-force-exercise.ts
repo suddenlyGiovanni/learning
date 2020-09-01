@@ -1,7 +1,4 @@
-/**
- * Write a function, makeChange, that returns an integer that represents the least number of coins
- *  that add up to the amount, n.
- */
+import assert from 'assert'
 
 export const makeChange = (coins: number[], amount: number): number => {
   const canSubtract = (x: number, y: number): boolean => x - y >= 0
@@ -24,4 +21,10 @@ export const makeChange = (coins: number[], amount: number): number => {
   return acc + 1
 }
 
-makeChange([1, 6, 10], 12) //?
+export const main = (): void => {
+  /**
+   * Write a function, makeChange, that returns an integer that represents the least number of coins
+   *  that add up to the amount, n.
+   */
+  assert.deepStrictEqual(makeChange([1, 6, 10], 12), 2)
+}

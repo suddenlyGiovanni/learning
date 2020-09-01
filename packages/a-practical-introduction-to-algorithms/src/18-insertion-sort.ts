@@ -1,4 +1,11 @@
-/* eslint-disable no-plusplus, no-unmodified-loop-condition */
+/*
+  eslint-disable
+  no-plusplus,
+  no-unmodified-loop-condition
+*/
+
+import assert from 'assert'
+
 /**
  * Insertion sort works similarly as we sort cards in our hand in a card game.
  * We assume that the first card is already sorted then, we select an unsorted card.
@@ -9,9 +16,7 @@
  *
  * Insertion sort is a sorting algorithm that places an unsorted element at its suitable place in
  * each iteration.
- */
-
-/**
+ *
  * Pseudo code:
  * @example
  *    insertionSort(array)
@@ -48,4 +53,16 @@ export const insertionSort = <A>(array: A[]): A[] => {
   return arr
 }
 
-insertionSort([3, 7, 4, 9, 5, 2, 6, 1]) // ?
+export const main = (): void => {
+  assert.deepStrictEqual(insertionSort([3, 7, 4, 9, 5, 2, 6, 1]), [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    9,
+  ])
+  // ?
+}

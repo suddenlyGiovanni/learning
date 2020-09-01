@@ -1,4 +1,6 @@
 /* eslint-disable max-statements */
+import assert from 'assert'
+
 /**
  * # Selection Sort Algorithm
  *
@@ -13,7 +15,6 @@
  * 4 - For each iteration, indexing starts from the first unsorted element.
  *     Step 1 to 3 are repeated until all the elements are placed at their correct positions.
  */
-
 export const selectionSort = <A>(array: A[]): A[] => {
   const arr: A[] = array.slice()
   const size = arr.length
@@ -31,7 +32,7 @@ export const selectionSort = <A>(array: A[]): A[] => {
     for (let i = step + 1; i < size; i++) {
       const element = arr[i]
       // Select the minimum element in each loop.
-      if(element < arr[minIdx]) {
+      if (element < arr[minIdx]) {
         minIdx = i
       }
       // Else do nothing
@@ -44,5 +45,13 @@ export const selectionSort = <A>(array: A[]): A[] => {
   return arr
 }
 
-selectionSort([20, 12, 10, 15, 2]) //?
-selectionSort([20]) //?
+export const main = (): void => {
+  assert.deepStrictEqual(selectionSort([20, 12, 10, 15, 2]), [
+    2,
+    10,
+    12,
+    15,
+    20,
+  ])
+  assert.deepStrictEqual(selectionSort([20]), [20])
+}
