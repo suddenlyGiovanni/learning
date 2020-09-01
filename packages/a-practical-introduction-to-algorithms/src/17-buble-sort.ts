@@ -1,4 +1,10 @@
-/* eslint-disable no-underscore-dangle, max-statements, spaced-comment */
+/*
+  eslint-disable
+  no-underscore-dangle,
+  max-statements,
+  spaced-comment
+*/
+
 /**
  * # Bubble sort
  *
@@ -13,6 +19,8 @@
  *     In each iteration, the comparison takes place up to the last unsorted element.
  *     The array is sorted when all the unsorted elements are placed at their correct positions.
  */
+
+import assert from 'assert'
 
 /*
  * # Bubble sort pseudo code
@@ -98,6 +106,7 @@ export const recursiveBubbleSort = <A>(xs: readonly A[]): A[] => {
   return sort(_xs, _xs.length - 1)
 }
 
-// [1, 2, 4, 5, 8]
-bubbleSort([5, 1, 4, 2, 8]) //?
-recursiveBubbleSort([5, 1, 4, 2, 8]) //?
+export const main = (): void => {
+  assert.deepStrictEqual(bubbleSort([5, 1, 4, 2, 8]), [1, 2, 4, 5, 8])
+  assert.deepStrictEqual(recursiveBubbleSort([5, 1, 4, 2, 8]), [1, 2, 4, 5, 8])
+}

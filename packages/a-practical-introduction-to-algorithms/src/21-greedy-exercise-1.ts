@@ -1,14 +1,6 @@
 /* eslint-disable max-statements, id-length */
-/**
- * Write a function, makeChange, that returns an integer that represents the least number of coins
- * that add up to an amount where the amount is always divisible by 5.
- *
- * Coin values: 5, 10, 25
- *
- * Input amount: 40 , output # of coins: 3 (25, 10, 5)
- *
- * Input amount: 35, output # of coins: 2 (25, 10)
- */
+
+import assert from 'assert'
 
 type int = number
 export const makeChange = (coins: readonly int[], amount: int): int[] => {
@@ -39,6 +31,19 @@ export const makeChange = (coins: readonly int[], amount: int): int[] => {
   return accumulator
 }
 
-makeChange([5, 10, 25], 50) // ?
-makeChange([5, 10, 25], 40) // ?
-makeChange([5, 10, 25], 35) // ?
+export const main = (): void => {
+  /**
+   * Write a function, makeChange, that returns an integer that represents the least number of coins
+   * that add up to an amount where the amount is always divisible by 5.
+   *
+   * Coin values: 5, 10, 25
+   *
+   * Input amount: 40 , output # of coins: 3 (25, 10, 5)
+   *
+   * Input amount: 35, output # of coins: 2 (25, 10)
+   */
+
+  assert.deepStrictEqual(makeChange([5, 10, 25], 50), [25, 25])
+  assert.deepStrictEqual(makeChange([5, 10, 25], 40), [25, 10, 5])
+  assert.deepStrictEqual(makeChange([5, 10, 25], 35), [25, 10])
+}
