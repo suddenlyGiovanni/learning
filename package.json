@@ -13,7 +13,7 @@
     "@typescript-eslint/parser": "3.10.1",
     "commitizen": "4.2.1",
     "cz-conventional-changelog": "3.3.0",
-    "dtslint": "3.7.0",
+    "dtslint": "4.0.0",
     "eslint": "7.8.1",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-import": "2.22.0",
