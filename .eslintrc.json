@@ -28,165 +28,184 @@
   },
   "plugins": ["@typescript-eslint", "jest", "import"],
   "rules": {
-    "@typescript-eslint/member-ordering": [
-      "error",
-      {
-        "default": {
-          "memberTypes": [
-            "signature",
-            "public-static-field",
-            "protected-static-field",
-            "private-static-field",
-            "public-instance-field",
-            "protected-instance-field",
-            "private-instance-field",
-            "public-abstract-field",
-            "protected-abstract-field",
-            "private-abstract-field",
-            "public-field",
-            "protected-field",
-            "private-field",
-            "static-field",
-            "instance-field",
-            "abstract-field",
-            "field",
-            "public-constructor",
-            "protected-constructor",
-            "private-constructor",
-            "constructor",
-            "public-static-method",
-            "protected-static-method",
-            "private-static-method",
-            "public-instance-method",
-            "protected-instance-method",
-            "private-instance-method",
-            "public-abstract-method",
-            "protected-abstract-method",
-            "private-abstract-method",
-            "public-method",
-            "protected-method",
-            "private-method",
-            "static-method",
-            "instance-method",
-            "abstract-method",
-            "method"
-          ],
-          "order": "alphabetically"
-        }
-      }
-    ],
-    "capitalized-comments": [
-      "warn",
-      "always",
-      {
-        "ignoreConsecutiveComments": true,
-        "ignoreInlineComments": true
-      }
-    ],
-    "func-style": [
-      "error",
-      "declaration",
-      {
-        "allowArrowFunctions": true
-      }
-    ],
-    "id-length": [
-      "error",
-      {
-        "exceptions": [
-          "_",
-          "a",
-          "b",
-          "c",
-          "f",
-          "i",
-          "j",
-          "m",
-          "n",
-          "n",
-          "x",
-          "xs",
-          "y",
-          "ys",
-          "z"
-        ]
-      }
-    ],
-    "import/extensions": ["warn", "never"],
-    "import/order": [
-      "warn",
-      {
-        "alphabetize": {
-          "caseInsensitive": true,
-          "order": "asc"
-        },
-        "groups": [
-          "builtin",
-          "external",
-          "parent",
-          "sibling",
-          "index",
-          "internal"
+  "@typescript-eslint/member-ordering": [
+    "error",
+    {
+      "default": {
+        "memberTypes": [
+          "signature",
+          "public-static-field",
+          "protected-static-field",
+          "private-static-field",
+          "public-instance-field",
+          "protected-instance-field",
+          "private-instance-field",
+          "public-abstract-field",
+          "protected-abstract-field",
+          "private-abstract-field",
+          "public-field",
+          "protected-field",
+          "private-field",
+          "static-field",
+          "instance-field",
+          "abstract-field",
+          "field",
+          "public-constructor",
+          "protected-constructor",
+          "private-constructor",
+          "constructor",
+          "public-static-method",
+          "protected-static-method",
+          "private-static-method",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method",
+          "public-abstract-method",
+          "protected-abstract-method",
+          "private-abstract-method",
+          "public-method",
+          "protected-method",
+          "private-method",
+          "static-method",
+          "instance-method",
+          "abstract-method",
+          "method"
         ],
-        "newlines-between": "always-and-inside-groups"
+        "order": "alphabetically"
       }
-    ],
-    "line-comment-position": "off",
-    "no-console": [
-      "warn",
-      {
-        "allow": ["warn", "error"]
-      }
-    ],
-    "no-inline-comments": "warn",
-    "no-magic-numbers": [
-      "warn",
-      {
-        "detectObjects": true,
-        "enforceConst": true,
-        "ignoreArrayIndexes": true
-      }
-    ],
-    "no-plusplus": [
-      "error",
-      {
-        "allowForLoopAfterthoughts": true
-      }
-    ],
-    "no-ternary": "off",
-    "no-undefined": "off",
-    "no-underscore-dangle": [
-      "error",
-      {
-        "allowAfterThis": true,
-        "allowFunctionParams": true
-      }
-    ],
-    "no-unused-vars": [
-      "error",
-      {
-        "args": "after-used",
-        "ignoreRestSiblings": true
-      }
-    ],
-    "one-var": ["error", "never"],
-    "sort-imports": [
-      "warn",
-      {
-        "ignoreCase": false,
-        "ignoreDeclarationSort": true,
-        "ignoreMemberSort": false,
-        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
-      }
-    ],
-    "sort-keys": [
-      "warn",
-      "asc",
-      {
-        "caseSensitive": true,
-        "minKeys": 2,
-        "natural": true
-      }
-    ]
-  }
+    }
+  ],
+  "capitalized-comments": [
+    "warn",
+    "always",
+    {
+      "ignoreConsecutiveComments": true,
+      "ignoreInlineComments": true
+    }
+  ],
+  "func-style": [
+    "error",
+    "declaration",
+    {
+      "allowArrowFunctions": true
+    }
+  ],
+  "id-length": [
+    "error",
+    {
+      "exceptions": [
+        "_",
+        "a",
+        "b",
+        "c",
+        "f",
+        "i",
+        "j",
+        "m",
+        "n",
+        "x",
+        "xs",
+        "y",
+        "ys",
+        "z"
+      ]
+    }
+  ],
+  "import/extensions": [
+    "warn",
+    "never"
+  ],
+  "import/order": [
+    "warn",
+    {
+      "alphabetize": {
+        "caseInsensitive": true,
+        "order": "asc"
+      },
+      "groups": [
+        "builtin",
+        "external",
+        "parent",
+        "sibling",
+        "index",
+        "internal"
+      ],
+      "newlines-between": "always-and-inside-groups"
+    }
+  ],
+  "line-comment-position": "off",
+  "no-console": [
+    "warn",
+    {
+      "allow": [
+        "warn",
+        "error"
+      ]
+    }
+  ],
+  "no-inline-comments": "warn",
+  "no-magic-numbers": [
+    "warn",
+    {
+      "detectObjects": true,
+      "enforceConst": true,
+      "ignoreArrayIndexes": true
+    }
+  ],
+  "no-plusplus": [
+    "error",
+    {
+      "allowForLoopAfterthoughts": true
+    }
+  ],
+  "no-ternary": "off",
+  "no-undefined": "off",
+  "no-underscore-dangle": [
+    "error",
+    {
+      "allowAfterThis": true,
+      "allowFunctionParams": true
+    }
+  ],
+  "no-unused-vars": [
+    "error",
+    {
+      "args": "after-used",
+      "ignoreRestSiblings": true
+    }
+  ],
+  "no-use-before-define": [
+    "error",
+    {
+      "functions": false
+    }
+  ],
+  "one-var": [
+    "error",
+    "never"
+  ],
+  "sort-imports": [
+    "warn",
+    {
+      "ignoreCase": false,
+      "ignoreDeclarationSort": true,
+      "ignoreMemberSort": false,
+      "memberSyntaxSortOrder": [
+        "none",
+        "all",
+        "multiple",
+        "single"
+      ]
+    }
+  ],
+  "sort-keys": [
+    "warn",
+    "asc",
+    {
+      "caseSensitive": true,
+      "minKeys": 2,
+      "natural": true
+    }
+  ]
+}
 }
