@@ -19,10 +19,10 @@ Immediately below, you can find the list of all the available sub repo and a lin
 | Repo                                     | Subject                | Source                                                                                                                   | Author                                                       |
 | ---------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------ |
 | [algo-cast]                              | Algorithms             | [Udemy](https://www.udemy.com/course/coding-interview-bootcamp-algorithms-and-data-structure/)                           | [Stephen Grider] - @StephenGrider                            |
-| [practical-intro-to-data-structures]     | Data structures        | [Front End Master](https://frontendmasters.com/courses/data-structures-interviews/)                                      | [Bianca Gandolfo] - @bgando                                  |
 | [a-practical-introduction-to-algorithms] | Algorithms             | [Front End Master](https://frontendmasters.com/courses/practical-algorithms/)                                            | [Bianca Gandolfo] - @bgando                                  |
+| [practical-intro-to-data-structures]     | Data structures        | [Front End Master](https://frontendmasters.com/courses/data-structures-interviews/)                                      | [Bianca Gandolfo] - @bgando                                  |
 | [tree-and-graph-data-structures]         | Data structures        | [Front End Master](https://frontendmasters.com/courses/trees-and-graphs/)                                                | [Bianca Gandolfo] - @bgando                                  |
-| [data-structures-and-algorithms]         | Data structures        | Gang of Four                                                                                                             | @suddenlyGiovanni                                            |
+| [data-structures-and-algorithms]         | Data structures        |                                                                                                              | @suddenlyGiovanni                                            |
 | [head-first-design-patterns]             | Design Patterns        | [Head First Design Patterns: A Brain-Friendly Guide](https://www.oreilly.com/library/view/head-first-design/0596007124/) | @suddenlyGiovanni                                            |
 | [java-design-pattern]                    | Design Patterns        | [Code with Mosh](https://codewithmosh.com/courses/enrolled/733596)                                                       | Mosh Hamedani - @mosh                                        |
 | [oop-design-patterns]                    | Design Patterns        | [YouTube Playlist](https://www.youtube.com/playlist?list=PLzvRQMJ9HDiSk1pnrKewLklYfCdu9Qjhy)                             | [Xavier Decuyper](Savjehttps://github.com/Savjeee) - @Savjee |
@@ -66,15 +66,16 @@ This project is licensed under the MIT License - see the [LICENSE.md] file for d
 [wallaby]: https://wallabyjs.com
 [quokka]: https://quokkajs.com/docs/index.html
 [//]: # 'Repos'
-[a-practical-introduction-to-algorithms]: ./packages/a-practical-introduction-to-algorithms/
-[practical-intro-to-data-structures]: ./packages/practical-intro-to-data-structures/
 [algo-cast]: ./packages/algo-cast/
+[a-practical-introduction-to-algorithms]: ./packages/data-structures-and-algorithms/a-practical-introduction-to-algorithms.md
+[practical-intro-to-data-structures]: ./packages/data-structures-and-algorithms/practical-intro-to-data-structures.md
+[tree-and-graph-data-structures]: ./packages/data-structures-and-algorithms/tree-and-graph-data-structures.md
 [build-your-own-programming-language]: ./packages/build-your-own-programming-language/
 [complete-intro-to-react-v5]: ./packages/complete-intro-to-react-v5/
 [head-first-design-patterns]: ./packages/head-first-design-patterns/
 [rethinking-asynchronous-javascript]: ./packages/rethinking-asynchronous-javascript/
 [composition-over-inheritance]: ./packages/composition-over-inheritance/
-[data-structures-and-algorithms]: ./packages/data-structures-and-algorithms/
+[data-structures-and-algorithms]: ./packages/data-structures-and-algorithms/README.md
 [deno-test]: ./packages/deno-test/
 [functional-programming-ts]: ./packages/functional-programming-ts/
 [hardcore-functional-js]: ./packages/hardcore-functional-js/
@@ -86,7 +87,6 @@ This project is licensed under the MIT License - see the [LICENSE.md] file for d
 [react-hooks-examples]: ./packages/react-hooks-examples/
 [typescrip-like-in-haskell]: ./packages/typescrip-like-in-haskell/
 [use-react-context-effectively]: ./packages/use-react-context-effectively/
-[tree-and-graph-data-structures]: ./packages/tree-and-graph-data-structures/
 [//]: # 'Authors'
 [bianca gandolfo]: https://github.com/bgando
 [steve kinney]: https://github.com/stevekinney

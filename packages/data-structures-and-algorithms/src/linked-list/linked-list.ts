@@ -1,269 +1,357 @@
-/* eslint-disable no-plusplus, max-statements, no-underscore-dangle, max-lines-per-function, func-style, no-console, no-undef, @typescript-eslint/member-ordering */
+/*
+  eslint-disable
+  max-statements,
+  @typescript-eslint/no-non-null-assertion,
+  no-plusplus,
+  max-lines-per-function,
+  max-lines,
+*/
 
-/**
- * Linked list
- * |Head| - - - - -  |Tail|
- * | O | -> O -> O ->| O |
- * a Linked list is a linear collection of data elements who each element points to the next
- * It is a data structure consisting of a collection of nodes which together represent a sequence.
- *  In its most basic form, each node contains:
- * - data,
- * - and a reference (in other words, a link) to the next node in the sequence.
- * {value, next -}-> {value, next -}-> {value, next}
- * This structure allows for efficient insertion or removal of elements from any position in the
- * sequence during iteration.
- * More complex variants add additional links, allowing more efficient insertion or removal of
- * nodes at arbitrary positions.
- * A drawback of linked lists is that access time is linear.
- * Linked lists are among the simplest and most common data structures.
- * They can be used to implement several other common abstract data types, including lists, stacks,
- * queues, associative arrays, and S-expressions, though it is not uncommon to implement those data
- * structures directly without using a linked list as the basis.
- *
- * The principal benefit of a linked list over a conventional array is that the list elements can
- * be easily inserted or removed without reallocation or reorganization of the entire structure
- * because the data items need not be stored contiguously in memory or on disk, while restructuring
- * an array at run-time is a much more expensive operation.
- *
- * Linked lists allow insertion and removal of nodes at any point in the list, and allow doing so
- * with a constant number of operations by keeping the link previous to the link being added or
- * removed in memory during list traversal.
- *
- * On the other hand, since simple linked lists by themselves do not allow random access to the
- * data or any form of efficient indexing, many basic operations may require iterating through most
- * or all of the list elements.
- *
- * Linked list are dynamic, so the length of list can increase or decrease as necessary.
- * Each node does not necessarily follow the previous one physically in the memory.
- */
+import type {
+  ILinkedList,
+  ILinkedListNode as INode,
+} from '../interfaces/linked-list.interface'
 
-interface INode<T = null> {
-  value: T
-  next: INode<T> | null
+import { Node } from './linked-list-node'
+
+export function defaultEqualityPredicate<A>(x: A, y: A): boolean {
+  return x === y
 }
 
-interface LinkedList<T> {
-  /** The first current element of the linked list */
-  readonly head: null | INode<T>
+export class LinkedList<T> implements ILinkedList<T> {
+  private readonly comparatorStrategy: (x: T, y: T) => boolean
 
-  /** The last current element of the linked list */
-  readonly tail: null | INode<T>
+  private count: number
 
-  /** The overall length of the linked list */
-  readonly length: number
+  private head: INode<T> | undefined
 
-  /** Adds an element to the end of the linked list */
-  readonly push: (value: T) => INode<T>
+  private tail: INode<T> | undefined
 
-  /** Removes and return the the last element of the linked list if one is available */
-  readonly pop: () => null | INode<T>
+  public constructor(
+    equalityPredicate: (x: T, y: T) => boolean = defaultEqualityPredicate
+  ) {
+    this.head = undefined
+    this.tail = this.head
+    this.count = 0
+    this.comparatorStrategy = equalityPredicate
+  }
 
   /**
-   * Retrieves an element at a specified index and then returns it.
-   * if the index is out of bounds it will return null
-   *
+   * Traverse the linked list sequentially and call the provided cb with the current node and index
+   * an explicit (and truthy) return from the callback function will stop the traversal and
+   * return that value out of to the traverse
+   * @static
+   * @template A
+   * @template B
+   * @param {ILinkedList<A>} linkedList
+   * @param {((
+   *       nodes: {
+   *         currentNode: INode<A>
+   *         nextNode: undefined | INode<A>
+   *         previousNode: undefined | INode<A>
+   *       },
+   *       index: number,
+   *       length: number
+   *     ) => B)} cb
+   * @returns {(undefined | B)}
+   * @memberof LinkedList
    */
-  readonly get: (index: number) => null | INode<T>
+  private static traverse<A, B>(
+    linkedList: ILinkedList<A>,
+    cb: (
+      nodes: {
+        currentNode: INode<A>
+        nextNode: undefined | INode<A>
+        previousNode: undefined | INode<A>
+      },
+      index: number,
+      length: number
+    ) => B
+  ): undefined | B {
+    // eslint-disable-next-line no-undef-init
+    let previousNode: undefined | INode<A> = undefined
+    let currentNode: undefined | INode<A> = linkedList.getHead()
+    let nextNode: undefined | INode<A> = currentNode?.next
 
-  /** Deletes an element at a specified index and returns it. */
-  readonly delete: (index: number) => null | INode<T>
+    for (let i = 0; currentNode && i < linkedList.size(); i++) {
+      const resp = cb(
+        { currentNode, nextNode, previousNode },
+        i,
+        linkedList.size()
+      )
 
-  /** Print the linked list to a string representation */
-  readonly print: () => string
-
-  readonly isEmpty: () => boolean
-}
-
-function createNode<T>(value: T): INode<T> {
-  return {
-    value,
-    next: null,
+      if (resp) {
+        return resp
+      }
+      previousNode = currentNode
+      nextNode = currentNode.next?.next
+      currentNode = currentNode.next
+    }
+    return undefined
   }
-}
 
-export function createLinkedList<T>(): LinkedList<T> {
-  let _head: null | INode<T> = null
-  let _tail: null | INode<T> = null
-  let _length = 0
-  return {
-    get head() {
-      return _head
-    },
+  /**
+   * Iterator of elements in the LinkedList
+   */
+  *[Symbol.iterator](): IterableIterator<INode<T>> {
+    let node = this.head
+    while (node) {
+      yield node
+      node = node.next
+    }
+  }
 
-    get tail() {
-      return _tail
-    },
+  /**
+   * Clears the list
+   */
+  public clear(): void {
+    this.head = undefined
+    this.tail = undefined
+    this.count = 0
+  }
 
-    get length() {
-      return _length
-    },
+  public forEach(cb: (node: INode<T>) => void): this {
+    for (const node of this) {
+      cb(node)
+    }
+    return this
+  }
 
-    push(value) {
-      // Push places an element to the end of the list
-      const node = createNode(value)
-
-      // Depending on the length of the list we need to take some different actions
-
-      // if the LL does not have a head and thus is empty...
-      if (this.head === null) {
-        _head = node
-        _tail = node
-        _length++
-        return node
+  /**
+   * This method returns the element of a specific position in the list.
+   * If the element does not exist in the list, it returns undefined.
+   */
+  public getElementAt(index: number): INode<T> | undefined {
+    if (index >= 0 && index <= this.count) {
+      let node = this.head
+      for (let i = 0; node && i < index; i++) {
+        node = node.next
       }
-      /**
-       * If the LL does have a length and thus have a head and a tail...
-       * a we need to update the tail property to the one just created.
-       */
-
-      // set the pointer of the current tail to the next node.
-      _tail.next = node
-      // Set the old tail to the now current new node.
-      _tail = node
-      _length++
       return node
-      // We need to increment the length property
-    },
+    }
+    return undefined
+  }
 
-    pop() {
-      /**
-       * How to pop an item when:
-       * - a list is empty
-       * - a list has a length of one
-       * - a list has many items
-       *
-       */
+  /**
+   * This method returns the head of the list.
+   */
+  public getHead(): INode<T> | undefined {
+    return this.head
+  }
 
-      // SCENARIO: a list is empty
-      if (this.isEmpty()) {
-        return null
+  /**
+   * This method returns the index of the element in the list.
+   * If the element does not exist in the list, it returns -1.
+   */
+  public indexOf(element: T): -1 | number {
+    if (this.head) {
+      if (this.comparatorStrategy(this.head.element, element)) {
+        return 0
       }
 
-      const node = _tail
-
-      // SCENARIO: a list has one item
-
-      // the list has a length of one when:
-      if (_head === _tail) {
-        // We need to remove the only element in the list and reset the head and tail back to null
-        _head = null
-        _tail = null
-        _length--
-        return node
-      }
-
-      // SCENARIO: a list has many items
-
-      /**
-       * need to set the penultimate item before tail to the new tail
-       * with its next value set to null
-       *
-       */
-      let current = _head
-      let penultimate: INode<T>
-      while (current) {
-        if (current.next === _tail) {
-          penultimate = current
-          break
+      const index = LinkedList.traverse(this, ({ currentNode }, i) => {
+        if (currentNode.element === element) {
+          return i
         }
-        current = current.next
-      }
+      })
+      return index ? index : -1
+    }
+    return -1
+  }
 
-      penultimate.next = null
-      _tail = penultimate
-      _length--
-      return node
-    },
-
-    get(index) {
-      if (index < 0 || index > _length) {
-        return null
-      }
-
-      if (index === 0) {
-        return _head
-      }
-
-      let current = _head
-      let i = 0
-      while (i < index) {
-        i++
-        current = current.next
-      }
-
-      return current
-    },
-
-    delete(index) {
-      if (index < 0 || index > _length) {
-        return null
-      }
+  /**
+   * Inserts a new element at a specified index in the list
+   */
+  public insert(element: T, index: number): boolean {
+    if (Number.isInteger(index) && index >= 0 && index <= this.count) {
+      const node = new Node(element)
 
       if (index === 0) {
-        const deleted = _head
-        _head = _head.next
-        _length--
-        return deleted
+        // eslint-disable-next-line no-negated-condition
+        if (!this.head) {
+          /*
+           * Case: empty list
+           * 1. set head to be the new node
+           * 2. set tail to also point to the new node
+           */
+          this.head = node
+          this.tail = node
+        } else {
+          /*
+           * Case: inset to the head of a list of size 1 or more
+           * 1. point the current head to the next property of the new node
+           * 2. set the new node to be the new head
+           */
+          node.next = this.head
+          this.head = node
+        }
+        this.count++
+        return true
       }
 
-      let current = _head
-      let previous: null | INode<T>
-      let i = 0
+      if (!this.head) {
+        return false
+      }
 
-      while (i < index) {
-        i++
-        previous = current
+      // Case: inserting at the tail of the list
+      if (index === this.count) {
+        this.tail!.next = node
+        this.tail = node
+        this.count++
+        return true
+      }
+
+      /*
+       * Case: inserting at any other position
+       * 1. iterate throughout the whole list and stop on the node preceding the desired index
+       * 2. set the new node next to point to the node at specified index (node.next = current.next)
+       * 3. set the current.next to point to the new node
+       */
+      let current = this.head
+      for (let i = 1; current.next && i < index; i++) {
         current = current.next
       }
-      const deleted = current
-      previous.next = current.next
-      _length--
-      return deleted
-    },
+      node.next = current.next
+      current.next = node
+      this.count++
+      return true
+    }
+    return false
+  }
 
-    print() {
-      const values: T[] = []
-      let current = _head
+  /**
+   * This method returns true if the linked list does not contain any elements,
+   * and false if the size of the linked list is bigger than 0
+   */
+  public isEmpty(): boolean {
+    return this.size() === 0
+  }
 
-      while (current) {
-        values.push(current.value)
-        current = current.next
+  public map<U>(cb: (element: T) => U): ILinkedList<U> {
+    const linkedList = new LinkedList<U>()
+    for (const node of this) {
+      linkedList.push(cb(node.element))
+    }
+    return linkedList
+  }
+
+  /**
+   * This method adds a new element to the end of the list
+   */
+  public push(element: T): void {
+    const node = new Node(element)
+    // eslint-disable-next-line no-negated-condition
+    if (!this.head) {
+      this.head = node
+      this.tail = this.head
+    } else {
+      // There must be a tail that is not undefined
+      this.tail!.next = node
+      this.tail = node
+    }
+    this.count++
+  }
+
+  /**
+   * This method removes an element from the list
+   */
+  public remove(element: T): undefined | T {
+    const nodes = LinkedList.traverse(this, (_nodes) =>
+      this.comparatorStrategy(_nodes.currentNode.element, element)
+        ? _nodes
+        : undefined
+    )
+
+    if (nodes) {
+      const { previousNode, currentNode, nextNode } = nodes
+      const node = this.removeNode(previousNode, currentNode, nextNode)
+      return node.element
+    }
+    return undefined
+  }
+
+  /**
+   * This method removes an item from a specified index in the list.
+   */
+  public removeAt(index: number): T | undefined {
+    if (Number.isInteger(index) && index >= 0 && index <= this.count) {
+      const nodes = LinkedList.traverse(this, (_nodes, i) =>
+        i === index ? _nodes : undefined
+      )
+
+      if (nodes) {
+        const { previousNode, currentNode, nextNode } = nodes
+        const { element } = this.removeNode(previousNode, currentNode, nextNode)
+        return element
       }
+    }
+    return undefined
+  }
 
-      return values.join(' => ')
-    },
-    isEmpty() {
-      return this.length === 0
-    },
+  /**
+   * This method returns the number of elements the linked list contains.
+   * It is similar to the length property of the array.
+   */
+  public size(): number {
+    return this.count
+  }
+
+  /**
+   * This method returns a string representation of the linked list.
+   * As the list uses a Node class as an element, we need to overwrite the default toString method
+   * inherited from the JavaScript Object class to output only the element values
+   */
+  public toString(): string {
+    if (!this.head) {
+      return ''
+    }
+    let objString = String(this.head.element)
+    let current = this.head.next
+    for (let i = 1; i < this.size() && current; i++) {
+      objString = `${objString},${String(current.element)}`
+      current = current.next
+    }
+    return objString
+  }
+
+  private removeNode(
+    previousNode: undefined | INode<T>,
+    currentNode: INode<T>,
+    nextNode: undefined | INode<T>
+  ): INode<T> {
+    // Case: remove from the head
+    if (!previousNode) {
+      // Current node is the head
+      if (!nextNode) {
+        /*
+         * Sub case .a: Linked list of size 1
+         * once the node is removed the linked list is empty
+         */
+        const node = new Node(currentNode.element)
+        this.clear()
+        return node
+      }
+      /*
+       * Sub case .b: Linked list of size n
+       */
+      this.head = nextNode
+      currentNode.next = undefined
+      this.count--
+      return currentNode
+    }
+
+    if (!nextNode) {
+      // Current node is the tail
+      previousNode.next = undefined
+      this.tail = previousNode
+      this.count--
+      return currentNode
+    }
+
+    // Case: remove from the middle
+    previousNode.next = nextNode
+    currentNode.next = undefined
+    this.count--
+    return currentNode
   }
 }
-
-export const main = (): void => {
-  const list = createLinkedList()
-  const values = ['a', 'b', 'c', 'd', 'e']
-  const nodes = values.map((val) => list.push(val))
-
-  console.log(list.isEmpty()) // => 'false';
-
-  // remove the last element of the list. expect it to be 'e';
-  list.pop() // ?
-  console.log(list.tail && list.tail.value) // => 'd'
-
-  console.log(JSON.stringify(list.get(1), undefined, 4))
-  /**
-   * {
-   *  "value": "b",
-   *   "next": {
-   *      "value": "c",
-   *      "next": {
-   *        "value": "d",
-   *        "next": null
-   *        }
-   *    }
-   * }
-   */
-
-  console.log(list.delete(1))
-  console.log(list.print()) // => 'a => c => d'
-}
-// main()
