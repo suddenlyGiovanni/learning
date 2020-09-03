@@ -1,70 +1,49 @@
-/* eslint-disable max-statements, no-undef, no-console */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 
-/**
- * Stacks:
- * A stack is an abstract data type that serves as a collection of elements, with two principal
- * operations:
- * - push: which adds an element to the collection
- * - pop: which removes the most recently added element that was not yet removed
- * - peek: which give access to the top without modifying the stack.
- * the stacks are `LIFO` (last in, first out)
- */
+import type { ILinkedList } from '../interfaces/linked-list.interface'
 
-interface Stack<T = string> {
-  readonly isEmpty: () => boolean
-  readonly length: number
-  readonly peek: () => T
-  readonly pop: () => T | undefined
-  readonly push: (item: T) => void
-}
+import type { IStack } from '../interfaces/stack.interface'
+import { LinkedList } from '../linked-list/linked-list'
 
-// eslint-disable-next-line func-style
-export function createStack<T>(): Stack<T> {
-  const array: T[] = []
+export class Stack<T> implements IStack<T> {
+  private readonly items: ILinkedList<T>
 
-  return {
-    push(item: T) {
-      array.push(item)
-    },
+  public constructor() {
+    this.items = new LinkedList<T>()
+  }
 
-    pop() {
-      return array.pop()
-    },
+  public clear(): void {
+    this.items.clear()
+  }
 
-    peek() {
-      const lastItemIdx = array.length - 1
-      return array[lastItemIdx]
-    },
+  public isEmpty(): boolean {
+    return this.items.isEmpty()
+  }
 
-    get length() {
-      return array.length
-    },
+  public peek(): T | undefined {
+    if (this.isEmpty()) {
+      return undefined
+    }
+    return this.items.getElementAt(this.items.size() - 1)!.element
+  }
 
-    isEmpty() {
-      return array.length === 0
-    },
+  public pop(): T | undefined {
+    if (this.isEmpty()) {
+      return undefined
+    }
+    const tailIndex = this.items.size() - 1
+    return this.items.removeAt(tailIndex)
+  }
+
+  public push(x: T): void {
+    this.items.push(x)
+  }
+
+  public size(): number {
+    return this.items.size()
+  }
+
+  public toString(): string {
+    return this.items.toString()
   }
 }
-
-export const main = (): void => {
-  //  ex. stack clothing...
-
-  const lowerBodyStack = createStack()
-  console.log(lowerBodyStack.isEmpty()) // => 'true'
-
-  lowerBodyStack.push('underwear')
-  lowerBodyStack.push('socks')
-  lowerBodyStack.push('pants')
-  lowerBodyStack.push('shoes')
-
-  console.log(lowerBodyStack.peek()) // => 'shoes'
-
-  lowerBodyStack.pop()
-  console.log(lowerBodyStack.peek()) // => 'pants'
-
-  lowerBodyStack.pop()
-  console.log(lowerBodyStack.peek()) // => 'socks'
-
-  console.log(lowerBodyStack.length) // => '2'
-}
-// main()
