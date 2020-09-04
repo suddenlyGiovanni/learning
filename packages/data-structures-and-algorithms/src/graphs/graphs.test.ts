@@ -7,12 +7,13 @@
   no-magic-numbers,
 */
 
+import type { IGraph } from '../interfaces/graphs.interface'
 import { LinkedList } from '../linked-list/linked-list'
 import { ILogger, Logger } from '../utils/logger'
 
 import { Graph } from './graphs'
 
-let graph: Graph<number>
+let graph: IGraph<number>
 let logger: ILogger<number>
 
 beforeEach(() => {
@@ -46,6 +47,30 @@ describe('the addNode function', () => {
     expect.hasAssertions()
     graph.addNode(2)
     expect(graph.adjList.get(2)).toStrictEqual(new LinkedList())
+  })
+})
+
+describe('the addEdge function', () => {
+  it('should be a function', () => {
+    expect.hasAssertions()
+    expect(typeof graph.addEdge).toBe('function')
+  })
+
+  it('should only allow to add edges between vertices', () => {
+    expect.hasAssertions()
+    graph.addNode(1)
+    expect(() => graph.addEdge(1, NaN)).toThrow(
+      'Please pass in valid Vertices/Nodes'
+    )
+  })
+
+  it('should add a new edge for given nodes/ vertices in the adjacency list', () => {
+    expect.hasAssertions()
+    graph.addNode(1)
+    graph.addNode(2)
+    graph.addEdge(1, 2)
+    expect(graph.adjList.get(1)!.indexOf(2)).not.toBe(-1)
+    expect(graph.adjList.get(2)!.indexOf(1)).not.toBe(-1)
   })
 })
 
@@ -121,7 +146,6 @@ describe('the removeEdge function', () => {
   })
 })
 
-// eslint-disable-next-line jest/no-disabled-tests
 describe('the depth first traversal function', () => {
   beforeEach(() => {
     graph.addNode(1)
@@ -149,7 +173,7 @@ describe('the depth first traversal function', () => {
 
   it('should return a warning when a not valid starting node is provided', () => {
     expect.hasAssertions()
-    expect(() => graph.depthFirstTraversal(7)).toThrow(
+    expect(() => graph.depthFirstTraversal(7, logger.log)).toThrow(
       'Invalid starting node was provided'
     )
   })
@@ -194,7 +218,7 @@ describe('the breadth first traversal function', () => {
 
   it('should return a warning when a starting node is not provided', () => {
     expect.hasAssertions()
-    expect(() => graph.breadthFirstTraversal(7)).toThrow(
+    expect(() => graph.breadthFirstTraversal(7, logger.log)).toThrow(
       'Invalid starting node was provided'
     )
   })

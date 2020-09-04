@@ -1,4 +1,4 @@
-export type VariadicFunction<A extends unknown[], B> = (...args: [...A]) => B
+import { VariadicFunction } from '../types'
 
 /**
  * @export
@@ -53,9 +53,10 @@ export interface IBinarySearchTree<T> {
 
   /**
    * @param {T} value
+   * @returns {(undefined | INode<T>)}
    * @memberof IBinarySearchTree
    */
-  insert(value: T): void
+  insert(value: T): undefined | INode<T>
 
   /**
    * @param {(null | INode<T>)} node
