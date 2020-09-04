@@ -101,7 +101,15 @@ export interface IBinaryTree<T> extends IBinaryTreeNode<T> {
    */
   inOrderTraversal(cb: (tree: IBinaryTree<T>) => void): void
 
-  insertChild(value: T): void
+  /**
+   * Insert a child as a `leaf node`.
+   * It fills in the the tree starting from left to right
+   * this is a breath first traversal
+   * @param {T} value
+   * @returns {IBinaryTree<T>}
+   * @memberof IBinaryTree
+   */
+  insertChild(value: T): IBinaryTree<T>
 
   /**
    * Explores all the nodes in the tree

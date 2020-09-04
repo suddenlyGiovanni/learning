@@ -1,11 +1,15 @@
 /*
   eslint-disable
   @typescript-eslint/no-non-null-assertion,
+  max-lines-per-function,
   max-statements,
   no-console,
+  no-negated-condition,
 */
 
+import type { IGraph } from '../interfaces/graphs.interface'
 import type { ILinkedList } from '../interfaces/linked-list.interface'
+
 import { LinkedList } from '../linked-list/linked-list'
 import { Queue } from '../queue/queue'
 import { Stack } from '../stack/stack'
@@ -14,7 +18,7 @@ export function defaultEqualityPredicate<A>(x: A, y: A): boolean {
   return x === y
 }
 
-export class Graph<T> {
+export class Graph<T> implements IGraph<T> {
   public adjList: Map<T, ILinkedList<T>>
 
   public nodes: T[]
@@ -53,7 +57,9 @@ export class Graph<T> {
     startingNode: T,
     cb: (node: T) => void = console.log
   ): void {
-    if (this.nodes.includes(startingNode)) {
+    const startingVertexIdx = this.nodes.indexOf(startingNode)
+    if (startingVertexIdx !== -1) {
+      const startingVertex = this.nodes[startingVertexIdx]
       /*
        * Algorithms:
        * 1. Enqueue the first vertex
@@ -72,23 +78,24 @@ export class Graph<T> {
        *      until all adjacent vertices visited
        * 4. until the queue is empty
        */
-      const nodeQueue = new Queue<T>()
+      const verticesQueue = new Queue<T>()
       const visitedSet = new Set<T>()
 
-      nodeQueue.enqueue(startingNode)
-      visitedSet.add(startingNode)
+      verticesQueue.enqueue(startingVertex)
 
-      while (!nodeQueue.isEmpty()) {
-        const current = nodeQueue.dequeue()!
-        const adjacentVertices = this.adjList.get(current)!
-        cb(current)
 
-        adjacentVertices.forEach(({ element: adjacentVertex }) => {
-          if (!visitedSet.has(adjacentVertex)) {
-            nodeQueue.enqueue(adjacentVertex)
-            visitedSet.add(adjacentVertex)
-          }
-        })
+      while (!verticesQueue.isEmpty()) {
+        const currentVertex = verticesQueue.dequeue()!
+        if (!visitedSet.has(currentVertex)) {
+          cb(currentVertex)
+          visitedSet.add(currentVertex)
+
+          const adjacentVertices = this.adjList.get(currentVertex)!
+
+          adjacentVertices.forEach(({ element: adjacentVertex }) => {
+            verticesQueue.enqueue(adjacentVertex)
+          })
+        }
       }
     } else {
       throw new Error('Invalid starting node was provided')
@@ -99,7 +106,10 @@ export class Graph<T> {
     startingNode: T,
     cb: (node: T) => void = console.log
   ): void {
-    if (this.nodes.includes(startingNode)) {
+    const startingNodeIdx = this.nodes.indexOf(startingNode)
+    // eslint-disable-next-line no-negated-condition
+    if (startingNodeIdx !== -1) {
+      const startingVertex = this.nodes[startingNodeIdx]
       /*
        * Algorithms:
        * 1. Push the first vertex onto the stack
@@ -116,20 +126,21 @@ export class Graph<T> {
       const nodeStack = new Stack<T>()
       const visitedSet = new Set<T>()
 
-      nodeStack.push(startingNode)
-      visitedSet.add(startingNode)
+      nodeStack.push(startingVertex)
 
       while (!nodeStack.isEmpty()) {
         const current = nodeStack.pop()!
-        const adjacentVertices = this.adjList.get(current)!
-        cb(current)
+        if (!visitedSet.has(current)) {
+          cb(current)
+          visitedSet.add(current)
 
-        adjacentVertices.forEach(({ element: adjacentVertex }) => {
-          if (!visitedSet.has(adjacentVertex)) {
-            nodeStack.push(adjacentVertex)
-            visitedSet.add(adjacentVertex)
-          }
-        })
+          const adjacentVertices = this.adjList.get(current)!
+          adjacentVertices.forEach(({ element: adjacentVertex }) => {
+            if (!visitedSet.has(adjacentVertex)) {
+              nodeStack.push(adjacentVertex)
+            }
+          })
+        }
       }
     } else {
       throw new Error('Invalid starting node was provided')

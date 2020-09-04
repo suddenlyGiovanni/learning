@@ -13,8 +13,8 @@
 import type {
   IBinarySearchTree,
   INode,
-  VariadicFunction,
 } from '../interfaces/binary-search-trees.interface'
+import { VariadicFunction } from '../types'
 
 export class Node<T> implements INode<T> {
   public left: null | Node<T>
@@ -45,15 +45,15 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
   }
 
   public contains(value: T): boolean {
-    const containsHelper = (_node: null | INode<T>, _value: T): boolean => {
-      if (_node === null) return false
-      if (_value === _node.value) return true
-      return _value < _node.value
-        ? containsHelper(_node.left, _value)
-        : containsHelper(_node.right, _value)
+    const containsHelper = (node: null | INode<T>): boolean => {
+      if (node === null) return false
+      if (value === node.value) return true
+      return value < node.value
+        ? containsHelper(node.left)
+        : containsHelper(node.right)
     }
 
-    return containsHelper(this.root, value)
+    return containsHelper(this.root)
   }
 
   public inOrderTraversal(
@@ -83,42 +83,39 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
      * 2. every sub-tree on the right has to be 'bigger than' the parent node
      */
 
-    const insertionHelper = (
-      _node: INode<T>,
-      _value: T
-    ): undefined | INode<T> => {
+    const insertionHelper = (node: INode<T>): undefined | INode<T> => {
       /* If value is less than _node then: */
-      if (_value < _node.value) {
+      if (value < node.value) {
         /*
          * If there is no left,
          * then set the value as new left sub-tree
          */
-        if (_node.left === null) {
-          _node.left = new Node(_value)
-          return _node.left
+        if (node.left === null) {
+          node.left = new Node(value)
+          return node.left
         }
 
         /*
          * If there is already a value as a left node,
          * then we need to traverse deeper into the left sub-tree
          */
-        insertionHelper(_node.left, _value)
-      } else if (_value > _node.value) {
+        insertionHelper(node.left)
+      } else if (value > node.value) {
         /* If value is greater than _node then go right */
 
         /*
          * If there is no right sub-tree,
          * then set the value as new right sub-tree
          */
-        if (_node.right === null) {
-          _node.right = new Node(_value)
-          return _node.right
+        if (node.right === null) {
+          node.right = new Node(value)
+          return node.right
         }
         /*
          * If there is already a value as a right node,
          * then we need to traverse deeper into the right sub-tree
          */
-        insertionHelper(_node.right, _value)
+        insertionHelper(node.right)
       }
 
       return undefined
@@ -129,7 +126,7 @@ export class BinarySearchTree<T> implements IBinarySearchTree<T> {
       return this.root
     }
 
-    return insertionHelper(this.root, value)
+    return insertionHelper(this.root)
   }
 
   public max(node: null | INode<T>): null | INode<T> {
