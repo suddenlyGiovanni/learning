@@ -3016,10 +3016,10 @@
     "@types/prop-types" "*"
     csstype "^3.0.2"
 
-"@types/sanctuary@3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@types/sanctuary/-/sanctuary-3.0.2.tgz#1b1c535335e3549095981a0c9fe16648d4154cb4"
-  integrity sha512-5Ow7ApdbXISMy2N0PtjIms+HwBFiMgoftG77pCRmnl5Dj4Mn1Li0DguhlkcSDvoRmVKHxQ8sfAGujEDS1ArByg==
+"@types/sanctuary@3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@types/sanctuary/-/sanctuary-3.0.3.tgz#55a0fdc1ee7496163b2f750c9658d7be98a3697e"
+  integrity sha512-wFZi8pco9Ki454v8yAGOJV4DAT5J6nErPFaCnB4eakhnov1DQ8+pOWn9GiVGz4yfH1MDztko66cZ3WsdxvdUsQ==
 
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
