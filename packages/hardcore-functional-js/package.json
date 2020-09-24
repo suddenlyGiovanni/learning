@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "accounting-js": "1.1.1",
-    "fp-ts": "2.8.2",
+    "fp-ts": "2.8.3",
     "ramda": "0.27.1",
     "sanctuary": "3.1.0"
   },
