@@ -6,7 +6,7 @@
     "url": "https://github.com/suddenlyGiovanni/learning/issues"
   },
   "dependencies": {
-    "chalk": "4.1.0",
+    "chalk": "4.1.2",
     "inquirer": "7.3.3",
     "lodash.flow": "3.5.0"
   },
