@@ -16,7 +16,7 @@
     "random-number": "0.0.9"
   },
   "devDependencies": {
-    "@types/random-number": "0.0.0",
+    "@types/random-number": "0.0.1",
     "ts-node": "9.0.0",
     "tsconfig-paths": "3.9.0"
   },

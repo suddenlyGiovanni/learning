@@ -2996,10 +2996,10 @@
   dependencies:
     ts-toolbelt "^6.3.3"
 
-"@types/random-number@0.0.0":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@types/random-number/-/random-number-0.0.0.tgz#e654528361018d520c6f9c81b03c80361857a6bb"
-  integrity sha512-LSXP+32W+9x86qP6eTTpvDrCSJoz2bLdeMmQumnYy0+s9NEA6qSitT3QwuxlDJ4Y9SNU52H8qUQ6l/gXm5ycRQ==
+"@types/random-number@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@types/random-number/-/random-number-0.0.1.tgz#5d4987a28104fe655f395cf254f7b36d8db3e5e0"
+  integrity sha512-Wz9bnPf3pYtHA5voHhcOb+bqDmNyYrNEBLER1TYESr64ToKTLNLDiMTbfDlGfjnxiKbZdGw2IgqTg2rDiYg/kw==
 
 "@types/react-dom@16.9.8":
   version "16.9.8"
