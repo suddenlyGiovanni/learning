@@ -1,25 +1,27 @@
 {
-  "name": "@suddenlyGiovanni/learning",
+  "name": "learning",
   "version": "0.0.0",
   "repository": "git@github.com:suddenlyGiovanni/learning.git",
   "author": "Giovanni Ravalico <15946771+suddenlyGiovanni@users.noreply.github.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "engines": {
+    "pnpm": ">=6",
+    "node": ">=16"
+  },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "4.2.0",
-    "@typescript-eslint/parser": "4.10.0",
-    "commitizen": "4.2.1",
+    "@typescript-eslint/eslint-plugin": "4.32.0",
+    "@typescript-eslint/parser": "4.32.0",
+    "commitizen": "4.2.4",
     "cz-conventional-changelog": "3.3.0",
     "dtslint": "4.0.4",
-    "eslint": "7.9.0",
-    "eslint-config-prettier": "6.11.0",
-    "eslint-plugin-import": "2.22.0",
-    "eslint-plugin-jest": "24.0.2",
+    "eslint": "7.32.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-import": "2.24.2",
+    "eslint-plugin-jest": "24.4.3",
     "husky": "7.0.2",
     "lerna": "4.0.0",
+    "prettier": "2.4.1",
     "typescript": "4.4.3"
   },
   "config": {
@@ -28,17 +30,18 @@
     }
   },
   "scripts": {
+    "build": "lerna run build",
+    "clean": "lerna run clean",
     "cz": "git-cz",
     "format:base": "prettier --parser typescript",
     "format:check": "npm run format:base -- --list-different \"src/**/*.{ts,tsx}\"",
     "format:write": "npm run format:base -- --write \"src/**/*.{ts,tsx}\"",
-    "typecheck": "tsc --project tsconfig.json --incremental false --noEmit ",
-    "test-types": "dtslint --expectOnly --localTs node_modules/typescript/lib types",
-    "purge-node_modules": "rm -rf node_modules",
-    "clean": "lerna run clean",
-    "build": "lerna run build",
+    "preinstall": "npx only-allow pnpm",
     "pub": "lerna publish",
-    "test": "lerna run test"
+    "purge-node_modules": "rm -rf node_modules",
+    "test": "lerna run test",
+    "test-types": "dtslint --expectOnly --localTs node_modules/typescript/lib types",
+    "typecheck": "tsc --project tsconfig.json --incremental false --noEmit "
   },
   "husky": {
     "hooks": {
@@ -46,7 +49,6 @@
     }
   },
   "volta": {
-    "node": "14.17.6",
-    "yarn": "1.22.11"
+    "node": "16.10.0"
   }
 }
