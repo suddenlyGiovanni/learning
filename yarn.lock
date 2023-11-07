@@ -2801,10 +2801,10 @@
   dependencies:
     "@babel/runtime" "^7.10.2"
 
-"@types/accounting@0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@types/accounting/-/accounting-0.4.1.tgz#865d9f5694fd7c438fba34eb4bc82eec6f34cdd5"
-  integrity sha512-qIN2yvRFvTtUtzG3bs7NKnsqHCPwRIIZMvBNWxiyF4LfOBMhwbwmsefqOt1T7KfkvCgOOxWYVqvlnKKZARSHgg==
+"@types/accounting@0.4.5":
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/@types/accounting/-/accounting-0.4.5.tgz#8a0bfe460721494e25eae451a4771ffdbe53011e"
+  integrity sha512-rf3MKoFZ3REGY2aQTqGwo79aJKom1xgHiJVBy0RguTqpxny1nDT4iYeLx2EgDEkXAhgbwnuLUoxlg4RKHIB7fQ==
 
 "@types/aria-query@^4.2.0":
   version "4.2.0"
