@@ -24,7 +24,7 @@
   "dependencies": {
     "accounting-js": "1.1.1",
     "fp-ts": "2.8.3",
-    "ramda": "0.27.1",
+    "ramda": "0.29.1",
     "sanctuary": "3.1.0"
   },
   "devDependencies": {
@@ -32,7 +32,7 @@
     "@types/accounting": "0.4.1",
     "@types/jest": "26.0.14",
     "@types/node": "14.11.2",
-    "@types/ramda": "0.27.19",
+    "@types/ramda": "0.29.8",
     "@types/sanctuary": "3.0.3",
     "jest": "26.4.2",
     "nodemon": "2.0.4",
